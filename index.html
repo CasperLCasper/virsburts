@@ -29,7 +29,7 @@
       flex-direction:column;
       align-items:center;
       justify-content:flex-start;
-      padding:40px 20px;
+      padding:60px 20px;
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       border-radius:16px;
       box-shadow:0 8px 30px rgba(2,6,23,0.7);
@@ -42,8 +42,8 @@
       gap:16px;
     }
     .logo{
-      width:72px;
-      height:72px;
+      width:100px;
+      height:100px;
       border-radius:12px;
       background:var(--glass);
       display:flex;
@@ -51,11 +51,11 @@
       justify-content:center;
       font-weight:700;
       color:var(--accent);
-      font-size:24px;
+      font-size:28px;
     }
     h1{
       margin:0;
-      font-size:24px;
+      font-size:28px;
       text-align:center;
     }
     p.lead{
@@ -67,39 +67,41 @@
     .buttons{
       display:flex;
       flex-direction:column; /* stabiņš */
-      gap:12px;
+      gap:16px;
       width:50%;          /* pogas aizņem pusi no ekrāna */
       max-width:400px;
-      margin-top:30px;
+      margin-top:40px;
+      align-items:center;
     }
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
-      padding:14px;
-      border-radius:10px;
+      gap:10px;
+      padding:18px 0;  /* augstākas pogas */
+      border-radius:12px;
       background:transparent;
-      border:1px solid rgba(255,255,255,0.06);
+      border:2px solid rgba(255,255,255,0.1);
       cursor:pointer;
       text-decoration:none;
       color:inherit;
-      font-weight:600;
-      transition:transform .12s ease, box-shadow .12s ease;
+      font-weight:700;
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
       width:100%; /* aizņem visu "buttons" platumu */
-      text-align:center;
+      font-size:18px; /* lielāks teksts */
     }
     .btn:focus{
-      outline:3px solid rgba(6,182,212,0.14);
+      outline:3px solid rgba(6,182,212,0.2);
       outline-offset:2px;
     }
     .btn:hover{
       transform:translateY(-4px);
-      box-shadow:0 8px 20px rgba(2,6,23,0.6);
+      box-shadow:0 12px 24px rgba(2,6,23,0.7);
     }
     .btn .arrow{
       margin-left:auto;
-      opacity:0.85;
+      opacity:0.9;
+      font-size:20px;
     }
     .btn.primary{
       background:linear-gradient(90deg,var(--accent), #7c3aed);
@@ -107,15 +109,16 @@
       color:#021026;
     }
     footer{
-      margin-top:40px;
+      margin-top:50px;
       color:var(--muted);
       font-size:13px;
       text-align:center;
     }
     @media (max-width:420px){
-      .logo{width:56px;height:56px;font-size:20px}
-      .container{padding:18px}
+      .logo{width:80px;height:80px;font-size:22px}
+      .container{padding:30px 15px}
       .buttons{width:80%;}
+      .btn{font-size:16px;padding:16px 0;}
     }
   </style>
 </head>
@@ -142,6 +145,7 @@
   </div>
 </body>
 </html>
+
 
 
 
