@@ -3,23 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mani projekti — vienas lappuses šablons</title>
+  <title>Mani projekti</title>
   <style>
     :root{
       --bg:#0f1724;
-      --card:#0b1220;
       --accent:#06b6d4;
       --muted:#94a3b8;
-      --glass: rgba(255,255,255,0.04)
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+    }
     body{
-      background:linear-gradient(180deg,#071026 0%, #071826 60%);
-      color:#fff;
+      background: linear-gradient(180deg,#071026 0%, #071826 60%);
+      color: #fff;
       display:flex;
-      align-items:center;
       justify-content:center;
+      align-items:flex-start;
       padding:0;
     }
     .container{
@@ -28,85 +30,65 @@
       display:flex;
       flex-direction:column;
       align-items:center;
-      justify-content:flex-start;
       padding:60px 20px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:16px;
-      box-shadow:0 8px 30px rgba(2,6,23,0.7);
-      backdrop-filter: blur(6px);
-    }
-    header{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:16px;
     }
     .logo{
       width:100px;
       height:100px;
       border-radius:12px;
-      background:var(--glass);
+      background: rgba(255,255,255,0.04);
       display:flex;
       align-items:center;
       justify-content:center;
       font-weight:700;
       color:var(--accent);
       font-size:28px;
+      margin-bottom:20px;
     }
     h1{
-      margin:0;
       font-size:28px;
+      margin:0;
       text-align:center;
     }
     p.lead{
-      margin:12px 0 20px;
-      color:var(--muted);
-      line-height:1.5;
       text-align:center;
+      color:var(--muted);
+      margin:12px 0 40px;
     }
     .buttons{
       display:flex;
-      flex-direction:column; /* stabiņš */
-      gap:16px;
-      width:50%;          /* pogas aizņem pusi no ekrāna */
+      flex-direction:column;
+      gap:20px;
+      width:50%;
       max-width:400px;
-      margin-top:40px;
       align-items:center;
     }
     .btn{
-      display:inline-flex;
-      align-items:center;
+      display:flex;
       justify-content:center;
-      gap:10px;
-      padding:18px 0;  /* augstākas pogas */
-      border-radius:12px;
-      background:transparent;
-      border:2px solid rgba(255,255,255,0.1);
-      cursor:pointer;
-      text-decoration:none;
-      color:inherit;
+      align-items:center;
+      width:100%;
+      padding:18px 0;
+      font-size:18px;
       font-weight:700;
-      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
-      width:100%; /* aizņem visu "buttons" platumu */
-      font-size:18px; /* lielāks teksts */
-    }
-    .btn:focus{
-      outline:3px solid rgba(6,182,212,0.2);
-      outline-offset:2px;
-    }
-    .btn:hover{
-      transform:translateY(-4px);
-      box-shadow:0 12px 24px rgba(2,6,23,0.7);
-    }
-    .btn .arrow{
-      margin-left:auto;
-      opacity:0.9;
-      font-size:20px;
+      border-radius:12px;
+      text-decoration:none;
+      color: #fff;
+      border:2px solid rgba(255,255,255,0.1);
+      transition:0.2s all;
     }
     .btn.primary{
-      background:linear-gradient(90deg,var(--accent), #7c3aed);
-      border:0;
+      background: linear-gradient(90deg,var(--accent),#7c3aed);
+      border:none;
       color:#021026;
+    }
+    .btn:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(2,6,23,0.7);
+    }
+    .arrow{
+      margin-left:auto;
+      font-size:20px;
     }
     footer{
       margin-top:50px;
@@ -114,30 +96,33 @@
       font-size:13px;
       text-align:center;
     }
-    @media (max-width:420px){
-      .logo{width:80px;height:80px;font-size:22px}
-      .container{padding:30px 15px}
+    @media(max-width:480px){
       .buttons{width:80%;}
       .btn{font-size:16px;padding:16px 0;}
+      .logo{width:80px;height:80px;font-size:22px;}
     }
   </style>
 </head>
 <body>
-  <div class="container" role="main">
-    <header>
-      <div class="logo" aria-hidden="true">LP</div>
-      <h1 id="site-title">Laipni lūgti manā vietnē</h1>
-      <p class="lead" id="site-sub">Šeit ir īss ievads vai apraksts — uzspiediet projekta pogu, lai atvērtu attiecīgo lapu.</p>
-    </header>
+  <div class="container">
+    <div class="logo">LP</div>
+    <h1>Laipni lūgti manā vietnē</h1>
+    <p class="lead">Šeit ir īss ievads vai apraksts — uzspiediet projekta pogu, lai atvērtu attiecīgo lapu.</p>
 
-    <section>
-      <div class="buttons" id="projects">
-        <a class="btn primary" href="https://example.com/projekts1" target="_blank" rel="noopener noreferrer">Projekts 1 <span class="arrow">→</span></a>
-        <a class="btn" href="https://example.com/projekts2" target="_blank" rel="noopener noreferrer">Projekts 2 <span class="arrow">→</span></a>
-        <a class="btn" href="https://example.com/projekts3" target="_blank" rel="noopener noreferrer">Projekts 3 <span class="arrow">→</span></a>
-        <a class="btn" href="https://example.com/projekts4" target="_blank" rel="noopener noreferrer">Projekts 4 <span class="arrow">→</span></a>
-      </div>
-    </section>
+    <div class="buttons">
+      <a class="btn primary" href="https://example.com/projekts1" target="_blank" rel="noopener noreferrer">
+        Projekts 1 <span class="arrow">→</span>
+      </a>
+      <a class="btn" href="https://example.com/projekts2" target="_blank" rel="noopener noreferrer">
+        Projekts 2 <span class="arrow">→</span>
+      </a>
+      <a class="btn" href="https://example.com/projekts3" target="_blank" rel="noopener noreferrer">
+        Projekts 3 <span class="arrow">→</span>
+      </a>
+      <a class="btn" href="https://example.com/projekts4" target="_blank" rel="noopener noreferrer">
+        Projekts 4 <span class="arrow">→</span>
+      </a>
+    </div>
 
     <footer>
       <div>Ja vēlaties, es varu pievienot vairāk pogu, ikonas vai padarīt pogas lejupielādes/emapasta saites.</div>
@@ -145,6 +130,7 @@
   </div>
 </body>
 </html>
+
 
 
 
