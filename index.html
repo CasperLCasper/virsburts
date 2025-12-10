@@ -6,23 +6,28 @@
   <title>Mani projekti — vienas lappuses šablons</title>
   <style>
     :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--glass: rgba(255,255,255,0.04)}
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
-    body{background:linear-gradient(180deg,#071026 0%, #071826 60%);color:#fff;display:flex;align-items:center;justify-content:center;padding:32px}
-    .container{width:100%;max-width:860px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:16px;padding:28px;box-shadow:0 8px 30px rgba(2,6,23,0.7);backdrop-filter: blur(6px)}
-    header{display:flex;align-items:center;gap:16px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#071026 0%, #071826 60%);color:#fff}
+    body{min-height:100vh;display:flex;flex-direction:column}
+
+    .container{width:100%;max-width:100%;flex:1;padding:40px;display:flex;flex-direction:column;justify-content:flex-start;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px)}
+
+    header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
     .logo{width:72px;height:72px;border-radius:12px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:20px}
-    h1{margin:0;font-size:20px}
-    p.lead{margin:12px 0 20px;color:var(--muted);line-height:1.5}
-    .buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 14px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);cursor:pointer;text-decoration:none;color:inherit;font-weight:600;transition:transform .12s ease, box-shadow .12s ease}
-    .btn:focus{outline:3px solid rgba(6,182,212,0.14);outline-offset:2px}
+
+    h1{font-size:28px;margin:0}
+    p.lead{margin:10px 0 20px;color:var(--muted);line-height:1.5;font-size:17px}
+
+    .buttons{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:20px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 18px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.08);cursor:pointer;text-decoration:none;color:inherit;font-weight:600;transition:transform .15s ease, box-shadow .15s ease}
     .btn:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(2,6,23,0.6)}
-    .btn .arrow{margin-left:auto;opacity:0.85}
     .btn.primary{background:linear-gradient(90deg,var(--accent), #7c3aed);border:0;color:#021026}
-    footer{margin-top:18px;color:var(--muted);font-size:13px}
-    @media (max-width:420px){.logo{width:56px;height:56px;font-size:18px}.container{padding:18px}}
-  </style>
+
+    footer{margin-top:auto;padding:20px 0;color:var(--muted);font-size:14px;text-align:center}
+
+    @media (max-width:420px){
+      .logo{width:56px;height:56px;font-size:18px}
+      .container{padding:20px}
 </head>
 <body>
   <div class="container" role="main">
@@ -63,5 +68,6 @@
   </script>
 </body>
 </html>
+
 
 
