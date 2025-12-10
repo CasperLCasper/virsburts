@@ -5,43 +5,130 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mani projekti — vienas lappuses šablons</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--glass: rgba(255,255,255,0.04)}
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#071026 0%, #071826 60%);color:#fff}
-    body{min-height:100vh;display:flex;flex-direction:column}
-
-    .container{width:100%;max-width:100%;flex:1;padding:40px;display:flex;flex-direction:column;justify-content:flex-start;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px)}
-
-    header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
-    .logo{width:72px;height:72px;border-radius:12px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:20px}
-
-    h1{font-size:28px;margin:0}
-    p.lead{margin:10px 0 20px;color:var(--muted);line-height:1.5;font-size:17px}
-
-    .buttons{display:flex;flex-direction:column;gap:16px;margin-top:20px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 18px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.08);cursor:pointer;text-decoration:none;color:inherit;font-weight:600;transition:transform .15s ease, box-shadow .15s ease}
-    .btn:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(2,6,23,0.6)}
-    .btn.primary{background:linear-gradient(90deg,var(--accent), #7c3aed);border:0;color:#021026}
-
-    footer{margin-top:auto;padding:20px 0;color:var(--muted);font-size:14px;text-align:center}
-
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#06b6d4;
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.04)
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    body{
+      background:linear-gradient(180deg,#071026 0%, #071826 60%);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+    }
+    .container{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:40px 20px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:16px;
+      box-shadow:0 8px 30px rgba(2,6,23,0.7);
+      backdrop-filter: blur(6px);
+    }
+    header{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+    }
+    .logo{
+      width:72px;
+      height:72px;
+      border-radius:12px;
+      background:var(--glass);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:var(--accent);
+      font-size:24px;
+    }
+    h1{
+      margin:0;
+      font-size:24px;
+      text-align:center;
+    }
+    p.lead{
+      margin:12px 0 20px;
+      color:var(--muted);
+      line-height:1.5;
+      text-align:center;
+    }
+    .buttons{
+      display:flex;
+      flex-direction:column; /* stabiņš */
+      gap:12px;
+      width:50%;          /* pogas aizņem pusi no ekrāna */
+      max-width:400px;
+      margin-top:30px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px;
+      border-radius:10px;
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      cursor:pointer;
+      text-decoration:none;
+      color:inherit;
+      font-weight:600;
+      transition:transform .12s ease, box-shadow .12s ease;
+      width:100%; /* aizņem visu "buttons" platumu */
+      text-align:center;
+    }
+    .btn:focus{
+      outline:3px solid rgba(6,182,212,0.14);
+      outline-offset:2px;
+    }
+    .btn:hover{
+      transform:translateY(-4px);
+      box-shadow:0 8px 20px rgba(2,6,23,0.6);
+    }
+    .btn .arrow{
+      margin-left:auto;
+      opacity:0.85;
+    }
+    .btn.primary{
+      background:linear-gradient(90deg,var(--accent), #7c3aed);
+      border:0;
+      color:#021026;
+    }
+    footer{
+      margin-top:40px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
     @media (max-width:420px){
-      .logo{width:56px;height:56px;font-size:18px}
-      .container{padding:20px}
+      .logo{width:56px;height:56px;font-size:20px}
+      .container{padding:18px}
+      .buttons{width:80%;}
     }
   </style>
 </head>
 <body>
   <div class="container" role="main">
-    <header style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:28px;">
+    <header>
       <div class="logo" aria-hidden="true">LP</div>
-      <h1 id="site-title" style="text-align:center;">Laipni lūgti manā vietnē</h1>
-      <p class="lead" id="site-sub" style="text-align:center;max-width:600px;">Šeit ir īss ievads vai apraksts — uzspiediet projekta pogu, lai atvērtu attiecīgo lapu.</p>
+      <h1 id="site-title">Laipni lūgti manā vietnē</h1>
+      <p class="lead" id="site-sub">Šeit ir īss ievads vai apraksts — uzspiediet projekta pogu, lai atvērtu attiecīgo lapu.</p>
     </header>
 
-    <section style="margin-top:18px">
+    <section>
       <div class="buttons" id="projects">
-        <!-- Nomainiet href uz saviem projektu URL. target="_blank" atver jaunā cilnē. -->
         <a class="btn primary" href="https://example.com/projekts1" target="_blank" rel="noopener noreferrer">Projekts 1 <span class="arrow">→</span></a>
         <a class="btn" href="https://example.com/projekts2" target="_blank" rel="noopener noreferrer">Projekts 2 <span class="arrow">→</span></a>
         <a class="btn" href="https://example.com/projekts3" target="_blank" rel="noopener noreferrer">Projekts 3 <span class="arrow">→</span></a>
@@ -50,23 +137,12 @@
     </section>
 
     <footer>
-      <div>Ja vēlaties, es varu pievienot vairāk pogu, ikonas, vai padarīt pogas lejupielādes/emapasta saites.</div>
+      <div>Ja vēlaties, es varu pievienot vairāk pogu, ikonas vai padarīt pogas lejupielādes/emapasta saites.</div>
     </footer>
   </div>
-
-  <script>
-    // Vienkārša JS palīdzība: ja gribat dinamiski pievienot projektus, varat izmantot šo piemēru.
-    /*
-    const projekti = [
-      {title: 'Projekts A', url: 'https://...' },
-      {title: 'Projekts B', url: 'https://...' }
-    ];
-    const container = document.getElementById('projects');
-    container.innerHTML = projekti.map(p => `\n  <a class=\"btn\" href=\"${p.url}\" target=\"_blank\" rel=\"noopener noreferrer\">${p.title} <span class=\"arrow\">→</span></a>`).join('');
-    */
-  </script>
 </body>
 </html>
+
 
 
 
