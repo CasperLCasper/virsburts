@@ -65,7 +65,8 @@
     }
     .btn{
       display:flex;
-      justify-content:center;
+      position: relative;
+      justify-content:center; /* Centrē nosaukumu */
       align-items:center;
       width:100%;
       padding:18px 0;
@@ -87,7 +88,8 @@
       box-shadow: 0 10px 25px rgba(2,6,23,0.7);
     }
     .arrow{
-      margin-left:auto;
+      position:absolute;
+      right:16px; /* vienmēr pa labi */
       font-size:20px;
     }
     footer{
@@ -111,16 +113,20 @@
 
     <div class="buttons">
       <a class="btn primary" href="https://example.com/projekts1" target="_blank" rel="noopener noreferrer">
-        Projekts 1 <span class="arrow">→</span>
+        Projekts 1
+        <span class="arrow">→</span>
       </a>
       <a class="btn" href="https://example.com/projekts2" target="_blank" rel="noopener noreferrer">
-        Projekts 2 <span class="arrow">→</span>
+        Projekts 2
+        <span class="arrow">→</span>
       </a>
       <a class="btn" href="https://example.com/projekts3" target="_blank" rel="noopener noreferrer">
-        Projekts 3 <span class="arrow">→</span>
+        Projekts 3
+        <span class="arrow">→</span>
       </a>
       <a class="btn" href="https://example.com/projekts4" target="_blank" rel="noopener noreferrer">
-        Projekts 4 <span class="arrow">→</span>
+        Projekts 4
+        <span class="arrow">→</span>
       </a>
     </div>
 
@@ -130,6 +136,7 @@
   </div>
 </body>
 </html>
+
 
 
 
