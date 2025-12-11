@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vienkārša modernā mājas lapa</title>
   <style>
-    /* Pamatstili */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', Arial, sans-serif;
@@ -34,7 +33,7 @@
       background-color: #fff;
       max-width: 800px;
       width: 90%;
-      margin: -40px auto 40px auto; /* nedaudz pacelts virs header */
+      margin: -40px auto 40px auto;
       padding: 30px 20px;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.1);
@@ -65,18 +64,19 @@
       align-items: center;
       width: 100%;
       padding: 18px 24px;
-      background-color: #06b6d4;
+      background: linear-gradient(135deg, #06b6d4, #7c3aed);
       color: #fff;
       font-size: 16px;
       font-weight: 600;
       border-radius: 12px;
       text-decoration: none;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     }
     .btn-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      background: linear-gradient(135deg, #7c3aed, #06b6d4);
     }
 
     /* Responsīvs dizains */
@@ -91,7 +91,7 @@
 
   <!-- HEADER -->
   <header>
-    <img src="virsburts-1.png" alt="Logo" class="logo">
+    <img src="logo.png" alt="Logo" class="logo">
   </header>
 
   <!-- TEKSTA KONTEINERS -->
@@ -110,9 +110,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
