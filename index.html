@@ -1,142 +1,116 @@
 <!doctype html>
 <html lang="lv">
 <head>
-  <meta charset="UTF‑8">
-  <meta name="viewport" content="width=device‑width, initial‑scale=1">
-  <title>Tavs Projekts — Par</title>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vienkārša modernā mājas lapa</title>
   <style>
+    /* Pamatstili */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin:0;
-      font-family: Arial, sans-serif;
-      background:#f7f7f7;
-      color:#1a1a1a;
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: #f2f2f2;
+      color: #111;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
+    /* HEADER */
     header {
-      background:#111;
-      padding:48px 20px;
-      text-align:center;
-      color:white;
+      width: 100%;
+      background-color: #111;
+      padding: 40px 20px;
+      text-align: center;
     }
-    header h1 {
-      margin:0;
-      font-size:34px;
-      font-weight:700;
-    }
-    header p {
-      margin:8px 0 0 0;
-      font-size:18px;
-      max-width:720px;
-      margin-left:auto;
-      margin-right:auto;
+    header img.logo {
+      max-width: 180px;
+      height: auto;
     }
 
-    nav {
-      background:#222;
-      padding:12px;
-      text-align:center;
-      font-size:16px;
+    /* TEKSTA KONTEINERS */
+    .intro {
+      background-color: #fff;
+      max-width: 800px;
+      width: 90%;
+      margin: -40px auto 40px auto; /* nedaudz pacelts virs header */
+      padding: 30px 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      text-align: center;
     }
-    nav a {
-      margin:0 14px;
-      color:white;
-      text-decoration:none;
-      font-weight:600;
+    .intro h1 {
+      font-size: 28px;
+      margin-bottom: 12px;
     }
-    nav a:hover {
-      text-decoration:underline;
-    }
-
-    .section {
-      max-width:900px;
-      margin:40px auto;
-      padding:0 20px;
-    }
-    .section h2 {
-      font-size:28px;
-      margin-bottom:12px;
-    }
-    .section p {
-      font-size:17px;
-      line-height:1.6;
+    .intro p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #555;
     }
 
+    /* POGAS KARTIŅAS */
     .buttons {
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      justify-content:center;
-      margin-top:24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 50%;
+      margin-bottom: 60px;
     }
-    .btn {
-      padding:14px 20px;
-      background:#06b6d4;
-      color:white;
-      border-radius:6px;
-      text-decoration:none;
-      font-weight:600;
-      transition:0.2s;
+    .btn-card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 18px 24px;
+      background-color: #06b6d4;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .btn:hover {
-      background:#0a8aa8;
+    .btn-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     }
 
-    footer {
-      text-align:center;
-      padding:22px 0;
-      font-size:14px;
-      color:#666;
-      border-top:1px solid #ddd;
-      margin-top:48px;
+    /* Responsīvs dizains */
+    @media(max-width:600px) {
+      .buttons { width: 80%; }
+      .intro h1 { font-size: 24px; }
+      .intro p { font-size: 14px; }
     }
   </style>
 </head>
-
 <body>
 
   <!-- HEADER -->
   <header>
-    <h1>Tavs Projekts</h1>
-    <p>Vienkārša un skaidra vietne, kas stāsta par tavu ideju un palīdz apmeklētājiem ātri atrast svarīgāko informāciju.</p>
+    <img src="logo.png" alt="Logo" class="logo">
   </header>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#par">Par</a>
-    <a href="#kads">Kas ir tas?</a>
-    <a href="#sakt">Kā sākt</a>
-    <a href="#kontakti">Kontakti</a>
-  </nav>
-
-  <!-- SATURA SEKCIJAS -->
-  <div class="section" id="par">
-    <h2>Par Mums</h2>
-    <p>Šī vietne ir radīta, lai palīdzētu cilvēkiem saprast, kas ir TAVS PROJEKTS, kā tas darbojas, un kā sākt izmantot vai iesaistīties.</p>
+  <!-- TEKSTA KONTEINERS -->
+  <div class="intro">
+    <h1>Laipni lūgti manā vietnē</h1>
+    <p>Šī ir vieta īsam aprakstam vai ievadam. Zemāk varat izvēlēties kādu no projektiem.</p>
   </div>
 
-  <div class="section" id="kads">
-    <h2>Kas tas ir?</h2>
-    <p>Tavs projekts var būt tehnoloģija, pakalpojums vai produkts. Šeit īsi skaidro, kā tas darbojas un kādas ir galvenās priekšrocības.</p>
+  <!-- POGAS KARTIŅAS -->
+  <div class="buttons">
+    <a href="https://example.com/projekts1" target="_blank" class="btn-card">Projekts 1</a>
+    <a href="https://example.com/projekts2" target="_blank" class="btn-card">Projekts 2</a>
+    <a href="https://example.com/projekts3" target="_blank" class="btn-card">Projekts 3</a>
+    <a href="https://example.com/projekts4" target="_blank" class="btn-card">Projekts 4</a>
   </div>
-
-  <div class="section" id="sakt">
-    <h2>Kā sākt</h2>
-    <p>Soli pa solim instrukcijas apmeklētājiem: kas jāzina, kā rīkoties, un kuras lietas jāņem vērā. Var izcelt vairākas apakšsekcijas.</p>
-
-    <div class="buttons">
-      <a class="btn" href="#par">Uzzināt vairāk</a>
-      <a class="btn" href="#kads">Kas tas ir</a>
-      <a class="btn" href="#kontakti">Sazināties</a>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer id="kontakti">
-    © 2025 Tavs Projekts. Visas tiesības paturētas.
-  </footer>
 
 </body>
 </html>
+
 
 
 
