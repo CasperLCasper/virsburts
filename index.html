@@ -21,12 +21,18 @@
       font-family:Inter, sans-serif;
     }
 
-    /* ===== HEADER – VISĀ PLATUMĀ ===== */
+    /* ===== HEADER ===== */
     header{
       width:100%;
       background:var(--header-bg);
       padding:40px 0;
       text-align:center;
+      margin-top:40px;              /* ← Atstarpe no augšas */
+      border-radius:12px;           /* Vizuāli "karājas" */
+      width:90%;                    /* Nav līdz pašām malām */
+      margin-left:auto;
+      margin-right:auto;
+      box-shadow:0 10px 30px rgba(0,0,0,0.25);
     }
 
     .logo{
@@ -34,16 +40,10 @@
       height:auto;
       object-fit:contain;
       display:block;
-      margin:0 auto 12px auto;
+      margin:0 auto;
     }
 
-    h1{
-      color:white;
-      margin:0;
-      font-size:28px;
-    }
-
-    /* ===== APRAKSTA KONTEINERS (ATSEVIŠĶI ZEM HEADER) ===== */
+    /* ===== APRAKSTS KONTEINERIS ===== */
     .description-box{
       background:white;
       max-width:800px;
@@ -111,13 +111,12 @@
 </head>
 <body>
 
-  <!-- HEADER VISĀ PLATUMĀ -->
+  <!-- HEADER AR ATSTARPI UN BEZ TEKSTA -->
   <header>
     <img src="virsburts-1.png" class="logo" alt="Logo">
-    <h1>Laipni lūgti manā vietnē</h1>
   </header>
 
-  <!-- APRAKSTS ZEM HEADER ATSEVIŠĶĀ KONTEINERĪ -->
+  <!-- APRAKSTS ZEM HEADER -->
   <div class="description-box">
     <p>Šeit ir īss ievads vai apraksts — izvēlies jebkuru projektu no saraksta zemāk.</p>
   </div>
@@ -134,6 +133,7 @@
 
 </body>
 </html>
+
 
 
 
