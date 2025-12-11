@@ -7,10 +7,9 @@
 
   <style>
     :root{
-      --page-bg: #e5e7eb;      /* īstā gaiši pelēkā krāsa */
-      --header-bg: #0b0f19;    /* tumšs header fons */
+      --page-bg:#e5e7eb;      /* gaiši pelēks lapas fons */
+      --header-bg:#0b0f19;    /* tumšs header */
       --accent:#06b6d4;
-      --muted:#6b7280;
     }
 
     *{ box-sizing:border-box; }
@@ -18,43 +17,47 @@
     html, body {
       margin:0;
       padding:0;
-      background:var(--page-bg);   /* pelēkais fons visai lapai */
+      background:var(--page-bg);
       font-family:Inter, sans-serif;
-      color:black;
     }
 
-    /* HEADER – tumšs bloks "karājas gaisā" */
+    /* ===== HEADER – VISĀ PLATUMĀ ===== */
     header{
       width:100%;
-      max-width:1000px;
-      margin:60px auto 60px auto; /* gaisīga atstarpe virs un zem */
       background:var(--header-bg);
-      padding:40px 20px;
-      border-radius:16px;
+      padding:40px 0;
       text-align:center;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      box-shadow:0 12px 30px rgba(0,0,0,0.35); /* karājas ēna */
     }
 
     .logo{
-      width:260px;
+      width:180px;
       height:auto;
-      margin-bottom:16px;
       object-fit:contain;
+      display:block;
+      margin:0 auto 12px auto;
     }
 
     h1{
+      color:white;
       margin:0;
       font-size:28px;
-      color:white;
     }
 
-    p.lead{
-      margin:14px 0 0;
-      color:#9ca3af;
-      max-width:600px;
+    /* ===== APRAKSTA KONTEINERS (ATSEVIŠĶI ZEM HEADER) ===== */
+    .description-box{
+      background:white;
+      max-width:800px;
+      margin:40px auto;
+      padding:28px 24px;
+      border-radius:14px;
+      box-shadow:0 8px 22px rgba(0,0,0,0.12);
+      text-align:center;
+    }
+
+    .description-box p{
+      margin:0;
+      font-size:18px;
+      color:#374151;
       line-height:1.5;
     }
 
@@ -62,8 +65,8 @@
     .buttons-wrapper{
       display:flex;
       justify-content:center;
-      width:100%;
       margin-top:20px;
+      padding-bottom:60px;
     }
 
     .buttons{
@@ -76,21 +79,20 @@
 
     .btn{
       display:flex;
-      align-items:center;
       justify-content:center;
-      padding:14px 18px;
-      border-radius:10px;
-      width:100%;
+      align-items:center;
+      padding:16px;
       text-decoration:none;
       font-weight:600;
-      border:1px solid rgba(0,0,0,0.15);
-      color:white;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,0.1);
       background:#1f2937;
+      color:white;
       transition:0.15s;
     }
 
     .btn.primary{
-      background:linear-gradient(90deg,var(--accent), #7c3aed);
+      background:linear-gradient(90deg, var(--accent), #7c3aed);
       border:none;
       color:#021026;
     }
@@ -100,28 +102,27 @@
       box-shadow:0 6px 18px rgba(0,0,0,0.3);
     }
 
-    footer{
-      margin:60px 0;
-      text-align:center;
-      color:#4b5563;
-    }
-
     @media(max-width:700px){
       .buttons{ width:75%; }
-      .logo{ width:180px; }
-      h1{ font-size:22px; }
+      .logo{ width:140px; }
     }
   </style>
 
 </head>
 <body>
 
+  <!-- HEADER VISĀ PLATUMĀ -->
   <header>
     <img src="virsburts-1.png" class="logo" alt="Logo">
     <h1>Laipni lūgti manā vietnē</h1>
-    <p class="lead">Šeit ir īss ievads vai apraksts — uzspiediet projekta pogu, lai atvērtu attiecīgo lapu.</p>
   </header>
 
+  <!-- APRAKSTS ZEM HEADER ATSEVIŠĶĀ KONTEINERĪ -->
+  <div class="description-box">
+    <p>Šeit ir īss ievads vai apraksts — izvēlies jebkuru projektu no saraksta zemāk.</p>
+  </div>
+
+  <!-- PROJEKTU POGAS -->
   <div class="buttons-wrapper">
     <div class="buttons">
       <a class="btn primary" href="#">Projekts 1 →</a>
@@ -131,12 +132,9 @@
     </div>
   </div>
 
-  <footer>
-    Ja vēlaties, varu pievienot vairāk pogu, sadaļas vai animācijas.
-  </footer>
-
 </body>
 </html>
+
 
 
 
