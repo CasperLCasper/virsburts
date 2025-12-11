@@ -3,63 +3,67 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mani projekti — vienas lappuses šablons</title>
+  <title>Mani projekti</title>
 
   <style>
     :root{
-      --header-bg: #0b0f19;   /* tumšais header fons */
-      --page-bg: #1f2937;     /* pelēkais pārējais fons */
+      --page-bg: #e5e7eb;      /* īstā gaiši pelēkā krāsa */
+      --header-bg: #0b0f19;    /* tumšs header fons */
       --accent:#06b6d4;
-      --muted:#94a3b8;
+      --muted:#6b7280;
     }
 
     *{ box-sizing:border-box; }
 
     html, body {
-      height:100%;
       margin:0;
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-      background:var(--page-bg);
-      color:white;
+      padding:0;
+      background:var(--page-bg);   /* pelēkais fons visai lapai */
+      font-family:Inter, sans-serif;
+      color:black;
     }
 
-    /* ===== HEADER ===== */
+    /* HEADER – tumšs bloks "karājas gaisā" */
     header{
       width:100%;
+      max-width:1000px;
+      margin:60px auto 60px auto; /* gaisīga atstarpe virs un zem */
       background:var(--header-bg);
       padding:40px 20px;
+      border-radius:16px;
+      text-align:center;
       display:flex;
       flex-direction:column;
       align-items:center;
-      text-align:center;
-      box-shadow:0 4px 12px rgba(0,0,0,0.4);
+      box-shadow:0 12px 30px rgba(0,0,0,0.35); /* karājas ēna */
     }
 
     .logo{
-      width:300px;
+      width:260px;
       height:auto;
-      object-fit:contain;
       margin-bottom:16px;
+      object-fit:contain;
     }
 
     h1{
       margin:0;
       font-size:28px;
+      color:white;
     }
 
     p.lead{
-      margin:12px 0 0;
+      margin:14px 0 0;
+      color:#9ca3af;
       max-width:600px;
-      color:var(--muted);
       line-height:1.5;
     }
 
-    /* ===== BUTTONS ===== */
-    main{
-      width:100%;
+    /* ===== PROJECT BUTTONS ===== */
+    .buttons-wrapper{
       display:flex;
       justify-content:center;
-      margin-top:40px;
+      width:100%;
+      margin-top:20px;
     }
 
     .buttons{
@@ -74,15 +78,15 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:14px 18px; /* nedaudz mazākas bet joprojām smukas */
+      padding:14px 18px;
       border-radius:10px;
       width:100%;
       text-decoration:none;
       font-weight:600;
-      border:1px solid rgba(255,255,255,0.2);
+      border:1px solid rgba(0,0,0,0.15);
       color:white;
-      background:rgba(255,255,255,0.05);
-      transition:0.15s ease;
+      background:#1f2937;
+      transition:0.15s;
     }
 
     .btn.primary{
@@ -93,50 +97,47 @@
 
     .btn:hover{
       transform:translateY(-3px);
-      box-shadow:0 6px 18px rgba(0,0,0,0.4);
+      box-shadow:0 6px 18px rgba(0,0,0,0.3);
     }
 
     footer{
-      margin:40px 0;
+      margin:60px 0;
       text-align:center;
-      color:var(--muted);
-      font-size:14px;
+      color:#4b5563;
     }
 
-    @media (max-width:700px){
+    @media(max-width:700px){
       .buttons{ width:75%; }
-      .logo{ width:200px; }
+      .logo{ width:180px; }
       h1{ font-size:22px; }
     }
-
   </style>
+
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
-    <img src="virsburts-1.png" class="logo" alt="Mans logo">
+    <img src="virsburts-1.png" class="logo" alt="Logo">
     <h1>Laipni lūgti manā vietnē</h1>
     <p class="lead">Šeit ir īss ievads vai apraksts — uzspiediet projekta pogu, lai atvērtu attiecīgo lapu.</p>
   </header>
 
-  <!-- MAIN PROJECT BUTTONS -->
-  <main>
+  <div class="buttons-wrapper">
     <div class="buttons">
-      <a class="btn primary" href="#" target="_blank">Projekts 1 →</a>
-      <a class="btn" href="#" target="_blank">Projekts 2 →</a>
-      <a class="btn" href="#" target="_blank">Projekts 3 →</a>
-      <a class="btn" href="#" target="_blank">Projekts 4 →</a>
+      <a class="btn primary" href="#">Projekts 1 →</a>
+      <a class="btn" href="#">Projekts 2 →</a>
+      <a class="btn" href="#">Projekts 3 →</a>
+      <a class="btn" href="#">Projekts 4 →</a>
     </div>
-  </main>
+  </div>
 
-  <!-- FOOTER -->
   <footer>
-    Ja vajag, varu pievienot vairāk pogu, sadaļas vai animācijas.
+    Ja vēlaties, varu pievienot vairāk pogu, sadaļas vai animācijas.
   </footer>
 
 </body>
 </html>
+
 
 
 
