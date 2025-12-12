@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> | </title>
+    <title>Mans Projekts</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -62,23 +62,18 @@
             align-items: center;
         }
         
-        .logo {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--black);
-            text-decoration: none;
-            letter-spacing: 1px;
+        /* Header logo - top left corner */
+        .header-logo {
+            height: 30px;
+            width: auto;
             opacity: 0.9;
             transition: var(--transition);
-            padding: 0.5rem 1rem;
-            border: 1px solid transparent;
+            cursor: pointer;
         }
         
-        .logo:hover {
+        .header-logo:hover {
             opacity: 1;
-            border-color: var(--lighter-gray);
-            border-radius: 4px;
+            transform: scale(1.05);
         }
         
         /* Hero Section - Centered Content */
@@ -103,35 +98,29 @@
             margin-bottom: 4rem;
         }
         
-        .logo-mark {
-            width: 60px;
-            height: 60px;
-            background: var(--black);
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0 auto 1.5rem;
-            font-family: 'Manrope', sans-serif;
+        /* Main logo - centered in hero */
+        .main-logo {
+            max-width: 300px;
+            height: auto;
+            margin: 0 auto 2rem;
+            display: block;
             transition: var(--transition);
         }
         
-        .logo-mark:hover {
-            transform: scale(1.05);
+        .main-logo:hover {
+            transform: scale(1.02);
         }
         
-        .logo-type {
+        .project-name {
             font-family: 'Manrope', sans-serif;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 400;
             color: var(--black);
             letter-spacing: -0.5px;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
         }
         
-        .logo-subtitle {
+        .project-subtitle {
             font-size: 0.9rem;
             color: var(--light-gray);
             font-weight: 400;
@@ -173,7 +162,8 @@
         
         .cta-button:hover {
             background: var(--dark-gray);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .button-icon {
@@ -263,8 +253,16 @@
         
         /* Responsive */
         @media (max-width: 768px) {
-            .logo-type {
-                font-size: 2.25rem;
+            .project-name {
+                font-size: 2rem;
+            }
+            
+            .main-logo {
+                max-width: 200px;
+            }
+            
+            .header-logo {
+                height: 25px;
             }
             
             .hero-text {
@@ -283,14 +281,12 @@
         }
         
         @media (max-width: 480px) {
-            .logo-type {
-                font-size: 2rem;
+            .project-name {
+                font-size: 1.75rem;
             }
             
-            .logo-mark {
-                width: 50px;
-                height: 50px;
-                font-size: 1.25rem;
+            .main-logo {
+                max-width: 150px;
             }
             
             .hero {
@@ -363,7 +359,7 @@
     <!-- Header - ONLY LOGO -->
     <header>
         <div class="header-content">
-            <a href="#" class="logo">LOGO</a>
+            <img src="virsburts-1.png" alt="Logo" class="header-logo" id="headerLogo">
         </div>
     </header>
     
@@ -385,16 +381,16 @@
         <div class="hero-content">
             <!-- Logo Display -->
             <div class="logo-display">
-                <div class="logo-mark">A</div>
-                <h1 class="logo-type">ARCHETYPE</h1>
-                <div class="logo-subtitle">Digital Studio</div>
+                <img src="virsburts-1.png" alt="Project Logo" class="main-logo" id="mainLogo">
+                <h1 class="project-name">Mans Projekts</h1>
+                <div class="project-subtitle">Digitālais Risinājums</div>
             </div>
             
             <!-- Text -->
             <p class="hero-text">
-                Mēs veidojam <span class="highlight">minimālistiskus digitālos risinājumus</span> 
-                ar uzsvaru uz būtību. Katrs elements ir pārdomāts, katrs risinājums 
-                <span class="highlight">funkcionāls un elegantā formā</span>.
+                Šis ir <span class="highlight">minimālistisks un elegants</span> digitālais risinājums, 
+                kas apvieno funkcionalitāti ar estētisku dizainu. Mēs veidojam produktus, 
+                kas ir <span class="highlight">intuitīvi un efektīvi</span>.
             </p>
             
             <!-- Button -->
@@ -418,20 +414,80 @@
                 loading.style.opacity = '0';
                 setTimeout(() => {
                     loading.style.display = 'none';
+                    
+                    // Check if logo loaded successfully
+                    checkLogo();
+                    
+                    // Animate content
+                    animateContent();
                 }, 500);
             }, 800);
         });
         
-        // Smooth hover effect for logo mark
-        const logoMark = document.querySelector('.logo-mark');
-        logoMark.addEventListener('mouseenter', function() {
+        // Check if logo file exists and loads correctly
+        function checkLogo() {
+            const headerLogo = document.getElementById('headerLogo');
+            const mainLogo = document.getElementById('mainLogo');
+            
+            // Function to handle logo loading errors
+            function handleLogoError(img) {
+                console.log('Logo nav atrasts:', img.src);
+                
+                // Show placeholder text instead
+                if (img.classList.contains('header-logo')) {
+                    img.style.display = 'none';
+                    document.querySelector('.header-content').innerHTML = `
+                        <div style="font-family: 'Manrope', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--black);">
+                            LOGO
+                        </div>
+                    `;
+                }
+                
+                if (img.classList.contains('main-logo')) {
+                    img.style.display = 'none';
+                    document.querySelector('.logo-display').innerHTML = `
+                        <div style="width: 200px; height: 100px; background: var(--lighter-gray); display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; color: var(--gray); font-size: 0.9rem;">
+                            Pievienojiet logo failu<br>virsburts-1.png
+                        </div>
+                        <h1 class="project-name">Mans Projekts</h1>
+                        <div class="project-subtitle">Digitālais Risinājums</div>
+                    `;
+                }
+            }
+            
+            // Add error handlers
+            headerLogo.onerror = () => handleLogoError(headerLogo);
+            mainLogo.onerror = () => handleLogoError(mainLogo);
+            
+            // Test if logo loaded successfully
+            if (headerLogo.complete && headerLogo.naturalHeight === 0) {
+                handleLogoError(headerLogo);
+            }
+            if (mainLogo.complete && mainLogo.naturalHeight === 0) {
+                handleLogoError(mainLogo);
+            }
+        }
+        
+        // Logo hover effects
+        const headerLogo = document.getElementById('headerLogo');
+        const mainLogo = document.getElementById('mainLogo');
+        
+        headerLogo.addEventListener('mouseenter', function() {
+            this.style.opacity = '1';
             this.style.transform = 'scale(1.05)';
-            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
         });
         
-        logoMark.addEventListener('mouseleave', function() {
+        headerLogo.addEventListener('mouseleave', function() {
+            this.style.opacity = '0.9';
             this.style.transform = 'scale(1)';
-            this.style.boxShadow = 'none';
+        });
+        
+        mainLogo.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+        });
+        
+        mainLogo.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
         });
         
         // CTA Button interaction
@@ -443,36 +499,32 @@
             this.style.transform = 'scale(0.98)';
             this.style.backgroundColor = '#333';
             
-            // Show message (could redirect to actual projects page)
             const originalText = this.querySelector('span').textContent;
-            this.querySelector('span').textContent = 'Sākam darbu...';
+            this.querySelector('span').textContent = 'Atver...';
             
-            // Reset after animation
             setTimeout(() => {
                 this.style.transform = '';
                 this.style.backgroundColor = '';
                 this.querySelector('span').textContent = originalText;
                 
-                // Here you would typically redirect to projects page
-                // window.location.href = '/projects';
-            }, 1000);
+                // Simple alert for demo
+                alert('Projekta saturs tiks atvērts drīzumā...');
+            }, 800);
         });
         
-        // Logo interaction
-        const headerLogo = document.querySelector('.logo');
+        // Header logo click - scroll to top
         headerLogo.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Simple logo animation
-            this.style.opacity = '0.5';
+            this.style.opacity = '0.7';
+            this.style.transform = 'scale(0.95)';
+            
             setTimeout(() => {
                 this.style.opacity = '0.9';
+                this.style.transform = 'scale(1)';
             }, 200);
             
-            // Scroll to top if not already there
-            if (window.scrollY > 100) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
         // Background lines animation on mouse move
@@ -486,71 +538,60 @@
                 const x = (mouseX * 100 * speed * index) - 50;
                 const y = (mouseY * 100 * speed * index) - 50;
                 
-                // Subtle movement for vertical lines
                 if (line.classList.contains('line-vertical')) {
                     line.style.transform = `translateX(${x}px)`;
                 }
                 
-                // Subtle movement for horizontal lines
                 if (line.classList.contains('line-horizontal')) {
                     line.style.transform = `translateY(${y}px)`;
                 }
             });
         });
         
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowDown') {
-                // If you add content later, scroll down
-                // Currently just triggers button click
-                ctaButton.click();
-            }
+        // Animate content on load
+        function animateContent() {
+            const logoDisplay = document.querySelector('.logo-display');
+            const heroText = document.querySelector('.hero-text');
+            const ctaSection = document.querySelector('.cta-button');
             
-            if (e.key === 'Escape') {
-                // Reset any animations
-                logoMark.style.transform = 'scale(1)';
-            }
-        });
+            // Set initial state for animation
+            logoDisplay.style.opacity = '0';
+            logoDisplay.style.transform = 'translateY(20px)';
+            logoDisplay.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            
+            heroText.style.opacity = '0';
+            heroText.style.transform = 'translateY(20px)';
+            heroText.style.transition = 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s';
+            
+            ctaSection.style.opacity = '0';
+            ctaSection.style.transform = 'translateY(20px)';
+            ctaSection.style.transition = 'opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s';
+            
+            // Animate in
+            setTimeout(() => {
+                logoDisplay.style.opacity = '1';
+                logoDisplay.style.transform = 'translateY(0)';
+                
+                heroText.style.opacity = '1';
+                heroText.style.transform = 'translateY(0)';
+                
+                ctaSection.style.opacity = '1';
+                ctaSection.style.transform = 'translateY(0)';
+            }, 300);
+        }
         
         // Window resize - adjust background lines
         function adjustLines() {
             const lines = document.querySelectorAll('.line-vertical');
-            const viewportWidth = window.innerWidth;
-            
-            // Adjust vertical line positions based on viewport
             lines.forEach((line, index) => {
                 const percentage = (index + 1) * 20; // 20%, 40%, 60%, 80%
                 line.style.left = `${percentage}%`;
             });
         }
         
-        // Initial adjustment
+        // Initial adjustments
         adjustLines();
-        
-        // Adjust on resize
         window.addEventListener('resize', adjustLines);
-        
-        // Text animation on load
-        const heroText = document.querySelector('.hero-text');
-        const ctaSection = document.querySelector('.cta-button');
-        
-        // Set initial state for animation
-        heroText.style.opacity = '0';
-        heroText.style.transform = 'translateY(20px)';
-        heroText.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        
-        ctaSection.style.opacity = '0';
-        ctaSection.style.transform = 'translateY(20px)';
-        ctaSection.style.transition = 'opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s';
-        
-        // Animate in
-        setTimeout(() => {
-            heroText.style.opacity = '1';
-            heroText.style.transform = 'translateY(0)';
-            
-            ctaSection.style.opacity = '1';
-            ctaSection.style.transform = 'translateY(0)';
-        }, 300);
     </script>
 </body>
 </html>
