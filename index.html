@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mans Projekts</title>
+    <title> | </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -62,57 +62,23 @@
             align-items: center;
         }
         
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .logo-img {
-            height: 30px;
-            width: auto;
-            max-width: 150px;
+        .logo {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--black);
+            text-decoration: none;
+            letter-spacing: 1px;
             opacity: 0.9;
             transition: var(--transition);
-            cursor: pointer;
-        }
-        
-        .logo-img:hover {
-            opacity: 1;
-        }
-        
-        .logo-text {
-            font-family: 'Manrope', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--light-gray);
-            letter-spacing: 1px;
-        }
-        
-        /* Upload Button */
-        .upload-btn {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            background: var(--black);
-            color: var(--white);
-            border: none;
-            border-radius: 4px;
             padding: 0.5rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            border: 1px solid transparent;
         }
         
-        .upload-btn:hover {
-            background: var(--dark-gray);
-            transform: translateY(-1px);
+        .logo:hover {
+            opacity: 1;
+            border-color: var(--lighter-gray);
+            border-radius: 4px;
         }
         
         /* Hero Section - Centered Content */
@@ -135,32 +101,37 @@
         /* Logo Display */
         .logo-display {
             margin-bottom: 4rem;
-            position: relative;
         }
         
-        .main-logo {
-            max-width: 200px;
-            height: auto;
-            margin: 0 auto 2rem;
-            display: block;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        
-        .main-logo:hover {
-            transform: scale(1.02);
-        }
-        
-        .project-name {
+        .logo-mark {
+            width: 60px;
+            height: 60px;
+            background: var(--black);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 auto 1.5rem;
             font-family: 'Manrope', sans-serif;
-            font-size: 2.5rem;
+            transition: var(--transition);
+        }
+        
+        .logo-mark:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-type {
+            font-family: 'Manrope', sans-serif;
+            font-size: 3rem;
             font-weight: 400;
             color: var(--black);
             letter-spacing: -0.5px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
         
-        .project-subtitle {
+        .logo-subtitle {
             font-size: 0.9rem;
             color: var(--light-gray);
             font-weight: 400;
@@ -202,8 +173,7 @@
         
         .cta-button:hover {
             background: var(--dark-gray);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
         }
         
         .button-icon {
@@ -291,105 +261,10 @@
             }
         }
         
-        /* Modal for Logo Upload */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1002;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 400px;
-            width: 90%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .modal h3 {
-            margin-bottom: 1.5rem;
-            color: var(--black);
-        }
-        
-        .upload-area {
-            border: 2px dashed var(--lighter-gray);
-            border-radius: 6px;
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .upload-area:hover {
-            border-color: var(--gray);
-            background: rgba(0, 0, 0, 0.01);
-        }
-        
-        .upload-area i {
-            font-size: 2rem;
-            color: var(--light-gray);
-            margin-bottom: 1rem;
-        }
-        
-        .upload-text {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .upload-hint {
-            font-size: 0.8rem;
-            color: var(--light-gray);
-            margin-top: 0.5rem;
-        }
-        
-        .modal-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        
-        .modal-btn {
-            flex: 1;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 4px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .modal-btn-primary {
-            background: var(--black);
-            color: var(--white);
-        }
-        
-        .modal-btn-primary:hover {
-            background: var(--dark-gray);
-        }
-        
-        .modal-btn-secondary {
-            background: var(--lighter-gray);
-            color: var(--black);
-        }
-        
-        .modal-btn-secondary:hover {
-            background: var(--gray);
-            color: var(--white);
-        }
-        
         /* Responsive */
         @media (max-width: 768px) {
-            .project-name {
-                font-size: 2rem;
+            .logo-type {
+                font-size: 2.25rem;
             }
             
             .hero-text {
@@ -405,31 +280,21 @@
             .line-1, .line-2, .line-3, .line-4 {
                 display: none;
             }
-            
-            .upload-btn {
-                top: 1rem;
-                right: 1rem;
-                padding: 0.4rem 0.8rem;
-                font-size: 0.7rem;
-            }
         }
         
         @media (max-width: 480px) {
-            .project-name {
-                font-size: 1.75rem;
+            .logo-type {
+                font-size: 2rem;
             }
             
-            .main-logo {
-                max-width: 150px;
+            .logo-mark {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
             }
             
             .hero {
                 padding: 0 1rem;
-            }
-            
-            .modal-content {
-                width: 95%;
-                padding: 1.5rem;
             }
         }
         
@@ -485,30 +350,6 @@
                 width: 0;
             }
         }
-        
-        /* Default logo placeholder */
-        .logo-placeholder {
-            width: 200px;
-            height: 60px;
-            background: var(--lighter-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin: 0 auto;
-        }
-        
-        .logo-placeholder-small {
-            width: 150px;
-            height: 30px;
-            background: var(--lighter-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            font-size: 0.8rem;
-        }
     </style>
 </head>
 <body>
@@ -519,36 +360,10 @@
         </div>
     </div>
     
-    <!-- Logo Upload Modal -->
-    <div class="modal" id="uploadModal">
-        <div class="modal-content">
-            <h3>Pievienot Logo</h3>
-            <div class="upload-area" id="uploadArea">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <div class="upload-text">Velciet logo failu šeit vai klikšķiniet, lai izvēlētos</div>
-                <div class="upload-hint">Atbalstītie formāti: PNG, JPG, SVG (Maks. 2MB)</div>
-            </div>
-            <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.svg" style="display: none;">
-            <div class="modal-buttons">
-                <button class="modal-btn modal-btn-secondary" id="cancelBtn">Atcelt</button>
-                <button class="modal-btn modal-btn-primary" id="uploadBtn">Augšupielādēt</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Upload Button -->
-    <button class="upload-btn" id="openUploadBtn">
-        <i class="fas fa-upload"></i>
-        Logo
-    </button>
-    
     <!-- Header - ONLY LOGO -->
     <header>
         <div class="header-content">
-            <div class="logo-container">
-                <img src="" alt="Logo" class="logo-img" id="headerLogo">
-                <div class="logo-text">logo</div>
-            </div>
+            <a href="#" class="logo">LOGO</a>
         </div>
     </header>
     
@@ -570,16 +385,16 @@
         <div class="hero-content">
             <!-- Logo Display -->
             <div class="logo-display">
-                <img src="" alt="Project Logo" class="main-logo" id="mainLogo">
-                <h1 class="project-name" id="projectName">Mans Projekts</h1>
-                <div class="project-subtitle" id="projectSubtitle">Digitālais Risinājums</div>
+                <div class="logo-mark">A</div>
+                <h1 class="logo-type">ARCHETYPE</h1>
+                <div class="logo-subtitle">Digital Studio</div>
             </div>
             
             <!-- Text -->
             <p class="hero-text">
-                Šis ir <span class="highlight">minimālistisks un elegants</span> digitālais risinājums, 
-                kas apvieno funkcionalitāti ar estētisku dizainu. Mēs veidojam produktus, 
-                kas ir <span class="highlight">intuitīvi un efektīvi</span>.
+                Mēs veidojam <span class="highlight">minimālistiskus digitālos risinājumus</span> 
+                ar uzsvaru uz būtību. Katrs elements ir pārdomāts, katrs risinājums 
+                <span class="highlight">funkcionāls un elegantā formā</span>.
             </p>
             
             <!-- Button -->
@@ -596,262 +411,71 @@
     </main>
     
     <script>
-        // DOM Elements
-        const loading = document.getElementById('loading');
-        const uploadModal = document.getElementById('uploadModal');
-        const openUploadBtn = document.getElementById('openUploadBtn');
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const uploadBtn = document.getElementById('uploadBtn');
-        const headerLogo = document.getElementById('headerLogo');
-        const mainLogo = document.getElementById('mainLogo');
-        const projectName = document.getElementById('projectName');
-        const projectSubtitle = document.getElementById('projectSubtitle');
-        const ctaButton = document.getElementById('ctaButton');
-        
-        // Current logo state
-        let currentLogo = null;
-        
         // Loading Animation
         window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
             setTimeout(() => {
                 loading.style.opacity = '0';
                 setTimeout(() => {
                     loading.style.display = 'none';
-                    loadSavedLogo();
                 }, 500);
             }, 800);
         });
         
-        // Load saved logo from localStorage
-        function loadSavedLogo() {
-            const savedLogo = localStorage.getItem('projectLogo');
-            const savedName = localStorage.getItem('projectName') || 'Mans Projekts';
-            const savedSubtitle = localStorage.getItem('projectSubtitle') || 'Digitālais Risinājums';
-            
-            if (savedLogo) {
-                headerLogo.src = savedLogo;
-                mainLogo.src = savedLogo;
-                currentLogo = savedLogo;
-            } else {
-                // Show placeholder if no logo saved
-                headerLogo.style.display = 'none';
-                mainLogo.style.display = 'none';
-                document.querySelector('.logo-container').innerHTML = `
-                    <div class="logo-placeholder-small">LOGO</div>
-                    <div class="logo-text">logo</div>
-                `;
-                document.querySelector('.logo-display').innerHTML = `
-                    <div class="logo-placeholder">PIEVIENOJIET LOGO</div>
-                    <h1 class="project-name">${savedName}</h1>
-                    <div class="project-subtitle">${savedSubtitle}</div>
-                `;
-            }
-            
-            projectName.textContent = savedName;
-            projectSubtitle.textContent = savedSubtitle;
-            
-            // Animate content in
-            animateContent();
-        }
-        
-        // Upload Modal Functions
-        openUploadBtn.addEventListener('click', () => {
-            uploadModal.style.display = 'flex';
-        });
-        
-        cancelBtn.addEventListener('click', () => {
-            uploadModal.style.display = 'none';
-            fileInput.value = '';
-        });
-        
-        uploadArea.addEventListener('click', () => {
-            fileInput.click();
-        });
-        
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.style.borderColor = 'var(--black)';
-            uploadArea.style.background = 'rgba(0, 0, 0, 0.02)';
-        });
-        
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.style.borderColor = 'var(--lighter-gray)';
-            uploadArea.style.background = '';
-        });
-        
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.style.borderColor = 'var(--lighter-gray)';
-            uploadArea.style.background = '';
-            
-            if (e.dataTransfer.files.length) {
-                handleLogoFile(e.dataTransfer.files[0]);
-            }
-        });
-        
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length) {
-                handleLogoFile(e.target.files[0]);
-            }
-        });
-        
-        function handleLogoFile(file) {
-            // Validate file
-            const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg+xml'];
-            const maxSize = 2 * 1024 * 1024; // 2MB
-            
-            if (!validTypes.includes(file.type)) {
-                alert('Lūdzu izvēlieties attēla failu (PNG, JPG, SVG)');
-                return;
-            }
-            
-            if (file.size > maxSize) {
-                alert('Faila izmērs nedrīkst pārsniegt 2MB');
-                return;
-            }
-            
-            // Read and preview file
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const logoDataUrl = e.target.result;
-                previewLogo(logoDataUrl);
-            };
-            reader.readAsDataURL(file);
-        }
-        
-        function previewLogo(dataUrl) {
-            // Update preview in modal
-            uploadArea.innerHTML = `
-                <img src="${dataUrl}" alt="Logo Preview" style="max-width: 150px; max-height: 60px; margin-bottom: 1rem;">
-                <div class="upload-text">Logo priekšskatījums</div>
-                <div class="upload-hint">Nospiediet "Augšupielādēt", lai saglabātu</div>
-            `;
-            
-            // Enable upload button
-            uploadBtn.disabled = false;
-            uploadBtn.textContent = 'Augšupielādēt';
-            
-            // Store preview
-            currentLogo = dataUrl;
-        }
-        
-        uploadBtn.addEventListener('click', () => {
-            if (!currentLogo) return;
-            
-            // Save to localStorage
-            localStorage.setItem('projectLogo', currentLogo);
-            
-            // Update logos on page
-            updateLogos(currentLogo);
-            
-            // Close modal
-            uploadModal.style.display = 'none';
-            fileInput.value = '';
-            
-            // Reset upload area
-            uploadArea.innerHTML = `
-                <i class="fas fa-cloud-upload-alt"></i>
-                <div class="upload-text">Velciet logo failu šeit vai klikšķiniet, lai izvēlētos</div>
-                <div class="upload-hint">Atbalstītie formāti: PNG, JPG, SVG (Maks. 2MB)</div>
-            `;
-            
-            uploadBtn.disabled = true;
-            uploadBtn.textContent = 'Izvēlieties failu';
-            
-            // Show success message
-            showMessage('Logo veiksmīgi saglabāts!', 'success');
-        });
-        
-        function updateLogos(logoDataUrl) {
-            // Update header logo
-            document.querySelector('.logo-container').innerHTML = `
-                <img src="${logoDataUrl}" alt="Logo" class="logo-img" id="headerLogo">
-                <div class="logo-text">logo</div>
-            `;
-            
-            // Update main logo
-            document.querySelector('.logo-display').innerHTML = `
-                <img src="${logoDataUrl}" alt="Project Logo" class="main-logo" id="mainLogo">
-                <h1 class="project-name" id="projectName">${projectName.textContent}</h1>
-                <div class="project-subtitle" id="projectSubtitle">${projectSubtitle.textContent}</div>
-            `;
-            
-            // Re-attach event listeners
-            const newHeaderLogo = document.getElementById('headerLogo');
-            const newMainLogo = document.getElementById('mainLogo');
-            
-            newHeaderLogo.addEventListener('click', handleLogoClick);
-            newMainLogo.addEventListener('mouseenter', handleLogoHover);
-            newMainLogo.addEventListener('mouseleave', handleLogoLeave);
-        }
-        
-        // Logo interactions
-        function handleLogoClick(e) {
-            e.preventDefault();
-            this.style.opacity = '0.7';
-            setTimeout(() => {
-                this.style.opacity = '1';
-            }, 200);
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        function handleLogoHover() {
+        // Smooth hover effect for logo mark
+        const logoMark = document.querySelector('.logo-mark');
+        logoMark.addEventListener('mouseenter', function() {
             this.style.transform = 'scale(1.05)';
-        }
-        
-        function handleLogoLeave() {
-            this.style.transform = 'scale(1)';
-        }
-        
-        // Project name and subtitle editing
-        projectName.addEventListener('click', () => {
-            const newName = prompt('Ievadiet projekta nosaukumu:', projectName.textContent);
-            if (newName && newName.trim()) {
-                projectName.textContent = newName.trim();
-                localStorage.setItem('projectName', newName.trim());
-                showMessage('Nosaukums saglabāts!', 'success');
-            }
+            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
         });
         
-        projectSubtitle.addEventListener('click', () => {
-            const newSubtitle = prompt('Ievadiet apakšvirsrakstu:', projectSubtitle.textContent);
-            if (newSubtitle !== null) {
-                projectSubtitle.textContent = newSubtitle;
-                localStorage.setItem('projectSubtitle', newSubtitle);
-                showMessage('Apakšvirsraksts saglabāts!', 'success');
-            }
+        logoMark.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'none';
         });
         
         // CTA Button interaction
+        const ctaButton = document.getElementById('ctaButton');
         ctaButton.addEventListener('click', function(e) {
             e.preventDefault();
             
+            // Button animation
             this.style.transform = 'scale(0.98)';
             this.style.backgroundColor = '#333';
             
+            // Show message (could redirect to actual projects page)
             const originalText = this.querySelector('span').textContent;
-            this.querySelector('span').textContent = 'Atver...';
+            this.querySelector('span').textContent = 'Sākam darbu...';
             
+            // Reset after animation
             setTimeout(() => {
                 this.style.transform = '';
                 this.style.backgroundColor = '';
                 this.querySelector('span').textContent = originalText;
                 
-                // Show project info
-                const projectData = {
-                    name: projectName.textContent,
-                    subtitle: projectSubtitle.textContent,
-                    hasLogo: !!currentLogo
-                };
-                
-                alert(`Projekts: ${projectData.name}\nApakšvirsraksts: ${projectData.subtitle}\nLogo: ${projectData.hasLogo ? 'Pievienots' : 'Nav pievienots'}`);
-            }, 800);
+                // Here you would typically redirect to projects page
+                // window.location.href = '/projects';
+            }, 1000);
         });
         
-        // Background lines animation
+        // Logo interaction
+        const headerLogo = document.querySelector('.logo');
+        headerLogo.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Simple logo animation
+            this.style.opacity = '0.5';
+            setTimeout(() => {
+                this.style.opacity = '0.9';
+            }, 200);
+            
+            // Scroll to top if not already there
+            if (window.scrollY > 100) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+        
+        // Background lines animation on mouse move
         document.addEventListener('mousemove', (e) => {
             const lines = document.querySelectorAll('.line');
             const mouseX = e.clientX / window.innerWidth;
@@ -862,117 +486,71 @@
                 const x = (mouseX * 100 * speed * index) - 50;
                 const y = (mouseY * 100 * speed * index) - 50;
                 
+                // Subtle movement for vertical lines
                 if (line.classList.contains('line-vertical')) {
                     line.style.transform = `translateX(${x}px)`;
                 }
                 
+                // Subtle movement for horizontal lines
                 if (line.classList.contains('line-horizontal')) {
                     line.style.transform = `translateY(${y}px)`;
                 }
             });
         });
         
-        // Utility functions
-        function showMessage(text, type) {
-            const message = document.createElement('div');
-            message.textContent = text;
-            message.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${type === 'success' ? '#10b981' : '#ef4444'};
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 4px;
-                z-index: 1003;
-                font-size: 0.9rem;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                animation: slideIn 0.3s ease;
-            `;
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') {
+                // If you add content later, scroll down
+                // Currently just triggers button click
+                ctaButton.click();
+            }
             
-            document.body.appendChild(message);
-            
-            setTimeout(() => {
-                message.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => {
-                    document.body.removeChild(message);
-                }, 300);
-            }, 3000);
-        }
+            if (e.key === 'Escape') {
+                // Reset any animations
+                logoMark.style.transform = 'scale(1)';
+            }
+        });
         
-        function animateContent() {
-            const elements = [
-                document.querySelector('.logo-display'),
-                document.querySelector('.hero-text'),
-                document.querySelector('.cta-button')
-            ];
-            
-            elements.forEach((el, index) => {
-                if (el) {
-                    el.style.opacity = '0';
-                    el.style.transform = 'translateY(20px)';
-                    el.style.transition = `opacity 0.8s ease ${index * 0.2}s, transform 0.8s ease ${index * 0.2}s`;
-                    
-                    setTimeout(() => {
-                        el.style.opacity = '1';
-                        el.style.transform = 'translateY(0)';
-                    }, 300 + (index * 200));
-                }
-            });
-        }
-        
-        // Initialize
-        window.addEventListener('resize', adjustLines);
-        
+        // Window resize - adjust background lines
         function adjustLines() {
             const lines = document.querySelectorAll('.line-vertical');
+            const viewportWidth = window.innerWidth;
+            
+            // Adjust vertical line positions based on viewport
             lines.forEach((line, index) => {
-                const percentage = (index + 1) * 20;
+                const percentage = (index + 1) * 20; // 20%, 40%, 60%, 80%
                 line.style.left = `${percentage}%`;
             });
         }
         
-        // Initial adjustments
+        // Initial adjustment
         adjustLines();
         
-        // Keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-                openUploadBtn.click();
-            }
-            
-            if (e.key === 'Escape' && uploadModal.style.display === 'flex') {
-                cancelBtn.click();
-            }
-        });
+        // Adjust on resize
+        window.addEventListener('resize', adjustLines);
         
-        // Add CSS for animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
+        // Text animation on load
+        const heroText = document.querySelector('.hero-text');
+        const ctaSection = document.querySelector('.cta-button');
+        
+        // Set initial state for animation
+        heroText.style.opacity = '0';
+        heroText.style.transform = 'translateY(20px)';
+        heroText.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        
+        ctaSection.style.opacity = '0';
+        ctaSection.style.transform = 'translateY(20px)';
+        ctaSection.style.transition = 'opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s';
+        
+        // Animate in
+        setTimeout(() => {
+            heroText.style.opacity = '1';
+            heroText.style.transform = 'translateY(0)';
             
-            @keyframes slideOut {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
+            ctaSection.style.opacity = '1';
+            ctaSection.style.transform = 'translateY(0)';
+        }, 300);
     </script>
 </body>
 </html>
