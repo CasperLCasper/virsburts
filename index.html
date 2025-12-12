@@ -3,297 +3,866 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eksperimentāla Mājaslapa</title>
+    <title>NEXUS | Digitālie Risinājumi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #f97316;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --gradient: linear-gradient(135deg, #6366f1, #8b5cf6, #f97316);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: white;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light);
             overflow-x: hidden;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
         }
         
-        /* LOGO - centrēts */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
         .logo {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark);
+            text-decoration: none;
         }
         
         .logo-icon {
-            font-size: 4rem;
-            color: #00d4ff;
-            margin-bottom: 1rem;
-            animation: pulse 2s infinite;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
         }
         
-        .logo-text {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(to right, #00d4ff, #ff00cc);
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 120px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            line-height: 1.1;
         }
         
-        /* Teksta sadaļa */
-        .text-section {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
         }
         
-        .main-text {
-            font-size: 1.8rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            color: #f0f0f0;
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
         }
         
-        .highlight {
-            color: #00d4ff;
-            font-weight: 700;
+        .hero-visual {
+            position: relative;
         }
         
-        /* Poga */
-        .button-section {
+        .hero-visual img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-hover);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: var(--transition);
+        }
+        
+        .hero-visual img:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        /* Features Section */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
             text-align: center;
             margin-bottom: 4rem;
         }
         
-        .project-button {
-            display: inline-flex;
+        .section-title h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--gray-light);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-radius: 16px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.2rem 3rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-            text-decoration: none;
-            color: white;
-            background: linear-gradient(45deg, #ff00cc, #00d4ff);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 0, 204, 0.4);
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .project-image {
+            height: 220px;
+            background: var(--gradient);
             position: relative;
             overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
         
-        .project-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 0, 204, 0.6);
-            letter-spacing: 2px;
+        .project-content {
+            padding: 2rem;
         }
         
-        .project-button:active {
-            transform: translateY(0);
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
         }
         
-        .button-icon {
-            margin-right: 10px;
+        .tag {
+            background: var(--gray-light);
+            color: var(--gray);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: var(--gradient);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            border-radius: var(--radius);
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .cta .btn {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .cta .btn:hover {
+            background: var(--dark);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
             font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
         }
         
-        /* Pielikumam - papildu efekti */
-        .background-elements {
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links, .nav-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        /* Loading Animation */
+        .loading {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
         
-        .shape {
-            position: absolute;
+        .spinner {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            background: rgba(255, 0, 204, 0.1);
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
         }
         
-        .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 5%;
-            animation: float 20s infinite linear;
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
         }
         
-        .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            bottom: 15%;
-            right: 10%;
-            background: rgba(0, 212, 255, 0.1);
-            animation: float 15s infinite linear reverse;
+        .hidden {
+            display: none;
         }
         
-        /* Animācijas */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(100px, 100px) rotate(360deg); }
-        }
-        
-        /* Atbilstība dažādiem ekrāniem */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .logo-text {
-                font-size: 2.2rem;
-            }
-            
-            .logo-icon {
-                font-size: 3rem;
-            }
-            
-            .main-text {
-                font-size: 1.4rem;
-            }
-            
-            .project-button {
-                padding: 1rem 2rem;
-                font-size: 1.1rem;
-            }
-        }
-        
-        /* Scroll efekts */
-        .scroll-hint {
-            text-align: center;
-            margin-top: 3rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        /* Dark mode toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 999;
+            border: none;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
-    <!-- Fona elementi -->
-    <div class="background-elements">
-        <div class="shape"></div>
-        <div class="shape"></div>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
     </div>
     
-    <div class="container">
-        <!-- LOGO sadaļa -->
-        <header class="logo">
-            <div class="virsburts-1.png">
-                <i class="fas fa-cube"></i>
-            </div>
-            <h1 class="logo-text">Eksperiments</h1>
-        </header>
-        
-        <!-- Teksta sadaļa -->
-        <section class="text-section">
-            <p class="main-text">
-                Šī ir <span class="highlight">eksperimentāla mājaslapa</span>, kas demonstrē jaunas idejas un radošus risinājumus digitālajā vidē. 
-                Mēs pārbaudām robežas un meklējam unikālus veidus, kā pārveidot vienkāršu saturu par <span class="highlight">uztvērēju pieredzi</span>.
-            </p>
-            <p class="main-text">
-                Katrs projekts sākas ar ideju, bet tikai caur eksperimentiem tas pārvēršas par kaut ko lielisku.
-            </p>
-        </section>
-        
-        <!-- Pogas sadaļa -->
-        <section class="button-section">
-            <a href="#" class="project-button" id="projectButton">
-                <i class="fas fa-arrow-right button-icon"></i>
-                Pāriet pie projektiem
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">N</div>
+                <span>NEXUS</span>
             </a>
-        </section>
-        
-        <!-- Scroll hint -->
-        <div class="scroll-hint">
-            <i class="fas fa-chevron-down"></i> Ritiniet uz leju, lai atklātu vairāk
+            
+            <div class="nav-links">
+                <a href="#home">Sākums</a>
+                <a href="#features">Iespējas</a>
+                <a href="#projects">Projekti</a>
+                <a href="#contact">Kontakti</a>
+            </div>
+            
+            <div class="nav-buttons">
+                <a href="#contact" class="btn btn-secondary">Sazināties</a>
+                <a href="#projects" class="btn btn-primary">Projekti <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-    </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Digitālā Transformācija Jūsu Uzņēmumam</h1>
+                    <p>Mēs veidojam modernus digitālos risinājumus, kas palielina efektivitāti, piesaista klientus un virza uzņēmumu uz nākotni.</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">Skatīt Projekti <i class="fas fa-arrow-down"></i></a>
+                        <a href="#contact" class="btn btn-secondary">Bezmaksas Konsultācija</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digitālā transformācija">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Ko Mēs Piedāvājam</h2>
+                <p>Pilns pakalpojumu klāsts jūsu digitālajām vajadzībām</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Mājaslapu Izstrāde</h3>
+                    <p>Modernas, ātras un meklētājprogrammām optimizētas mājaslapas, kas pārveido apmeklētājus par klientiem.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>E-komercija</h3>
+                    <p>Pilnībā funkcionāli interneta veikali ar drošiem maksājumiem un pārvaldības paneli.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Digitālā Mārketinga</h3>
+                    <p>Stratēģiska mārketinga plānošana un īstenošana sociālajos tīklos un meklētājprogrammās.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mūsu Projekti</h2>
+                <p>Iepazīstieties ar mūsu veiktajiem darbiem un iedvesmojieties</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);"></div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Web Design</span>
+                            <span class="tag">E-commerce</span>
+                        </div>
+                        <h3>Modernas E-veikala Platforma</h3>
+                        <p>Pilnībā pielāgota e-komercijas risinājuma izstrāde ar integrētu maksājumu sistēmu.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #f97316, #f59e0b);"></div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Branding</span>
+                            <span class="tag">UI/UX</span>
+                        </div>
+                        <h3>Uzņēmuma Identitātes Attīstība</h3>
+                        <p>Komplekss zīmola attīstības projekts, ieskaitot logotipu, vizuālo identitāti un mājaslapu.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #10b981, #34d399);"></div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">Mobile App</span>
+                            <span class="tag">React Native</span>
+                        </div>
+                        <h3>Mobīlā Lietotņu Izstrāde</h3>
+                        <p>Šķērsplatformu mobilo lietotņu izstrāde iOS un Android operētājsistēmām.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container">
+            <div class="cta">
+                <h2>Sāksim Savu projektu Kopā</h2>
+                <p>Vai esat gatavi pārveidot savu digitālo klātbūtni? Sazinieties ar mums šodien, lai apspriestu jūsu idejas.</p>
+                <a href="#contact" class="btn btn-primary">Sākt Sarunu <i class="fas fa-comment"></i></a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <div class="logo-icon" style="width: 35px; height: 35px;">N</div>
+                        <span>NEXUS</span>
+                    </div>
+                    <p>Mēs veidojam nākotnes digitālos risinājumus, kas maina uzņēmējdarbību un piešķir konkurences priekšrocības.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Pakalpojumi</h3>
+                    <ul>
+                        <li><a href="#">Mājaslapu Izstrāde</a></li>
+                        <li><a href="#">E-komercija</a></li>
+                        <li><a href="#">UI/UX Dizains</a></li>
+                        <li><a href="#">Digitālais Mārketings</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Kontakti</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Rīga, Latvija</li>
+                        <li><i class="fas fa-phone"></i> +371 20 000 000</li>
+                        <li><i class="fas fa-envelope"></i> info@nexus.lv</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 NEXUS Digitālie Risinājumi. Visas tiesības aizsargātas.</p>
+            </div>
+        </div>
+    </footer>
     
     <script>
-        // Interaktivitāte pogai
-        document.getElementById('projectButton').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Animācija
-            this.style.transform = 'scale(0.95)';
-            this.style.background = 'linear-gradient(45deg, #00d4ff, #ff00cc)';
-            
-            // Paziņojums
-            alert('Pārejat uz projektu sadaļu! Šobrīd šī funkcija ir demonstrācijas režīmā.');
-            
-            // Atgriežam sākotnējo stāvokli pēc īsa laika
+        // Loading screen
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loading');
             setTimeout(() => {
-                this.style.transform = '';
-                this.style.background = 'linear-gradient(45deg, #ff00cc, #00d4ff)';
-            }, 300);
-            
-            // Ja būtu vairāk satura, varētu ritināt uz leju
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
-            });
+                loading.style.opacity = '0';
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 500);
+            }, 800);
         });
         
-        // Dinamisks fona efekts
-        document.addEventListener('mousemove', (e) => {
-            const shapes = document.querySelectorAll('.shape');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        const navButtons = document.querySelector('.nav-buttons');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navButtons.style.display = navButtons.style.display === 'flex' ? 'none' : 'flex';
             
-            shapes.forEach((shape, index) => {
-                const speed = index === 0 ? 0.02 : 0.01;
-                const offsetX = (x * 100 * speed) - 50;
-                const offsetY = (y * 100 * speed) - 50;
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.backgroundColor = 'white';
+                navLinks.style.padding = '2rem';
+                navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
                 
-                shape.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+                navButtons.style.flexDirection = 'column';
+                navButtons.style.position = 'absolute';
+                navButtons.style.top = 'calc(100% + 200px)';
+                navButtons.style.left = '0';
+                navButtons.style.width = '100%';
+                navButtons.style.padding = '2rem';
+            }
+        });
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                document.body.style.backgroundColor = '#0f172a';
+                document.body.style.color = '#f8fafc';
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                document.body.style.backgroundColor = '';
+                document.body.style.color = '';
+            }
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '0.8rem 0';
+                nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.padding = '1.2rem 0';
+                nav.style.boxShadow = 'none';
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        navLinks.style.display = 'none';
+                        navButtons.style.display = 'none';
+                    }
+                }
             });
         });
         
-        // Logo interaktivitāte
-        const logo = document.querySelector('.logo-icon');
-        logo.addEventListener('mouseenter', () => {
-            logo.style.color = '#ff00cc';
-            logo.style.transform = 'rotate(15deg)';
-        });
-        
-        logo.addEventListener('mouseleave', () => {
-            logo.style.color = '#00d4ff';
-            logo.style.transform = 'rotate(0)';
+        // Add hover effects to cards
+        document.querySelectorAll('.feature-card, .project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
         });
     </script>
 </body>
