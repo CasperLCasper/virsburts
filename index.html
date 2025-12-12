@@ -62,7 +62,7 @@
             align-items: center;
         }
         
-        /* Header logo - top left corner */
+        /* Header logo - top center */
         .header-logo {
             height: 105px;
             width: auto;
@@ -93,24 +93,12 @@
             z-index: 2;
         }
         
-        /* Logo Display */
+        /* Logo Display - NO LOGO HERE */
         .logo-display {
             margin-bottom: 4rem;
         }
         
-        /* Main logo - centered in hero */
-        .main-logo {
-            max-width: 300px;
-            height: auto;
-            margin: 0 auto 2rem;
-            display: block;
-            transition: var(--transition);
-        }
-        
-        .main-logo:hover {
-            transform: scale(1.02);
-        }
-        
+        /* Project Name */
         .project-name {
             font-family: 'Manrope', sans-serif;
             font-size: 2.5rem;
@@ -251,18 +239,26 @@
             }
         }
         
+        /* Logo error handling */
+        .logo-placeholder {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--black);
+            opacity: 0.9;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--lighter-gray);
+            border-radius: 4px;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .project-name {
                 font-size: 2rem;
             }
             
-            .main-logo {
-                max-width: 600px;
-            }
-            
             .header-logo {
-                height: 205px;
+                height: 80px;
             }
             
             .hero-text {
@@ -285,8 +281,8 @@
                 font-size: 1.75rem;
             }
             
-            .main-logo {
-                max-width: 150px;
+            .header-logo {
+                height: 60px;
             }
             
             .hero {
@@ -359,6 +355,7 @@
     <!-- Header - ONLY LOGO -->
     <header>
         <div class="header-content">
+            <!-- Logo file: virsburts-melns.png -->
             <img src="virsburts-melns.png" alt="Logo" class="header-logo" id="headerLogo">
         </div>
     </header>
@@ -379,9 +376,8 @@
         
         <!-- Content -->
         <div class="hero-content">
-            <!-- Logo Display -->
+            <!-- NO LOGO HERE - Just project name and subtitle -->
             <div class="logo-display">
-                <img src="virsburts-melns.png" alt="Project Logo" class="main-logo" id="mainLogo">
                 <h1 class="project-name">Mans Projekts</h1>
                 <div class="project-subtitle">Digitālais Risinājums</div>
             </div>
@@ -427,50 +423,67 @@
         // Check if logo file exists and loads correctly
         function checkLogo() {
             const headerLogo = document.getElementById('headerLogo');
-            const mainLogo = document.getElementById('mainLogo');
             
             // Function to handle logo loading errors
             function handleLogoError(img) {
                 console.log('Logo nav atrasts:', img.src);
                 
                 // Show placeholder text instead
-                if (img.classList.contains('header-logo')) {
-                    img.style.display = 'none';
-                    document.querySelector('.header-content').innerHTML = `
-                        <div style="font-family: 'Manrope', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--black);">
-                            LOGO
-                        </div>
-                    `;
-                }
-                
-                if (img.classList.contains('main-logo')) {
-                    img.style.display = 'none';
-                    document.querySelector('.logo-display').innerHTML = `
-                        <div style="width: 200px; height: 100px; background: var(--lighter-gray); display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; color: var(--gray); font-size: 0.9rem;">
-                            Pievienojiet logo failu<br>virsburts-1.png
-                        </div>
-                        <h1 class="project-name">Mans Projekts</h1>
-                        <div class="project-subtitle">Digitālais Risinājums</div>
-                    `;
-                }
+                img.style.display = 'none';
+                document.querySelector('.header-content').innerHTML = `
+                    <div class="logo-placeholder">
+                        LOGO
+                    </div>
+                `;
             }
             
-            // Add error handlers
+            // Add error handler
             headerLogo.onerror = () => handleLogoError(headerLogo);
-            mainLogo.onerror = () => handleLogoError(mainLogo);
             
             // Test if logo loaded successfully
             if (headerLogo.complete && headerLogo.naturalHeight === 0) {
                 handleLogoError(headerLogo);
             }
-            if (mainLogo.complete && mainLogo.naturalHeight === 0) {
-                handleLogoError(mainLogo);
-            }
+            
+            // Try alternative logo names if first one fails
+            setTimeout(() => {
+                if (headerLogo.naturalHeight === 0) {
+                    console.log('Mēģinu alternatīvus logo failu nosaukumus...');
+                    
+                    const alternativeLogos = [
+                        'virsburts-1.png',
+                        'logo.png',
+                        'Logo.png',
+                        'virsburts.png',
+                        'Virsburts.png'
+                    ];
+                    
+                    tryAlternativeLogos(alternativeLogos, 0);
+                }
+            }, 1000);
+        }
+        
+        // Try alternative logo names
+        function tryAlternativeLogos(logoList, index) {
+            if (index >= logoList.length) return;
+            
+            const testImage = new Image();
+            testImage.onload = function() {
+                console.log('✅ Logo atrasts:', logoList[index]);
+                document.getElementById('headerLogo').src = logoList[index];
+                document.getElementById('headerLogo').style.display = 'block';
+            };
+            
+            testImage.onerror = function() {
+                console.log('❌ Logo nav atrasts:', logoList[index]);
+                tryAlternativeLogos(logoList, index + 1);
+            };
+            
+            testImage.src = logoList[index];
         }
         
         // Logo hover effects
         const headerLogo = document.getElementById('headerLogo');
-        const mainLogo = document.getElementById('mainLogo');
         
         headerLogo.addEventListener('mouseenter', function() {
             this.style.opacity = '1';
@@ -479,14 +492,6 @@
         
         headerLogo.addEventListener('mouseleave', function() {
             this.style.opacity = '0.9';
-            this.style.transform = 'scale(1)';
-        });
-        
-        mainLogo.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.05)';
-        });
-        
-        mainLogo.addEventListener('mouseleave', function() {
             this.style.transform = 'scale(1)';
         });
         
