@@ -3,41 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krāsu Konfigurators</title>
+    <title>Mans Projekts</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Bāzes krāsas */
-            --base-black: #0a0a0a;
-            --base-dark-gray: #1a1a1a;
-            --base-gray: #404040;
-            --base-light-gray: #8c8c8c;
-            --base-lighter-gray: #e5e5e5;
-            --base-white: #ffffff;
+            /* ATSEVIŠĶAS KRĀSAS KATRAM ELEMENTAM */
             
-            /* ATSEVIŠĶAS ELEMENTU KRĀSAS - maināmas */
-            --color-header-logo-height: 105px;
-            --color-header-logo-opacity: 0.9;
+            /* 1. Header Logo */
+            --logo-height: 105px;
+            --logo-opacity: 0.9;
             
-            --color-project-name: #0a0a0a;
-            --color-project-subtitle: #8c8c8c;
+            /* 2. Teksti */
+            --color-project-name: #0a0a0a;          /* Projekta nosaukums */
+            --color-project-subtitle: #8c8c8c;      /* Apakšvirsraksts */
+            --color-hero-text: #404040;             /* Galvenais teksts */
+            --color-highlight-text: #0a0a0a;        /* Izceltais teksts */
             
-            --color-hero-text: #404040;
-            --color-highlight-text: #0a0a0a;
+            /* 3. Poga */
+            --color-button-bg: #0a0a0a;             /* Pogas fons */
+            --color-button-text: #ffffff;           /* Pogas teksts */
+            --color-button-hover: #1a1a1a;          /* Pogas hover */
             
-            --color-button-bg: #0a0a0a;
-            --color-button-text: #ffffff;
-            --color-button-hover: #1a1a1a;
+            /* 4. Fona elementi */
+            --color-bg-lines: #e5e5e5;              /* Fona līnijas */
+            --color-scroll-line-bg: #e5e5e5;        /* Scroll līnijas fons */
+            --color-scroll-line-animation: #0a0a0a; /* Scroll animācija */
             
-            --color-bg-lines: #e5e5e5;
-            --color-scroll-line-bg: #e5e5e5;
-            --color-scroll-line-animation: #0a0a0a;
+            /* 5. Loading ekrāns */
+            --color-loading-bg: #ffffff;            /* Loading fons */
+            --color-loading-line: #e5e5e5;          /* Loading līnija */
+            --color-loading-animation: #0a0a0a;     /* Loading animācija */
             
-            --color-loading-bg: #ffffff;
-            --color-loading-line: #e5e5e5;
-            --color-loading-animation: #0a0a0a;
-            
+            /* Bāzes vērtības */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
@@ -55,7 +53,7 @@
         body {
             font-family: 'Inter', sans-serif;
             color: var(--color-hero-text);
-            background-color: var(--base-white);
+            background-color: #ffffff;
             line-height: 1.6;
             font-weight: 400;
             position: relative;
@@ -85,9 +83,9 @@
         
         /* Header logo - top center */
         .header-logo {
-            height: var(--color-header-logo-height);
+            height: var(--logo-height);
             width: auto;
-            opacity: var(--color-header-logo-opacity);
+            opacity: var(--logo-opacity);
             transition: var(--transition);
             cursor: pointer;
         }
@@ -227,7 +225,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: var(--base-light-gray);
+            color: #8c8c8c;
             opacity: 0.7;
             z-index: 2;
         }
@@ -266,102 +264,10 @@
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--color-project-name);
-            opacity: var(--color-header-logo-opacity);
+            opacity: var(--logo-opacity);
             padding: 0.5rem 1rem;
             border: 1px solid var(--color-bg-lines);
             border-radius: 4px;
-        }
-        
-        /* Color Control Panel */
-        .color-panel {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            z-index: 1001;
-            max-width: 300px;
-            border: 1px solid var(--base-lighter-gray);
-            transition: transform 0.3s ease;
-            transform: translateX(calc(100% + 20px));
-        }
-        
-        .color-panel.open {
-            transform: translateX(0);
-        }
-        
-        .panel-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--color-button-bg);
-            color: var(--color-button-text);
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1002;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-        
-        .panel-toggle:hover {
-            transform: rotate(45deg);
-        }
-        
-        .color-control {
-            margin-bottom: 1rem;
-        }
-        
-        .color-control label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--base-gray);
-            margin-bottom: 0.5rem;
-        }
-        
-        .color-input-group {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-        
-        .color-input {
-            flex: 1;
-            height: 36px;
-            border: 1px solid var(--base-lighter-gray);
-            border-radius: 6px;
-            padding: 0 0.75rem;
-            font-family: monospace;
-            font-size: 0.85rem;
-        }
-        
-        .color-preview {
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
-            border: 1px solid var(--base-lighter-gray);
-            cursor: pointer;
-        }
-        
-        .color-section {
-            margin: 1.5rem 0;
-            padding-top: 1rem;
-            border-top: 1px solid var(--base-lighter-gray);
-        }
-        
-        .color-section h3 {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            color: var(--color-project-name);
         }
         
         /* Responsive */
@@ -371,7 +277,7 @@
             }
             
             .header-logo {
-                height: calc(var(--color-header-logo-height) * 0.75);
+                height: calc(var(--logo-height) * 0.75);
             }
             
             .hero-text {
@@ -387,12 +293,6 @@
             .line-1, .line-2, .line-3, .line-4 {
                 display: none;
             }
-            
-            .color-panel {
-                max-width: calc(100vw - 40px);
-                right: 10px;
-                left: 10px;
-            }
         }
         
         @media (max-width: 480px) {
@@ -401,15 +301,11 @@
             }
             
             .header-logo {
-                height: calc(var(--color-header-logo-height) * 0.6);
+                height: calc(var(--logo-height) * 0.6);
             }
             
             .hero {
                 padding: 0 1rem;
-            }
-            
-            .color-panel {
-                padding: 1rem;
             }
         }
         
@@ -475,139 +371,6 @@
         </div>
     </div>
     
-    <!-- Color Control Panel -->
-    <button class="panel-toggle" id="panelToggle">
-        <i class="fas fa-palette"></i>
-    </button>
-    
-    <div class="color-panel" id="colorPanel">
-        <h2 style="margin-bottom: 1.5rem; color: var(--color-project-name);">Krāsu Konfigurators</h2>
-        
-        <div class="color-section">
-            <h3>Header Logo</h3>
-            <div class="color-control">
-                <label>Logo augstums (px)</label>
-                <input type="number" class="color-input" id="logoHeight" value="105" min="30" max="300">
-            </div>
-            <div class="color-control">
-                <label>Logo caurspīdīgums</label>
-                <input type="range" class="color-input" id="logoOpacity" min="0.1" max="1" step="0.1" value="0.9">
-            </div>
-        </div>
-        
-        <div class="color-section">
-            <h3>Teksti</h3>
-            <div class="color-control">
-                <label>Projekta nosaukums</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="projectNameColor" value="#0a0a0a">
-                    <div class="color-preview" id="projectNamePreview" style="background: #0a0a0a;"></div>
-                </div>
-            </div>
-            <div class="color-control">
-                <label>Apakšvirsraksts</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="subtitleColor" value="#8c8c8c">
-                    <div class="color-preview" id="subtitlePreview" style="background: #8c8c8c;"></div>
-                </div>
-            </div>
-            <div class="color-control">
-                <label>Galvenais teksts</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="textColor" value="#404040">
-                    <div class="color-preview" id="textPreview" style="background: #404040;"></div>
-                </div>
-            </div>
-            <div class="color-control">
-                <label>Izceltais teksts</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="highlightColor" value="#0a0a0a">
-                    <div class="color-preview" id="highlightPreview" style="background: #0a0a0a;"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="color-section">
-            <h3>Poga</h3>
-            <div class="color-control">
-                <label>Pogas fons</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="buttonBgColor" value="#0a0a0a">
-                    <div class="color-preview" id="buttonBgPreview" style="background: #0a0a0a;"></div>
-                </div>
-            </div>
-            <div class="color-control">
-                <label>Pogas teksts</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="buttonTextColor" value="#ffffff">
-                    <div class="color-preview" id="buttonTextPreview" style="background: #ffffff;"></div>
-                </div>
-            </div>
-            <div class="color-control">
-                <label>Pogas hover</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="buttonHoverColor" value="#1a1a1a">
-                    <div class="color-preview" id="buttonHoverPreview" style="background: #1a1a1a;"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="color-section">
-            <h3>Fona elementi</h3>
-            <div class="color-control">
-                <label>Fona līnijas</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="bgLinesColor" value="#e5e5e5">
-                    <div class="color-preview" id="bgLinesPreview" style="background: #e5e5e5;"></div>
-                </div>
-            </div>
-            <div class="color-control">
-                <label>Scroll līnija (fons)</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="scrollLineBgColor" value="#e5e5e5">
-                    <div class="color-preview" id="scrollLineBgPreview" style="background: #e5e5e5;"></div>
-                </div>
-            </div>
-            <div class="color-control">
-                <label>Scroll animācija</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="scrollAnimColor" value="#0a0a0a">
-                    <div class="color-preview" id="scrollAnimPreview" style="background: #0a0a0a;"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="color-section">
-            <h3>Loading ekrāns</h3>
-            <div class="color-control">
-                <label>Loading fons</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="loadingBgColor" value="#ffffff">
-                    <div class="color-preview" id="loadingBgPreview" style="background: #ffffff;"></div>
-                </div>
-            </div>
-            <div class="color-control">
-                <label>Loading līnija</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="loadingLineColor" value="#e5e5e5">
-                    <div class="color-preview" id="loadingLinePreview" style="background: #e5e5e5;"></div>
-                </div>
-            </div>
-            <div class="color-control">
-                <label>Loading animācija</label>
-                <div class="color-input-group">
-                    <input type="color" class="color-input" id="loadingAnimColor" value="#0a0a0a">
-                    <div class="color-preview" id="loadingAnimPreview" style="background: #0a0a0a;"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-            <button class="cta-button" id="saveColors" style="flex: 1;">Saglabāt</button>
-            <button class="cta-button" id="resetColors" style="flex: 1; background: #6b7280;">Atiestatīt</button>
-        </div>
-    </div>
-    
     <!-- Header - ONLY LOGO -->
     <header>
         <div class="header-content">
@@ -670,231 +433,21 @@
                     // Check if logo loaded successfully
                     checkLogo();
                     
-                    // Load saved colors
-                    loadSavedColors();
-                    
                     // Animate content
                     animateContent();
                 }, 500);
             }, 800);
         });
         
-        // Color Control Variables
-        const colorVariables = {
-            'logoHeight': '--color-header-logo-height',
-            'logoOpacity': '--color-header-logo-opacity',
-            'projectNameColor': '--color-project-name',
-            'subtitleColor': '--color-project-subtitle',
-            'textColor': '--color-hero-text',
-            'highlightColor': '--color-highlight-text',
-            'buttonBgColor': '--color-button-bg',
-            'buttonTextColor': '--color-button-text',
-            'buttonHoverColor': '--color-button-hover',
-            'bgLinesColor': '--color-bg-lines',
-            'scrollLineBgColor': '--color-scroll-line-bg',
-            'scrollAnimColor': '--color-scroll-line-animation',
-            'loadingBgColor': '--color-loading-bg',
-            'loadingLineColor': '--color-loading-line',
-            'loadingAnimColor': '--color-loading-animation'
-        };
-        
-        // Initialize color controls
-        function initializeColorControls() {
-            // Sync color inputs with previews
-            Object.keys(colorVariables).forEach(id => {
-                const input = document.getElementById(id);
-                const preview = document.getElementById(id + 'Preview');
-                
-                if (input && preview) {
-                    // Update preview when input changes
-                    input.addEventListener('input', function() {
-                        if (this.type === 'color') {
-                            preview.style.background = this.value;
-                            updateColorVariable(id, this.value);
-                        } else if (this.type === 'range') {
-                            updateColorVariable(id, this.value);
-                        } else if (this.type === 'number') {
-                            updateColorVariable(id, this.value + 'px');
-                        }
-                    });
-                    
-                    // Set initial preview
-                    if (input.type === 'color') {
-                        preview.style.background = input.value;
-                    }
-                }
-            });
-            
-            // Panel toggle
-            const panelToggle = document.getElementById('panelToggle');
-            const colorPanel = document.getElementById('colorPanel');
-            
-            panelToggle.addEventListener('click', () => {
-                colorPanel.classList.toggle('open');
-                panelToggle.innerHTML = colorPanel.classList.contains('open') 
-                    ? '<i class="fas fa-times"></i>' 
-                    : '<i class="fas fa-palette"></i>';
-            });
-            
-            // Save colors button
-            document.getElementById('saveColors').addEventListener('click', saveColors);
-            
-            // Reset colors button
-            document.getElementById('resetColors').addEventListener('click', resetColors);
-        }
-        
-        // Update CSS variable
-        function updateColorVariable(id, value) {
-            const variableName = colorVariables[id];
-            if (variableName) {
-                document.documentElement.style.setProperty(variableName, value);
-            }
-        }
-        
-        // Save colors to localStorage
-        function saveColors() {
-            const colors = {};
-            Object.keys(colorVariables).forEach(id => {
-                const input = document.getElementById(id);
-                if (input) {
-                    colors[id] = input.value;
-                }
-            });
-            
-            localStorage.setItem('pageColors', JSON.stringify(colors));
-            showMessage('Krāsas saglabātas!', 'success');
-        }
-        
-        // Load colors from localStorage
-        function loadSavedColors() {
-            const saved = localStorage.getItem('pageColors');
-            if (saved) {
-                const colors = JSON.parse(saved);
-                Object.keys(colors).forEach(id => {
-                    const input = document.getElementById(id);
-                    const preview = document.getElementById(id + 'Preview');
-                    const value = colors[id];
-                    
-                    if (input) {
-                        input.value = value;
-                        
-                        // Update preview
-                        if (preview && input.type === 'color') {
-                            preview.style.background = value;
-                        }
-                        
-                        // Update CSS variable
-                        updateColorVariable(id, value);
-                    }
-                });
-            }
-            
-            // Initialize controls
-            initializeColorControls();
-        }
-        
-        // Reset to default colors
-        function resetColors() {
-            const defaultColors = {
-                'logoHeight': '105',
-                'logoOpacity': '0.9',
-                'projectNameColor': '#0a0a0a',
-                'subtitleColor': '#8c8c8c',
-                'textColor': '#404040',
-                'highlightColor': '#0a0a0a',
-                'buttonBgColor': '#0a0a0a',
-                'buttonTextColor': '#ffffff',
-                'buttonHoverColor': '#1a1a1a',
-                'bgLinesColor': '#e5e5e5',
-                'scrollLineBgColor': '#e5e5e5',
-                'scrollAnimColor': '#0a0a0a',
-                'loadingBgColor': '#ffffff',
-                'loadingLineColor': '#e5e5e5',
-                'loadingAnimColor': '#0a0a0a'
-            };
-            
-            Object.keys(defaultColors).forEach(id => {
-                const input = document.getElementById(id);
-                const preview = document.getElementById(id + 'Preview');
-                const value = defaultColors[id];
-                
-                if (input) {
-                    input.value = value;
-                    
-                    if (preview && input.type === 'color') {
-                        preview.style.background = value;
-                    }
-                    
-                    updateColorVariable(id, value);
-                }
-            });
-            
-            localStorage.removeItem('pageColors');
-            showMessage('Krāsas atiestatītas!', 'info');
-        }
-        
-        // Show message
-        function showMessage(text, type) {
-            const message = document.createElement('div');
-            message.textContent = text;
-            message.style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: ${type === 'success' ? '#10b981' : '#3b82f6'};
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 6px;
-                z-index: 1003;
-                font-size: 0.9rem;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                animation: slideIn 0.3s ease;
-            `;
-            
-            document.body.appendChild(message);
-            
-            setTimeout(() => {
-                message.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => {
-                    document.body.removeChild(message);
-                }, 300);
-            }, 3000);
-        }
-        
-        // Add CSS for message animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(-50%) translateY(-100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(-50%) translateY(0);
-                    opacity: 1;
-                }
-            }
-            
-            @keyframes slideOut {
-                from {
-                    transform: translateX(-50%) translateY(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(-50%) translateY(-100%);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Original functions from your code
+        // Check if logo file exists and loads correctly
         function checkLogo() {
             const headerLogo = document.getElementById('headerLogo');
             
+            // Function to handle logo loading errors
             function handleLogoError(img) {
                 console.log('Logo nav atrasts:', img.src);
+                
+                // Show placeholder text instead
                 img.style.display = 'none';
                 document.querySelector('.header-content').innerHTML = `
                     <div class="logo-placeholder">
@@ -903,14 +456,19 @@
                 `;
             }
             
+            // Add error handler
             headerLogo.onerror = () => handleLogoError(headerLogo);
             
+            // Test if logo loaded successfully
             if (headerLogo.complete && headerLogo.naturalHeight === 0) {
                 handleLogoError(headerLogo);
             }
             
+            // Try alternative logo names if first one fails
             setTimeout(() => {
                 if (headerLogo.naturalHeight === 0) {
+                    console.log('Mēģinu alternatīvus logo failu nosaukumus...');
+                    
                     const alternativeLogos = [
                         'virsburts-1.png',
                         'logo.png',
@@ -918,28 +476,33 @@
                         'virsburts.png',
                         'Virsburts.png'
                     ];
+                    
                     tryAlternativeLogos(alternativeLogos, 0);
                 }
             }, 1000);
         }
         
+        // Try alternative logo names
         function tryAlternativeLogos(logoList, index) {
             if (index >= logoList.length) return;
             
             const testImage = new Image();
             testImage.onload = function() {
+                console.log('✅ Logo atrasts:', logoList[index]);
                 document.getElementById('headerLogo').src = logoList[index];
                 document.getElementById('headerLogo').style.display = 'block';
             };
+            
             testImage.onerror = function() {
+                console.log('❌ Logo nav atrasts:', logoList[index]);
                 tryAlternativeLogos(logoList, index + 1);
             };
+            
             testImage.src = logoList[index];
         }
         
-        // Event listeners for original functionality
+        // Logo hover effects
         const headerLogo = document.getElementById('headerLogo');
-        const ctaButton = document.getElementById('ctaButton');
         
         headerLogo.addEventListener('mouseenter', function() {
             this.style.opacity = '1';
@@ -947,14 +510,12 @@
         });
         
         headerLogo.addEventListener('mouseleave', function() {
-            this.style.opacity = 'var(--color-header-logo-opacity)';
+            this.style.opacity = 'var(--logo-opacity)';
             this.style.transform = 'scale(1)';
         });
         
-        headerLogo.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        // CTA Button hover effects (link already works, but we add extra styles)
+        const ctaButton = document.getElementById('ctaButton');
         
         ctaButton.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-2px)';
@@ -966,7 +527,33 @@
             this.style.boxShadow = 'none';
         });
         
-        // Background lines animation
+        // Button click animation (optional, since link will navigate away)
+        ctaButton.addEventListener('mousedown', function() {
+            this.style.transform = 'scale(0.98)';
+            this.style.backgroundColor = '#333';
+        });
+        
+        ctaButton.addEventListener('mouseup', function() {
+            this.style.transform = '';
+            this.style.backgroundColor = '';
+        });
+        
+        // Header logo click - scroll to top
+        headerLogo.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            this.style.opacity = '0.7';
+            this.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                this.style.opacity = 'var(--logo-opacity)';
+                this.style.transform = 'scale(1)';
+            }, 200);
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Background lines animation on mouse move
         document.addEventListener('mousemove', (e) => {
             const lines = document.querySelectorAll('.line');
             const mouseX = e.clientX / window.innerWidth;
@@ -980,40 +567,57 @@
                 if (line.classList.contains('line-vertical')) {
                     line.style.transform = `translateX(${x}px)`;
                 }
+                
                 if (line.classList.contains('line-horizontal')) {
                     line.style.transform = `translateY(${y}px)`;
                 }
             });
         });
         
+        // Animate content on load
         function animateContent() {
-            const elements = [
-                document.querySelector('.logo-display'),
-                document.querySelector('.hero-text'),
-                document.querySelector('.cta-button')
-            ];
+            const logoDisplay = document.querySelector('.logo-display');
+            const heroText = document.querySelector('.hero-text');
+            const ctaSection = document.querySelector('.cta-button');
             
-            elements.forEach((el, index) => {
-                if (el) {
-                    el.style.opacity = '0';
-                    el.style.transform = 'translateY(20px)';
-                    el.style.transition = `opacity 0.8s ease ${index * 0.2}s, transform 0.8s ease ${index * 0.2}s`;
-                    
-                    setTimeout(() => {
-                        el.style.opacity = '1';
-                        el.style.transform = 'translateY(0)';
-                    }, 300 + (index * 200));
-                }
+            // Set initial state for animation
+            logoDisplay.style.opacity = '0';
+            logoDisplay.style.transform = 'translateY(20px)';
+            logoDisplay.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            
+            heroText.style.opacity = '0';
+            heroText.style.transform = 'translateY(20px)';
+            heroText.style.transition = 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s';
+            
+            ctaSection.style.opacity = '0';
+            ctaSection.style.transform = 'translateY(20px)';
+            ctaSection.style.transition = 'opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s';
+            
+            // Animate in
+            setTimeout(() => {
+                logoDisplay.style.opacity = '1';
+                logoDisplay.style.transform = 'translateY(0)';
+                
+                heroText.style.opacity = '1';
+                heroText.style.transform = 'translateY(0)';
+                
+                ctaSection.style.opacity = '1';
+                ctaSection.style.transform = 'translateY(0)';
+            }, 300);
+        }
+        
+        // Window resize - adjust background lines
+        function adjustLines() {
+            const lines = document.querySelectorAll('.line-vertical');
+            lines.forEach((line, index) => {
+                const percentage = (index + 1) * 20; // 20%, 40%, 60%, 80%
+                line.style.left = `${percentage}%`;
             });
         }
         
-        // Keyboard shortcut for color panel (Ctrl+Shift+C)
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
-                e.preventDefault();
-                document.getElementById('panelToggle').click();
-            }
-        });
+        // Initial adjustments
+        adjustLines();
+        window.addEventListener('resize', adjustLines);
     </script>
 </body>
 </html>
