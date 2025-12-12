@@ -1,156 +1,300 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mani projekti — moderns šablons</title>
-  <style>
-    :root {
-      --header-bg: #111827;
-      --intro-bg: #1f2937;
-      --accent: #06b6d4;
-      --muted: #94a3b8;
-      --card-bg: #1e293b;
-      --card-hover: #374151;
-    }
-
-    * { box-sizing: border-box; margin:0; padding:0; font-family: Inter, sans-serif; }
-
-    body {
-      min-height: 100vh;
-      background: #0f1724;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* Abstraktās formas fons */
-    body::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 20% 30%, #06b6d4, transparent 50%),
-                  radial-gradient(circle at 80% 70%, #7c3aed, transparent 50%),
-                  radial-gradient(circle at 50% 50%, #facc15, transparent 30%);
-      opacity: 0.1;
-      top: -50%;
-      left: -50%;
-      z-index: 0;
-    }
-
-    header {
-      width: 100%;
-      background: var(--header-bg);
-      padding: 40px 20px 60px 20px;
-      text-align: center;
-      z-index: 1;
-      position: relative;
-    }
-
-    .logo {
-      max-width: 200px;
-      height: auto;
-      margin: 0 auto 20px auto;
-    }
-
-    #site-title {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    #site-sub {
-      font-size: 16px;
-      color: var(--muted);
-      margin-top: 0;
-    }
-
-    .intro {
-      background: var(--intro-bg);
-      margin: -40px 20px 40px 20px;
-      padding: 24px;
-      border-radius: 16px;
-      text-align: center;
-      max-width: 800px;
-      z-index: 1;
-      position: relative;
-    }
-
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      width: 300px;
-      z-index: 1;
-      position: relative;
-    }
-
-    .btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 14px 20px;
-      background: var(--card-bg);
-      border-radius: 12px;
-      text-decoration: none;
-      color: #fff;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-4px);
-      background: var(--card-hover);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    }
-
-    .btn .arrow {
-      margin-left: 8px;
-      opacity: 0.8;
-    }
-
-    footer {
-      margin-top: 60px;
-      margin-bottom: 40px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-      z-index: 1;
-      position: relative;
-    }
-
-    @media (max-width: 500px) {
-      .buttons { width: 80%; }
-      #site-title { font-size: 24px; }
-      .intro { margin: -30px 10px 30px 10px; padding: 18px; }
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksperimentāla Mājaslapa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* LOGO - centrēts */
+        .logo {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .logo-icon {
+            font-size: 4rem;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .logo-text {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #00d4ff, #ff00cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        /* Teksta sadaļa */
+        .text-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .main-text {
+            font-size: 1.8rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #f0f0f0;
+        }
+        
+        .highlight {
+            color: #00d4ff;
+            font-weight: 700;
+        }
+        
+        /* Poga */
+        .button-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .project-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(45deg, #ff00cc, #00d4ff);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 0, 204, 0.4);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .project-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 0, 204, 0.6);
+            letter-spacing: 2px;
+        }
+        
+        .project-button:active {
+            transform: translateY(0);
+        }
+        
+        .button-icon {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        /* Pielikumam - papildu efekti */
+        .background-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 0, 204, 0.1);
+        }
+        
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation: float 20s infinite linear;
+        }
+        
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: 15%;
+            right: 10%;
+            background: rgba(0, 212, 255, 0.1);
+            animation: float 15s infinite linear reverse;
+        }
+        
+        /* Animācijas */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100px, 100px) rotate(360deg); }
+        }
+        
+        /* Atbilstība dažādiem ekrāniem */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .logo-text {
+                font-size: 2.2rem;
+            }
+            
+            .logo-icon {
+                font-size: 3rem;
+            }
+            
+            .main-text {
+                font-size: 1.4rem;
+            }
+            
+            .project-button {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Scroll efekts */
+        .scroll-hint {
+            text-align: center;
+            margin-top: 3rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <img src="virsburts-1.png" alt="Mans logo" class="logo">
-    <h1 id="site-title">Laipni lūgti manā vietnē</h1>
-  </header>
-
-  <div class="intro">
-    <p id="site-sub">Šeit ir īss ievads vai apraksts — uzspiediet projekta pogu, lai atvērtu attiecīgo lapu.</p>
-  </div>
-
-  <div class="buttons">
-    <a class="btn" href="https://example.com/projekts1" target="_blank" rel="noopener noreferrer">Projekts 1 <span class="arrow">→</span></a>
-    <a class="btn" href="https://example.com/projekts2" target="_blank" rel="noopener noreferrer">Projekts 2 <span class="arrow">→</span></a>
-    <a class="btn" href="https://example.com/projekts3" target="_blank" rel="noopener noreferrer">Projekts 3 <span class="arrow">→</span></a>
-    <a class="btn" href="https://example.com/projekts4" target="_blank" rel="noopener noreferrer">Projekts 4 <span class="arrow">→</span></a>
-  </div>
-
-  <footer>
-    © 2025 Mans projekts. Visas tiesības aizsargātas.
-  </footer>
+    <!-- Fona elementi -->
+    <div class="background-elements">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="container">
+        <!-- LOGO sadaļa -->
+        <header class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-cube"></i>
+            </div>
+            <h1 class="logo-text">Eksperiments</h1>
+        </header>
+        
+        <!-- Teksta sadaļa -->
+        <section class="text-section">
+            <p class="main-text">
+                Šī ir <span class="highlight">eksperimentāla mājaslapa</span>, kas demonstrē jaunas idejas un radošus risinājumus digitālajā vidē. 
+                Mēs pārbaudām robežas un meklējam unikālus veidus, kā pārveidot vienkāršu saturu par <span class="highlight">uztvērēju pieredzi</span>.
+            </p>
+            <p class="main-text">
+                Katrs projekts sākas ar ideju, bet tikai caur eksperimentiem tas pārvēršas par kaut ko lielisku.
+            </p>
+        </section>
+        
+        <!-- Pogas sadaļa -->
+        <section class="button-section">
+            <a href="#" class="project-button" id="projectButton">
+                <i class="fas fa-arrow-right button-icon"></i>
+                Pāriet pie projektiem
+            </a>
+        </section>
+        
+        <!-- Scroll hint -->
+        <div class="scroll-hint">
+            <i class="fas fa-chevron-down"></i> Ritiniet uz leju, lai atklātu vairāk
+        </div>
+    </div>
+    
+    <script>
+        // Interaktivitāte pogai
+        document.getElementById('projectButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Animācija
+            this.style.transform = 'scale(0.95)';
+            this.style.background = 'linear-gradient(45deg, #00d4ff, #ff00cc)';
+            
+            // Paziņojums
+            alert('Pārejat uz projektu sadaļu! Šobrīd šī funkcija ir demonstrācijas režīmā.');
+            
+            // Atgriežam sākotnējo stāvokli pēc īsa laika
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.background = 'linear-gradient(45deg, #ff00cc, #00d4ff)';
+            }, 300);
+            
+            // Ja būtu vairāk satura, varētu ritināt uz leju
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Dinamisks fona efekts
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const speed = index === 0 ? 0.02 : 0.01;
+                const offsetX = (x * 100 * speed) - 50;
+                const offsetY = (y * 100 * speed) - 50;
+                
+                shape.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            });
+        });
+        
+        // Logo interaktivitāte
+        const logo = document.querySelector('.logo-icon');
+        logo.addEventListener('mouseenter', () => {
+            logo.style.color = '#ff00cc';
+            logo.style.transform = 'rotate(15deg)';
+        });
+        
+        logo.addEventListener('mouseleave', () => {
+            logo.style.color = '#00d4ff';
+            logo.style.transform = 'rotate(0)';
+        });
+    </script>
 </body>
 </html>
