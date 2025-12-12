@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVA | Eleganti Risinājumi</title>
+    <title> | </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --black: #0a0a0a;
             --dark-gray: #1a1a1a;
             --gray: #404040;
             --light-gray: #8c8c8c;
-            --lighter-gray: #d4d4d4;
+            --lighter-gray: #e5e5e5;
             --white: #ffffff;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
+            --accent: #000000;
             --border: #262626;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
@@ -27,8 +25,9 @@
             box-sizing: border-box;
         }
         
-        html {
-            scroll-behavior: smooth;
+        html, body {
+            height: 100%;
+            overflow: hidden;
         }
         
         body {
@@ -37,138 +36,112 @@
             background-color: var(--white);
             line-height: 1.6;
             font-weight: 400;
-            overflow-x: hidden;
+            position: relative;
         }
         
         h1, h2, h3, h4 {
             font-family: 'Manrope', sans-serif;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--black);
             letter-spacing: -0.025em;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        /* Header */
+        /* Header - ONLY LOGO */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--lighter-gray);
+            background: transparent;
             z-index: 1000;
-            padding: 1.5rem 0;
+            padding: 2rem 0;
         }
         
         .header-content {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
         
         .logo {
             font-family: 'Manrope', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
+            font-size: 1.2rem;
+            font-weight: 600;
             color: var(--black);
             text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-        }
-        
-        .nav-links a {
-            color: var(--gray);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
+            letter-spacing: 1px;
+            opacity: 0.9;
             transition: var(--transition);
-            position: relative;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
         }
         
-        .nav-links a:hover {
-            color: var(--black);
+        .logo:hover {
+            opacity: 1;
+            border-color: var(--lighter-gray);
+            border-radius: 4px;
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--black);
-            transition: var(--transition);
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
+        /* Hero Section - Centered Content */
         .hero {
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             align-items: center;
-            padding: 8rem 0 4rem;
+            justify-content: center;
             position: relative;
+            padding: 0 2rem;
         }
         
         .hero-content {
             max-width: 800px;
-            margin: 0 auto;
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
         
+        /* Logo Display */
         .logo-display {
-            margin-bottom: 3rem;
-            position: relative;
-            display: inline-block;
+            margin-bottom: 4rem;
         }
         
         .logo-mark {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             background: var(--black);
             color: var(--white);
-            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 600;
             margin: 0 auto 1.5rem;
             font-family: 'Manrope', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .logo-mark:hover {
+            transform: scale(1.05);
         }
         
         .logo-type {
             font-family: 'Manrope', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 3rem;
+            font-weight: 400;
             color: var(--black);
-            letter-spacing: -1.5px;
-            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.25rem;
         }
         
-        .tagline {
-            font-size: 1.1rem;
+        .logo-subtitle {
+            font-size: 0.9rem;
             color: var(--light-gray);
             font-weight: 400;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 3rem;
+            letter-spacing: 2px;
         }
         
+        /* Hero Text */
         .hero-text {
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             color: var(--gray);
             line-height: 1.8;
             max-width: 600px;
@@ -178,49 +151,29 @@
         
         .highlight {
             color: var(--black);
-            font-weight: 600;
-            position: relative;
-            padding: 0 2px;
+            font-weight: 500;
         }
         
-        /* Button */
+        /* CTA Button */
         .cta-button {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 1rem 2.5rem;
+            gap: 10px;
+            padding: 0.875rem 2rem;
             background: var(--black);
             color: var(--white);
             text-decoration: none;
             font-weight: 500;
-            font-size: 1rem;
+            font-size: 0.95rem;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             transition: var(--transition);
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.7s;
-        }
-        
-        .cta-button:hover::before {
-            left: 100%;
         }
         
         .cta-button:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
+            background: var(--dark-gray);
+            transform: translateY(-1px);
         }
         
         .button-icon {
@@ -228,132 +181,43 @@
         }
         
         .cta-button:hover .button-icon {
-            transform: translateX(5px);
+            transform: translateX(3px);
         }
         
-        /* Projects Section */
-        .projects {
-            padding: 6rem 0;
-            background: var(--white);
-            border-top: 1px solid var(--lighter-gray);
+        /* Background Elements - Minimal */
+        .bg-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
         
-        .section-title {
-            text-align: center;
-            margin-bottom: 4rem;
+        .line {
+            position: absolute;
+            background: var(--lighter-gray);
         }
         
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .line-vertical {
+            width: 1px;
+            height: 100%;
         }
         
-        .section-title p {
-            color: var(--light-gray);
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin: 0 auto;
+        .line-horizontal {
+            height: 1px;
+            width: 100%;
         }
         
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .project-card {
-            background: var(--white);
-            border: 1px solid var(--lighter-gray);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: var(--transition);
-        }
-        
-        .project-card:hover {
-            border-color: var(--gray);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-        }
-        
-        .project-number {
-            font-size: 0.9rem;
-            color: var(--light-gray);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-        
-        .project-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-        }
-        
-        .project-card p {
-            color: var(--gray);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--black);
-            color: var(--lighter-gray);
-            padding: 4rem 0 2rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-        
-        .footer-logo {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 1rem;
-        }
-        
-        .footer-text {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--light-gray);
-        }
-        
-        .footer-links h3 {
-            color: var(--white);
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        
-        .footer-links ul {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-links a {
-            color: var(--light-gray);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
-        
-        .footer-links a:hover {
-            color: var(--white);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            font-size: 0.9rem;
-            color: var(--light-gray);
-        }
+        .line-1 { left: 20%; }
+        .line-2 { left: 40%; }
+        .line-3 { left: 60%; }
+        .line-4 { left: 80%; }
+        .line-5 { top: 20%; }
+        .line-6 { top: 40%; }
+        .line-7 { top: 60%; }
+        .line-8 { top: 80%; }
         
         /* Scroll Indicator */
         .scroll-indicator {
@@ -365,14 +229,8 @@
             flex-direction: column;
             align-items: center;
             color: var(--light-gray);
-            opacity: 0.8;
-        }
-        
-        .scroll-text {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
+            opacity: 0.7;
+            z-index: 2;
         }
         
         .scroll-line {
@@ -403,49 +261,41 @@
             }
         }
         
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 0 1.5rem;
-            }
-            
             .logo-type {
-                font-size: 2.5rem;
+                font-size: 2.25rem;
             }
             
             .hero-text {
-                font-size: 1.1rem;
+                font-size: 1rem;
+                padding: 0 1rem;
             }
             
-            .nav-links {
+            .cta-button {
+                padding: 0.75rem 1.75rem;
+                font-size: 0.9rem;
+            }
+            
+            .line-1, .line-2, .line-3, .line-4 {
                 display: none;
             }
-            
-            .mobile-menu-btn {
-                display: block;
-                background: none;
-                border: none;
-                color: var(--black);
-                font-size: 1.2rem;
-                cursor: pointer;
-            }
-            
-            .section-title h2 {
+        }
+        
+        @media (max-width: 480px) {
+            .logo-type {
                 font-size: 2rem;
             }
-        }
-        
-        /* Utility Classes */
-        .text-center {
-            text-align: center;
-        }
-        
-        .mt-2 {
-            margin-top: 2rem;
-        }
-        
-        .mb-4 {
-            margin-bottom: 4rem;
+            
+            .logo-mark {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+            }
+            
+            .hero {
+                padding: 0 1rem;
+            }
         }
         
         /* Loading Animation */
@@ -468,12 +318,12 @@
         }
         
         .loading-line {
-            width: 200px;
-            height: 2px;
+            width: 100px;
+            height: 1px;
             background: var(--lighter-gray);
             position: relative;
             overflow: hidden;
-            margin: 2rem auto;
+            margin: 1rem auto;
         }
         
         .loading-line::after {
@@ -506,130 +356,59 @@
     <!-- Loading Animation -->
     <div class="loading" id="loading">
         <div class="loading-content">
-            <div class="logo-mark">N</div>
             <div class="loading-line"></div>
         </div>
     </div>
     
-    <!-- Header -->
+    <!-- Header - ONLY LOGO -->
     <header>
-        <div class="container header-content">
-            <a href="#" class="logo">NOVA</a>
-            <nav class="nav-links">
-                <a href="#work">Darbi</a>
-                <a href="#services">Pakalpojumi</a>
-                <a href="#about">Par mums</a>
-                <a href="#contact">Kontakti</a>
-            </nav>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
+        <div class="header-content">
+            <a href="#" class="logo">LOGO</a>
         </div>
     </header>
     
     <!-- Hero Section -->
     <main class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <!-- Logo -->
-                <div class="logo-display">
-                    <div class="logo-mark">N</div>
-                    <h1 class="logo-type">NOVA</h1>
-                    <div class="tagline">Eleganti risinājumi</div>
-                </div>
-                
-                <!-- Text -->
-                <p class="hero-text">
-                    Mēs veidojam <span class="highlight">minimālistiskus, funkcionālus risinājumus</span> 
-                    uzņēmumiem, kas vērtī izcilību. Katrs projekts ir pārdomāts līdz sīkākajai detaļai, 
-                    lai nodrošinātu <span class="highlight">nepārspējamu lietotāja pieredzi</span>.
-                </p>
-                
-                <!-- Button -->
-                <a href="#work" class="cta-button">
-                    <span>Pāriet pie darbiem</span>
-                    <i class="fas fa-arrow-right button-icon"></i>
-                </a>
-                
-                <!-- Scroll Indicator -->
-                <div class="scroll-indicator">
-                    <div class="scroll-text">Ritiniet</div>
-                    <div class="scroll-line"></div>
-                </div>
+        <!-- Background Lines -->
+        <div class="bg-lines">
+            <div class="line line-vertical line-1"></div>
+            <div class="line line-vertical line-2"></div>
+            <div class="line line-vertical line-3"></div>
+            <div class="line line-vertical line-4"></div>
+            <div class="line line-horizontal line-5"></div>
+            <div class="line line-horizontal line-6"></div>
+            <div class="line line-horizontal line-7"></div>
+            <div class="line line-horizontal line-8"></div>
+        </div>
+        
+        <!-- Content -->
+        <div class="hero-content">
+            <!-- Logo Display -->
+            <div class="logo-display">
+                <div class="logo-mark">A</div>
+                <h1 class="logo-type">ARCHETYPE</h1>
+                <div class="logo-subtitle">Digital Studio</div>
+            </div>
+            
+            <!-- Text -->
+            <p class="hero-text">
+                Mēs veidojam <span class="highlight">minimālistiskus digitālos risinājumus</span> 
+                ar uzsvaru uz būtību. Katrs elements ir pārdomāts, katrs risinājums 
+                <span class="highlight">funkcionāls un elegantā formā</span>.
+            </p>
+            
+            <!-- Button -->
+            <a href="#" class="cta-button" id="ctaButton">
+                <span>Pāriet pie projektiem</span>
+                <i class="fas fa-arrow-right button-icon"></i>
+            </a>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
             </div>
         </div>
     </main>
-    
-    <!-- Projects Section -->
-    <section class="projects" id="work">
-        <div class="container">
-            <div class="section-title">
-                <h2>Izvēlēti Darbi</h2>
-                <p>Pārdomāti risinājumi nozaru līderiem</p>
-            </div>
-            
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-number">01</div>
-                    <h3>Fintech Platforma</h3>
-                    <p>Modernas fintech risinājuma izstrāde ar uzsvaru uz drošību un lietojamību. Platforma apvieno vairākus finanšu pakalpojumus vienotā interfeisā.</p>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-number">02</div>
-                    <h3>Corporate Identitāte</h3>
-                    <p>Pilns zīmola attīstības cikls starptautiskam uzņēmumam. Dizaina sistēma, kas nodrošina konsekvenci visos kanālos.</p>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-number">03</div>
-                    <h3>Enterprise CRM</h3>
-                    <p>Pielāgota CRM sistēma lielam uzņēmumam. Integrācija ar esošajām sistēmām un pielāgojums specifiskām vajadzībām.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <div class="footer-logo">NOVA</div>
-                    <p class="footer-text">
-                        Veidojam elegantus digitālos risinājumus uzņēmumiem, 
-                        kas tiecas pēc perfekcijas. Katrs projekts ir pārdomāta 
-                        līdz sīkākajai detaļai.
-                    </p>
-                </div>
-                
-                <div class="footer-links">
-                    <h3>Saites</h3>
-                    <ul>
-                        <li><a href="#work">Darbi</a></li>
-                        <li><a href="#services">Pakalpojumi</a></li>
-                        <li><a href="#about">Par mums</a></li>
-                        <li><a href="#contact">Kontakti</a></li>
-                        <li><a href="#">Privātums</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h3>Kontakti</h3>
-                    <ul>
-                        <li>Rīga, Latvija</li>
-                        <li>+371 20 000 000</li>
-                        <li>info@nova.lv</li>
-                        <li>Darba laiks: 9:00-18:00</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2024 NOVA. Visas tiesības aizsargātas.</p>
-            </div>
-        </div>
-    </footer>
     
     <script>
         // Loading Animation
@@ -643,122 +422,135 @@
             }, 800);
         });
         
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
+        // Smooth hover effect for logo mark
+        const logoMark = document.querySelector('.logo-mark');
+        logoMark.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+        });
+        
+        logoMark.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'none';
+        });
+        
+        // CTA Button interaction
+        const ctaButton = document.getElementById('ctaButton');
+        ctaButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Button animation
+            this.style.transform = 'scale(0.98)';
+            this.style.backgroundColor = '#333';
+            
+            // Show message (could redirect to actual projects page)
+            const originalText = this.querySelector('span').textContent;
+            this.querySelector('span').textContent = 'Sākam darbu...';
+            
+            // Reset after animation
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.backgroundColor = '';
+                this.querySelector('span').textContent = originalText;
                 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                // Here you would typically redirect to projects page
+                // window.location.href = '/projects';
+            }, 1000);
+        });
+        
+        // Logo interaction
+        const headerLogo = document.querySelector('.logo');
+        headerLogo.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Simple logo animation
+            this.style.opacity = '0.5';
+            setTimeout(() => {
+                this.style.opacity = '0.9';
+            }, 200);
+            
+            // Scroll to top if not already there
+            if (window.scrollY > 100) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+        
+        // Background lines animation on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const lines = document.querySelectorAll('.line');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            lines.forEach((line, index) => {
+                const speed = 0.0005;
+                const x = (mouseX * 100 * speed * index) - 50;
+                const y = (mouseY * 100 * speed * index) - 50;
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                // Subtle movement for vertical lines
+                if (line.classList.contains('line-vertical')) {
+                    line.style.transform = `translateX(${x}px)`;
+                }
+                
+                // Subtle movement for horizontal lines
+                if (line.classList.contains('line-horizontal')) {
+                    line.style.transform = `translateY(${y}px)`;
                 }
             });
         });
         
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.padding = '1rem 0';
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
-            } else {
-                header.style.padding = '1.5rem 0';
-                header.style.boxShadow = 'none';
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') {
+                // If you add content later, scroll down
+                // Currently just triggers button click
+                ctaButton.click();
+            }
+            
+            if (e.key === 'Escape') {
+                // Reset any animations
+                logoMark.style.transform = 'scale(1)';
             }
         });
         
-        // Mobile menu toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            const icon = mobileMenuBtn.querySelector('i');
+        // Window resize - adjust background lines
+        function adjustLines() {
+            const lines = document.querySelectorAll('.line-vertical');
+            const viewportWidth = window.innerWidth;
             
-            if (icon.classList.contains('fa-bars')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-                navLinks.style.display = 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.width = '100%';
-                navLinks.style.backgroundColor = 'var(--white)';
-                navLinks.style.padding = '2rem';
-                navLinks.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
-                navLinks.style.gap = '1.5rem';
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-                navLinks.style.display = 'none';
-            }
-        });
-        
-        // Button hover effect enhancement
-        const ctaButton = document.querySelector('.cta-button');
-        ctaButton.addEventListener('mouseenter', () => {
-            ctaButton.style.transform = 'translateY(-2px)';
-        });
-        
-        ctaButton.addEventListener('mouseleave', () => {
-            ctaButton.style.transform = 'translateY(0)';
-        });
-        
-        // Project card hover effect
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-4px)';
-                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+            // Adjust vertical line positions based on viewport
+            lines.forEach((line, index) => {
+                const percentage = (index + 1) * 20; // 20%, 40%, 60%, 80%
+                line.style.left = `${percentage}%`;
             });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = 'none';
-            });
-        });
+        }
         
-        // Text animation on scroll
+        // Initial adjustment
+        adjustLines();
+        
+        // Adjust on resize
+        window.addEventListener('resize', adjustLines);
+        
+        // Text animation on load
         const heroText = document.querySelector('.hero-text');
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        const ctaSection = document.querySelector('.cta-button');
         
         // Set initial state for animation
         heroText.style.opacity = '0';
         heroText.style.transform = 'translateY(20px)';
-        heroText.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        heroText.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         
+        ctaSection.style.opacity = '0';
+        ctaSection.style.transform = 'translateY(20px)';
+        ctaSection.style.transition = 'opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s';
+        
+        // Animate in
         setTimeout(() => {
-            observer.observe(heroText);
-        }, 500);
-        
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target) && window.innerWidth <= 768) {
-                const icon = mobileMenuBtn.querySelector('i');
-                if (icon.classList.contains('fa-times')) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                    navLinks.style.display = 'none';
-                }
-            }
-        });
+            heroText.style.opacity = '1';
+            heroText.style.transform = 'translateY(0)';
+            
+            ctaSection.style.opacity = '1';
+            ctaSection.style.transform = 'translateY(0)';
+        }, 300);
     </script>
 </body>
 </html>
