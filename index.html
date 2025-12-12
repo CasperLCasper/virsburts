@@ -64,7 +64,7 @@
         
         /* Header logo - top center */
         .header-logo {
-            height: 65px;
+            height: 105px;
             width: auto;
             opacity: 0.9;
             transition: var(--transition);
@@ -389,8 +389,8 @@
                 kas ir <span class="highlight">intuitīvi un efektīvi</span>.
             </p>
             
-            <!-- Button -->
-            <a href="#" class="cta-button" id="ctaButton">
+            <!-- Button WITH LINK -->
+            <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" class="cta-button" id="ctaButton" target="_blank">
                 <span>Pāriet pie projektiem</span>
                 <i class="fas fa-arrow-right button-icon"></i>
             </a>
@@ -495,26 +495,28 @@
             this.style.transform = 'scale(1)';
         });
         
-        // CTA Button interaction
+        // CTA Button hover effects (link already works, but we add extra styles)
         const ctaButton = document.getElementById('ctaButton');
-        ctaButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Button animation
+        
+        ctaButton.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+        });
+        
+        ctaButton.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+        
+        // Button click animation (optional, since link will navigate away)
+        ctaButton.addEventListener('mousedown', function() {
             this.style.transform = 'scale(0.98)';
             this.style.backgroundColor = '#333';
-            
-            const originalText = this.querySelector('span').textContent;
-            this.querySelector('span').textContent = 'Atver...';
-            
-            setTimeout(() => {
-                this.style.transform = '';
-                this.style.backgroundColor = '';
-                this.querySelector('span').textContent = originalText;
-                
-                // Simple alert for demo
-                alert('Projekta saturs tiks atvērts drīzumā...');
-            }, 800);
+        });
+        
+        ctaButton.addEventListener('mouseup', function() {
+            this.style.transform = '';
+            this.style.backgroundColor = '';
         });
         
         // Header logo click - scroll to top
