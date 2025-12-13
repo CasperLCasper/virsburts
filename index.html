@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mans Projekts — Minimālistisks digitāls risinājums</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
 :root {
     --logo-height: 65px;
@@ -21,12 +23,10 @@
     --color-bg: #ffffff;
     --color-bg-lines: #e5e5e5;
     --color-scroll-line-bg: #10b981;
-    --color-scroll-line-animation: #FFFFFF;
-    --color-loading-bg: #ffffff;
-    --color-loading-line: #3a86ff;
-    --color-loading-animation: #10b981;
+    --color-scroll-line-animation: #ffffff;
     --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
+
 [data-theme="dark"] {
     --logo-src: url('virsburts-balts.png');
     --color-project-name: #ffffff;
@@ -41,47 +41,185 @@
     --color-scroll-line-bg: #ffffff;
     --color-scroll-line-animation: #0a0a0a;
 }
-body, html { margin:0; padding:0; min-height:100%; font-family:'Inter',sans-serif; background:var(--color-bg); color:var(--color-hero-text); }
-h1 { font-family:'Manrope',sans-serif; letter-spacing:-0.03em; }
-header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100; }
-.header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); content:var(--logo-src); }
-main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 20px; position:relative; flex-direction:column; }
-.hero { max-width:720px; text-align:center; position:relative; z-index:2; }
-.project-name { font-size:40px; color:var(--color-project-name); margin-bottom:5px; font-weight:600; }
-.project-subtitle { font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--color-project-subtitle); margin-bottom:30px; }
-.hero-text { max-width:560px; margin:0 auto 30px; font-size:18px; color:var(--color-hero-text); }
-.highlight { color:var(--color-highlight-text); font-weight:500; }
-.cta-button { display:inline-flex; align-items:center; gap:5px; padding:14px 32px; background:var(--color-button-bg); color:var(--color-button-text); border-radius:6px; text-decoration:none; font-weight:500; transition:var(--transition); position:relative; z-index:5; cursor:pointer; }
-.cta-button:hover { background:var(--color-button-hover); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
-.bg-lines { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
-.bg-lines .line { position:absolute; background:var(--color-bg-lines); }
+
+body, html {
+    margin:0;
+    padding:0;
+    min-height:100%;
+    font-family:'Inter',sans-serif;
+    background:var(--color-bg);
+    color:var(--color-hero-text);
+}
+
+header {
+    position:fixed;
+    top:0;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    padding:20px 0;
+    z-index:100;
+}
+
+.header-logo {
+    height:var(--logo-height);
+    cursor:pointer;
+}
+
+.bg-lines {
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+}
+
+.bg-lines .line {
+    position:absolute;
+    background:var(--color-bg-lines);
+}
+
 .line-vertical { width:1px; height:100%; }
 .line-horizontal { height:1px; width:100%; }
-.line-1 { left:20%; } .line-2 { left:40%; } .line-3 { left:60%; } .line-4 { left:80%; }
-.line-5 { top:20%; } .line-6 { top:40%; } .line-7 { top:60%; } .line-8 { top:80%; }
-.theme-toggle { position:fixed; bottom:40px; left:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
-.theme-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
-.scroll-indicator { position:relative; margin-top:10px; margin-bottom:20px; display:flex; justify-content:center; pointer-events:none; }
-.scroll-line { width:3px; height:42px; background:var(--color-scroll-line-bg); position:relative; overflow:hidden; border-radius:2px; }
-.scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
-@keyframes scrollLine { to{top:100%;} }
 
-/* Projekti kartiņas */
-.projects-container { display:none; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:30px; }
-.project-card { background:var(--color-bg-lines); padding:20px; border-radius:8px; width:250px; display:flex; flex-direction:column; align-items:center; opacity:0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.project-card.show { opacity:1; transform:translateY(0); }
-.project-card img { width:80px; height:80px; margin-bottom:15px; }
-.project-card h3 { margin:0 0 10px; font-size:18px; }
-.project-card p { font-size:14px; text-align:center; margin:0; }
+.line-1 { left:20%; } .line-2 { left:40%; }
+.line-3 { left:60%; } .line-4 { left:80%; }
+.line-5 { top:20%; } .line-6 { top:40%; }
+.line-7 { top:60%; } .line-8 { top:80%; }
 
-@media(max-width:768px){ header{padding:15px 0;} .header-logo{height:49px;} .hero-text{font-size:16px;} .project-name{font-size:32px;} .project-card { width:100%; max-width:300px; } }
+main {
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 20px;
+    position:relative;
+    flex-direction:column;
+}
+
+.hero {
+    max-width:720px;
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+.project-name {
+    font-size:40px;
+    font-weight:600;
+    color:var(--color-project-name);
+}
+
+.project-subtitle {
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--color-project-subtitle);
+    margin-bottom:30px;
+}
+
+.hero-text {
+    max-width:560px;
+    margin:0 auto 30px;
+    font-size:18px;
+}
+
+.highlight {
+    color:var(--color-highlight-text);
+    font-weight:500;
+}
+
+.scroll-indicator {
+    margin-bottom:20px;
+    display:flex;
+    justify-content:center;
+    pointer-events:none;
+}
+
+.scroll-line {
+    width:3px;
+    height:42px;
+    background:var(--color-scroll-line-bg);
+    overflow:hidden;
+    border-radius:2px;
+}
+
+.scroll-line::after {
+    content:'';
+    position:absolute;
+    top:-100%;
+    left:0;
+    width:100%;
+    height:100%;
+    background:var(--color-scroll-line-animation);
+    animation:scrollLine 2s infinite;
+}
+
+@keyframes scrollLine {
+    to { top:100%; }
+}
+
+.cta-button {
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:14px 32px;
+    background:var(--color-button-bg);
+    color:var(--color-button-text);
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:500;
+    cursor:pointer;
+    transition:var(--transition);
+}
+
+/* ✅ POP-UP projekti */
+.projects-container {
+    position:absolute;
+    top: calc(100% + 30px);
+    left:50%;
+    transform:translateX(-50%);
+    display:none;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:900px;
+    width:100%;
+    z-index:5;
+}
+
+.project-card {
+    background:var(--color-bg-lines);
+    padding:20px;
+    border-radius:8px;
+    width:250px;
+    text-align:center;
+    opacity:0;
+    transform:translateY(20px);
+    transition:.4s ease;
+}
+
+.project-card.show {
+    opacity:1;
+    transform:translateY(0);
+}
+
+.theme-toggle {
+    position:fixed;
+    bottom:40px;
+    left:40px;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    border:none;
+    background:var(--color-button-bg);
+    color:var(--color-button-text);
+    cursor:pointer;
+    z-index:20;
+}
 </style>
 </head>
-<body>
 
-<div class="loading" id="loading" aria-hidden="true">
-  <div class="loading-line"></div>
-</div>
+<body>
 
 <div class="bg-lines">
   <div class="line line-vertical line-1"></div>
@@ -95,77 +233,60 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 </div>
 
 <header>
-  <img src="virsburts-melns.png" alt="Mans Projekts logo" class="header-logo" id="logo">
+  <img src="virsburts-melns.png" class="header-logo">
 </header>
 
 <main>
-  <section class="hero" aria-labelledby="title">
-    <h1 id="title" class="project-name">Mans Projekts</h1>
-    <p class="project-subtitle">Digitālais risinājums</p>
-    <p class="hero-text">Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums, kas fokusējas uz skaidru dizainu, pielāgojamām krāsām un augstu lietojamību.</p>
-    <div class="scroll-indicator" aria-hidden="true">
-      <div class="scroll-line"></div>
-    </div>
-    <a href="#" class="cta-button" aria-label="Atvērt projektu sarakstu">Skatīt projektus <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
-  </section>
+<section class="hero">
 
-  <!-- Projekti kartiņas -->
-  <div class="projects-container" id="projectsContainer">
-    <div class="project-card">
-      <img src="logo1.png" alt="Projekts 1 logo">
-      <h3>NFT Sepolia Wall</h3>
-      <p>Minimālistisks dinamiskais NFT projekts testnet vidē.</p>
-    </div>
-    <div class="project-card">
-      <img src="logo2.png" alt="Projekts 2 logo">
-      <h3>Projekts 2</h3>
-      <p>Apraksts par projektu 2, kas demonstrē modernu dizainu.</p>
-    </div>
-    <div class="project-card">
-      <img src="logo3.png" alt="Projekts 3 logo">
-      <h3>Projekts 3</h3>
-      <p>Apraksts par projektu 3 ar uzsvaru uz lietotāja pieredzi.</p>
-    </div>
-  </div>
+<h1 class="project-name">Mans Projekts</h1>
+<p class="project-subtitle">Digitālais risinājums</p>
+<p class="hero-text">
+  Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums.
+</p>
 
-  <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
-    <i class="fas fa-moon"></i>
-  </button>
+<div class="scroll-indicator">
+  <div class="scroll-line"></div>
+</div>
+
+<a href="#" class="cta-button" id="cta">Skatīt projektus <i class="fas fa-arrow-down"></i></a>
+
+<div class="projects-container" id="projects">
+  <div class="project-card">NFT Sepolia Wall</div>
+  <div class="project-card">Projekts 2</div>
+  <div class="project-card">Projekts 3</div>
+</div>
+
+</section>
+
+<button class="theme-toggle" id="toggle"><i class="fas fa-moon"></i></button>
 </main>
 
 <script>
-window.addEventListener('load',()=>{const l=document.getElementById('loading'); l.style.opacity='0'; setTimeout(()=>l.remove(),400);});
-document.getElementById('logo').addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
+const cta = document.getElementById('cta');
+const container = document.getElementById('projects');
+const cards = document.querySelectorAll('.project-card');
 
-// Projekti kartiņas ar fade-in
-const ctaButton = document.querySelector('.cta-button');
-const projectsContainer = document.getElementById('projectsContainer');
-const projectCards = projectsContainer.querySelectorAll('.project-card');
+cta.onclick = e => {
+  e.preventDefault();
+  const open = container.style.display === 'flex';
+  container.style.display = open ? 'none' : 'flex';
+  cards.forEach((c,i)=>setTimeout(()=>c.classList.toggle('show',!open),i*120));
+};
 
-ctaButton.addEventListener('click', (e)=>{
-    e.preventDefault();
-    if(projectsContainer.style.display==='flex'){
-        projectsContainer.style.display='none';
-        projectCards.forEach(c=>c.classList.remove('show'));
-    } else {
-        projectsContainer.style.display='flex';
-        projectCards.forEach((c,i)=>setTimeout(()=>c.classList.add('show'), i*150));
-        projectsContainer.scrollIntoView({behavior:'smooth'});
-    }
-});
+const toggle = document.getElementById('toggle');
+const root = document.documentElement;
 
-// Theme toggle
-const toggle=document.getElementById('themeToggle');
-const root=document.documentElement;
-toggle.addEventListener('click',()=>{
-    const isDark=root.getAttribute('data-theme')==='dark';
-    root.setAttribute('data-theme',isDark?'light':'dark');
-    toggle.innerHTML=isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
-});
+toggle.onclick = () => {
+  const dark = root.getAttribute('data-theme') === 'dark';
+  root.setAttribute('data-theme', dark ? 'light' : 'dark');
+  toggle.innerHTML = dark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+};
 </script>
 
 </body>
 </html>
+
 
 
 
