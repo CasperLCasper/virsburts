@@ -8,23 +8,34 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 :root {
+    /* Header Logo */
     --logo-height: 65px;
-    --logo-opacity: 1;
+    --logo-opacity: 0.9;
     --logo-src: url('virsburts-melns.png');
+
+    /* Teksti */
     --color-project-name: #0a0a0a;
     --color-project-subtitle: #8c8c8c;
     --color-hero-text: #404040;
     --color-highlight-text: #0a0a0a;
+
+    /* Poga */
     --color-button-bg: #0a0a0a;
     --color-button-text: #ffffff;
     --color-button-hover: #1a1a1a;
+
+    /* Fona elementi */
     --color-bg: #ffffff;
     --color-bg-lines: #e5e5e5;
     --color-scroll-line-bg: #10b981;
     --color-scroll-line-animation: #FFFFFF;
+
+    /* Loading ekrāns */
     --color-loading-bg: #ffffff;
     --color-loading-line: #3a86ff;
     --color-loading-animation: #10b981;
+
+    /* Motion */
     --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 [data-theme="dark"] {
@@ -41,37 +52,54 @@
     --color-scroll-line-bg: #ffffff;
     --color-scroll-line-animation: #0a0a0a;
 }
+
+/* Reset */
 body, html { margin:0; padding:0; min-height:100%; font-family:'Inter',sans-serif; background:var(--color-bg); color:var(--color-hero-text); }
 h1 { font-family:'Manrope',sans-serif; letter-spacing:-0.03em; }
-header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:2rem 0; z-index:100; }
+
+/* Header */
+header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100; }
 .header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); content:var(--logo-src); }
-main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 1.5rem; position:relative; }
+
+/* Hero section */
+main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 20px; position:relative; }
 .hero { max-width:720px; text-align:center; position:relative; z-index:2; }
-.project-name { font-size:clamp(1.75rem,4vw,2.5rem); color:var(--color-project-name); margin-bottom:0.25rem; font-weight:600; }
-.project-subtitle { font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-project-subtitle); margin-bottom:2.5rem; }
-.hero-text { max-width:560px; margin:0 auto 3rem; font-size:1.05rem; color:var(--color-hero-text); }
+.project-name { font-size:40px; color:var(--color-project-name); margin-bottom:5px; font-weight:600; }
+.project-subtitle { font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--color-project-subtitle); margin-bottom:30px; }
+.hero-text { max-width:560px; margin:0 auto 30px; font-size:18px; color:var(--color-hero-text); }
 .highlight { color:var(--color-highlight-text); font-weight:500; }
-.cta-button { display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; background:var(--color-button-bg); color:var(--color-button-text); border-radius:6px; text-decoration:none; font-weight:500; transition:var(--transition); position:relative; z-index:5; }
+
+/* CTA button */
+.cta-button { display:inline-flex; align-items:center; gap:5px; padding:14px 32px; background:var(--color-button-bg); color:var(--color-button-text); border-radius:6px; text-decoration:none; font-weight:500; transition:var(--transition); position:relative; z-index:5; }
 .cta-button:hover { background:var(--color-button-hover); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
+
+/* Background lines */
 .bg-lines { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
 .bg-lines .line { position:absolute; background:var(--color-bg-lines); }
 .line-vertical { width:1px; height:100%; }
 .line-horizontal { height:1px; width:100%; }
 .line-1 { left:20%; } .line-2 { left:40%; } .line-3 { left:60%; } .line-4 { left:80%; }
 .line-5 { top:20%; } .line-6 { top:40%; } .line-7 { top:60%; } .line-8 { top:80%; }
-.theme-toggle { position:fixed; bottom:2.5rem; left:2.5rem; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
+
+/* Theme toggle button */
+.theme-toggle { position:fixed; bottom:40px; left:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
 .theme-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
-.scroll-indicator { position:absolute; bottom:3.5rem; left:50%; transform:translateX(-50%); z-index:10; pointer-events:none; }
+
+/* Scroll indicator above CTA button */
+.scroll-indicator { position:relative; margin-top:-40px; margin-bottom:20px; display:flex; justify-content:center; pointer-events:none; }
 .scroll-line { width:3px; height:42px; background:var(--color-scroll-line-bg); position:relative; overflow:hidden; border-radius:2px; }
 .scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
 @keyframes scrollLine { to{top:100%;} }
-@media(max-width:768px){ header{padding:1.5rem 0;} .header-logo{height:calc(var(--logo-height)*0.75);} .hero-text{font-size:1rem;} }
+
+@media(max-width:768px){ header{padding:15px 0;} .header-logo{height:49px;} .hero-text{font-size:16px;} .project-name{font-size:32px;} }
 </style>
 </head>
 <body>
+
 <div class="loading" id="loading" aria-hidden="true">
   <div class="loading-line"></div>
 </div>
+
 <div class="bg-lines">
   <div class="line line-vertical line-1"></div>
   <div class="line line-vertical line-2"></div>
@@ -82,23 +110,26 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
   <div class="line line-horizontal line-7"></div>
   <div class="line line-horizontal line-8"></div>
 </div>
+
 <header>
   <img src="virsburts-melns.png" alt="Mans Projekts logo" class="header-logo" id="logo">
 </header>
+
 <main>
   <section class="hero" aria-labelledby="title">
     <h1 id="title" class="project-name">Mans Projekts</h1>
     <p class="project-subtitle">Digitālais risinājums</p>
     <p class="hero-text">Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums, kas fokusējas uz skaidru dizainu, pielāgojamām krāsām un augstu lietojamību.</p>
-    <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener" class="cta-button" aria-label="Atvērt projektu lapu">Skatīt projektus <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
     <div class="scroll-indicator" aria-hidden="true">
       <div class="scroll-line"></div>
     </div>
+    <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener" class="cta-button" aria-label="Atvērt projektu lapu">Skatīt projektus <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
   </section>
   <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
     <i class="fas fa-moon"></i>
   </button>
 </main>
+
 <script>
 window.addEventListener('load',()=>{const l=document.getElementById('loading'); l.style.opacity='0'; setTimeout(()=>l.remove(),400);});
 document.getElementById('logo').addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
@@ -106,8 +137,10 @@ const toggle=document.getElementById('themeToggle');
 const root=document.documentElement;
 toggle.addEventListener('click',()=>{const isDark=root.getAttribute('data-theme')==='dark';root.setAttribute('data-theme',isDark?'light':'dark');toggle.innerHTML=isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';});
 </script>
+
 </body>
 </html>
+
 
 
 
