@@ -31,8 +31,6 @@
     --color-close-btn: #666;
     --color-card-bg: #f8f9fa;
     --color-card-border: #e9ecef;
-    --color-tag-bg: #e9ecef;
-    --color-tag-text: #495057;
     --color-link: #0d6efd;
     --color-link-hover: #0a58ca;
     --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
@@ -56,8 +54,6 @@
     --color-close-btn: #aaa;
     --color-card-bg: #2d2d2d;
     --color-card-border: #444;
-    --color-tag-bg: #444;
-    --color-tag-text: #e9ecef;
     --color-link: #6ea8fe;
     --color-link-hover: #9ec5fe;
 }
@@ -117,9 +113,9 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     padding: 40px;
     border-radius: 16px;
     z-index: 1000;
-    max-width: 1000px;
+    max-width: 900px;
     width: 90%;
-    max-height: 85vh;
+    max-height: 80vh;
     overflow-y: auto;
     box-shadow: 0 25px 80px rgba(0,0,0,0.3);
     opacity: 0;
@@ -172,11 +168,11 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
 }
 
-/* ATJAUNINĀTĀS PROJEKTU KARTIŅAS */
+/* VIENKĀRŠĀTĀS PROJEKTU KARTIŅAS */
 .project-card {
     background: var(--color-card-bg);
     padding: 25px;
@@ -184,11 +180,12 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     border: 1px solid var(--color-card-border);
     display: flex;
     flex-direction: column;
+    align-items: center;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    height: 100%;
+    text-align: center;
 }
 
 .project-card.show {
@@ -205,86 +202,53 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     box-shadow: 0 15px 35px rgba(0,0,0,0.3);
 }
 
-.project-logo-container {
+/* LOGO */
+.project-card img {
     width: 80px;
     height: 80px;
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-bg);
-    border-radius: 16px;
-    padding: 15px;
-    border: 1px solid var(--color-card-border);
-}
-
-.project-card img {
-    width: 100%;
-    height: 100%;
+    margin-bottom: 20px;
     object-fit: contain;
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
-.project-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
+/* PROJEKTA NOSAUKUMS */
 .project-card h3 {
-    margin: 0 0 12px;
+    margin: 0 0 15px;
     font-size: 20px;
     color: var(--color-modal-text);
-    text-align: center;
     font-family: 'Manrope', sans-serif;
     font-weight: 600;
+    line-height: 1.3;
 }
 
+/* ĪSS APRAKSTS */
 .project-description {
     font-size: 14px;
     color: var(--color-hero-text);
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: 20px;
     flex-grow: 1;
+    max-width: 250px;
 }
 
-.project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.tech-tag {
-    background: var(--color-tag-bg);
-    color: var(--color-tag-text);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.project-links {
-    display: flex;
-    gap: 12px;
-    margin-top: auto;
-}
-
+/* VIENKĀRŠĀ POGA */
 .project-link {
-    flex: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 10px 16px;
+    width: 100%;
+    padding: 12px 20px;
     background: var(--color-button-bg);
     color: var(--color-button-text);
-    border-radius: 6px;
+    border-radius: 8px;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
     transition: var(--transition);
-    text-align: center;
+    border: none;
+    cursor: pointer;
+    margin-top: auto;
 }
 
 .project-link:hover {
@@ -293,18 +257,7 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.project-link.secondary {
-    background: transparent;
-    color: var(--color-link);
-    border: 1px solid var(--color-link);
-}
-
-.project-link.secondary:hover {
-    background: var(--color-link);
-    color: var(--color-button-text);
-}
-
-.project-link-icon {
+.project-link i {
     font-size: 14px;
 }
 
@@ -353,9 +306,8 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     .hero-text{font-size:16px;} 
     .project-name{font-size:32px;}
     .projects-modal {
-        padding: 20px;
+        padding: 25px;
         width: 95%;
-        max-height: 90vh;
     }
     .modal-header h2 {
         font-size: 24px;
@@ -366,9 +318,6 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     }
     .project-card {
         padding: 20px;
-    }
-    .project-links {
-        flex-direction: column;
     }
     .theme-toggle {
         bottom: 20px;
@@ -447,95 +396,35 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
   <div class="projects-grid">
     <!-- 1. Projekts -->
     <div class="project-card">
-      <div class="project-logo-container">
-        <img src="dynamic-wallet.png" alt="NFT Sepolia Wall logo" loading="lazy">
-      </div>
-      <div class="project-content">
-        <h3>Dynamic Ethereum wallet vizualizer</h3>
-        <p class="project-description">
-          Dinamisks NFT mākslas projekts uz Sepolia testnet. Katrs NFT tiek ģenerēts unikāli, 
-          izmantojot pēc lietotāja atzīmes pielāgotus parametrus. 
-          Īsta māksla, kas mainās līdz ar tehnoloģijām.
-        </p>
-        <div class="project-tech">
-          <span class="tech-tag">Solidity</span>
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">IPFS</span>
-          <span class="tech-tag">Web3</span>
-        </div>
-        <div class="project-links">
-          <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">
-            <i class="fas fa-external-link-alt project-link-icon"></i>
-            Apskatīt projektu
-          </a>
-          <a href="https://github.com/username/nft-sepolia-wall" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-            <i class="fab fa-github project-link-icon"></i>
-            GitHub
-          </a>
-        </div>
-      </div>
+      <img src="logo1.png" alt="NFT Sepolia Wall logo" loading="lazy">
+      <h3>NFT Sepolia Wall</h3>
+      <p class="project-description">Dinamisks NFT mākslas projekts uz Sepolia testnet ar unikālu ģenerēšanu.</p>
+      <a href="https://nft-sepolia-wall-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link">
+        <i class="fas fa-external-link-alt"></i>
+        Pāriet pie projekta
+      </a>
     </div>
 
     <!-- 2. Projekts -->
     <div class="project-card">
-      <div class="project-logo-container">
-        <img src="logo2.png" alt="Design System logo" loading="lazy">
-      </div>
-      <div class="project-content">
-        <h3>Minimal Design System</h3>
-        <p class="project-description">
-          Pilnībā konsekventa dizaina sistēma mūsdienu web lietotnēm. 
-          Ietver komponentu bibliotēku, stila vadlīnijas un dokumentāciju 
-          efektīvai izstrādes procesa standartizēšanai.
-        </p>
-        <div class="project-tech">
-          <span class="tech-tag">Vue.js</span>
-          <span class="tech-tag">TypeScript</span>
-          <span class="tech-tag">Sass</span>
-          <span class="tech-tag">Storybook</span>
-        </div>
-        <div class="project-links">
-          <a href="https://design-system-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link">
-            <i class="fas fa-external-link-alt project-link-icon"></i>
-            Dizaina sistēma
-          </a>
-          <a href="https://design-system-docs.lv" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-            <i class="fas fa-book project-link-icon"></i>
-            Dokumentācija
-          </a>
-        </div>
-      </div>
+      <img src="logo2.png" alt="Design System logo" loading="lazy">
+      <h3>Minimal Design System</h3>
+      <p class="project-description">Konsekventa dizaina sistēma mūsdienu web lietotnēm ar komponentu bibliotēku.</p>
+      <a href="https://design-system-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link">
+        <i class="fas fa-external-link-alt"></i>
+        Pāriet pie projekta
+      </a>
     </div>
 
     <!-- 3. Projekts -->
     <div class="project-card">
-      <div class="project-logo-container">
-        <img src="logo3.png" alt="E-commerce AI logo" loading="lazy">
-      </div>
-      <div class="project-content">
-        <h3>AI Powered E-Commerce</h3>
-        <p class="project-description">
-          Inteliģenta e-veikala platforma ar mašīnmācīšanās ieteikumu sistēmu. 
-          Personalizēts lietotāju pieredze, automatizēts inventāra pārvaldība 
-          un prediktīva analīze pārdošanas trendiem.
-        </p>
-        <div class="project-tech">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">TensorFlow</span>
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">MongoDB</span>
-        </div>
-        <div class="project-links">
-          <a href="https://ai-ecommerce-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link">
-            <i class="fas fa-external-link-alt project-link-icon"></i>
-            Demoversija
-          </a>
-          <a href="https://github.com/username/ai-ecommerce" target="_blank" rel="noopener noreferrer" class="project-link secondary">
-            <i class="fas fa-download project-link-icon"></i>
-            Case Study
-          </a>
-        </div>
-      </div>
+      <img src="logo3.png" alt="E-commerce AI logo" loading="lazy">
+      <h3>AI Powered E-Commerce</h3>
+      <p class="project-description">Inteliģenta e-veikala platforma ar ML ieteikumu sistēmu un personalizētu pieredzi.</p>
+      <a href="https://ai-ecommerce-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link">
+        <i class="fas fa-external-link-alt"></i>
+        Pāriet pie projekta
+      </a>
     </div>
   </div>
 </div>
