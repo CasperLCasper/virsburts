@@ -10,7 +10,7 @@
 :root {
     /* Header Logo */
     --logo-height: 65px;
-    --logo-opacity: 1;
+    --logo-opacity: 0.9;
     --logo-src: url('virsburts-melns.png');
 
     /* Teksti */
@@ -35,7 +35,6 @@
     --color-loading-line: #3a86ff;
     --color-loading-animation: #10b981;
 
-    /* Motion */
     --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 [data-theme="dark"] {
@@ -54,15 +53,15 @@
 }
 
 /* Reset */
-body, html { margin:0; padding:0; min-height:100%; font-family:'Inter',sans-serif; background:var(--color-bg); color:var(--color-hero-text); }
-h1 { font-family:'Manrope',sans-serif; letter-spacing:-0.03em; }
+body, html { margin:0; padding:0; min-height:100%; font-family:'Inter',sans-serif; background:var(--color-bg); color:var(--color-hero-text); scroll-behavior:smooth; }
+h1,h2,h3,h4 { font-family:'Manrope',sans-serif; letter-spacing:-0.03em; }
 
 /* Header */
 header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100; }
-.header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); content:var(--logo-src); }
+.header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); }
 
-/* Hero section */
-main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 20px; position:relative; }
+/* Hero */
+main { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 20px; position:relative; }
 .hero { max-width:720px; text-align:center; position:relative; z-index:2; }
 .project-name { font-size:40px; color:var(--color-project-name); margin-bottom:5px; font-weight:600; }
 .project-subtitle { font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--color-project-subtitle); margin-bottom:30px; }
@@ -85,21 +84,30 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 .theme-toggle { position:fixed; bottom:40px; left:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
 .theme-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
 
-/* Scroll indicator above CTA button */
-.scroll-indicator { position:relative; margin-top:10px; margin-bottom:20px; display:flex; justify-content:center; pointer-events:none; }
+/* Scroll indicator above CTA */
+.scroll-indicator { position:relative; margin-top:-40px; margin-bottom:20px; display:flex; justify-content:center; pointer-events:none; }
 .scroll-line { width:3px; height:42px; background:var(--color-scroll-line-bg); position:relative; overflow:hidden; border-radius:2px; }
 .scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
 @keyframes scrollLine { to{top:100%;} }
+
+/* Projects section */
+#projects { display:none; padding:100px 20px; background:#f5f5f5; text-align:center; }
+#projects h2 { font-size:32px; margin-bottom:20px; }
+#projects p { max-width:600px; margin:0 auto 40px; }
+#projects .project-card { background:#fff; padding:20px; border-radius:8px; width:250px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+#projects .project-container { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
 
 @media(max-width:768px){ header{padding:15px 0;} .header-logo{height:49px;} .hero-text{font-size:16px;} .project-name{font-size:32px;} }
 </style>
 </head>
 <body>
 
+<!-- Loading -->
 <div class="loading" id="loading" aria-hidden="true">
   <div class="loading-line"></div>
 </div>
 
+<!-- Background lines -->
 <div class="bg-lines">
   <div class="line line-vertical line-1"></div>
   <div class="line line-vertical line-2"></div>
@@ -111,35 +119,77 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
   <div class="line line-horizontal line-8"></div>
 </div>
 
+<!-- Header -->
 <header>
   <img src="virsburts-melns.png" alt="Mans Projekts logo" class="header-logo" id="logo">
 </header>
 
+<!-- Main content -->
 <main>
   <section class="hero" aria-labelledby="title">
     <h1 id="title" class="project-name">Mans Projekts</h1>
     <p class="project-subtitle">Digitālais risinājums</p>
     <p class="hero-text">Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums, kas fokusējas uz skaidru dizainu, pielāgojamām krāsām un augstu lietojamību.</p>
+
     <div class="scroll-indicator" aria-hidden="true">
       <div class="scroll-line"></div>
     </div>
-    <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener" class="cta-button" aria-label="Atvērt projektu lapu">Skatīt projektus <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+
+    <a href="javascript:void(0);" class="cta-button" id="viewProjectsBtn">Skatīt projektus <i class="fas fa-arrow-down"></i></a>
   </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Mūsu Projekti</h2>
+    <p>Šeit vari ievietot aprakstus, attēlus vai linkus uz projektiem.</p>
+    <div class="project-container">
+      <div class="project-card"><h3>Projekts 1</h3><p>Īss apraksts par projektu.</p></div>
+      <div class="project-card"><h3>Projekts 2</h3><p>Īss apraksts par projektu.</p></div>
+      <div class="project-card"><h3>Projekts 3</h3><p>Īss apraksts par projektu.</p></div>
+    </div>
+  </section>
+
+  <!-- Theme toggle -->
   <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
     <i class="fas fa-moon"></i>
   </button>
 </main>
 
 <script>
+// Loading animation
 window.addEventListener('load',()=>{const l=document.getElementById('loading'); l.style.opacity='0'; setTimeout(()=>l.remove(),400);});
+
+// Logo click scroll top
 document.getElementById('logo').addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
+
+// Theme toggle
 const toggle=document.getElementById('themeToggle');
 const root=document.documentElement;
-toggle.addEventListener('click',()=>{const isDark=root.getAttribute('data-theme')==='dark';root.setAttribute('data-theme',isDark?'light':'dark');toggle.innerHTML=isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';});
+toggle.addEventListener('click',()=>{
+  const isDark=root.getAttribute('data-theme')==='dark';
+  root.setAttribute('data-theme',isDark?'light':'dark');
+  toggle.innerHTML=isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
+});
+
+// View projects toggle
+const btn = document.getElementById('viewProjectsBtn');
+const projects = document.getElementById('projects');
+btn.addEventListener('click', () => {
+  if (projects.style.display === 'none' || projects.style.display === '') {
+    projects.style.display = 'block';
+    projects.scrollIntoView({ behavior: 'smooth' });
+    btn.innerHTML = 'Slēpt projektus <i class="fas fa-arrow-up"></i>';
+  } else {
+    projects.style.display = 'none';
+    btn.innerHTML = 'Skatīt projektus <i class="fas fa-arrow-down"></i>';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+});
 </script>
 
 </body>
 </html>
+
 
 
 
