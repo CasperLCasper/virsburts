@@ -57,7 +57,7 @@ body, html { margin:0; padding:0; min-height:100%; font-family:'Inter',sans-seri
 h1,h2,h3,h4 { font-family:'Manrope',sans-serif; letter-spacing:-0.03em; }
 
 /* Header */
-header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100; }
+header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100; background:transparent; }
 .header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); }
 
 /* Hero */
@@ -91,7 +91,7 @@ main { min-height:100vh; display:flex; flex-direction:column; align-items:center
 @keyframes scrollLine { to{top:100%;} }
 
 /* Projects section */
-#projects { display:none; padding:100px 20px; background:#f5f5f5; text-align:center; }
+#projects { display:none; padding:140px 20px 100px; background:#f5f5f5; text-align:center; }
 #projects h2 { font-size:32px; margin-bottom:20px; }
 #projects p { max-width:600px; margin:0 auto 40px; }
 #projects .project-card { background:#fff; padding:20px; border-radius:8px; width:250px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
@@ -171,13 +171,16 @@ toggle.addEventListener('click',()=>{
   toggle.innerHTML=isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
 });
 
-// View projects toggle
+// View projects toggle with header offset
 const btn = document.getElementById('viewProjectsBtn');
 const projects = document.getElementById('projects');
 btn.addEventListener('click', () => {
+  const headerHeight = document.querySelector('header').offsetHeight;
+
   if (projects.style.display === 'none' || projects.style.display === '') {
     projects.style.display = 'block';
-    projects.scrollIntoView({ behavior: 'smooth' });
+    const projectsTop = projects.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
+    window.scrollTo({ top: projectsTop, behavior: 'smooth' });
     btn.innerHTML = 'Slēpt projektus <i class="fas fa-arrow-up"></i>';
   } else {
     projects.style.display = 'none';
@@ -189,6 +192,7 @@ btn.addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
 
