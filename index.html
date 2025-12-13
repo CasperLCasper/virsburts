@@ -21,8 +21,6 @@
     --color-button-hover: #1a1a1a;
     --color-bg: #ffffff;
     --color-bg-lines: #e5e5e5;
-    --color-scroll-line-bg: #10b981;
-    --color-scroll-line-animation: #FFFFFF;
     --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
@@ -69,14 +67,14 @@ main {
     align-items:center;
     justify-content:center;
     padding:0 20px;
-    position:relative; /* SVARĪGI */
+    position:relative; /* 🔧 svarīgi pop-up enkurošanai */
     flex-direction:column;
 }
 
 .hero {
     max-width:720px;
     text-align:center;
-    position:relative; /* SVARĪGI */
+    position:relative; /* 🔧 svarīgi */
     z-index:2;
 }
 
@@ -117,12 +115,13 @@ main {
     font-weight:500;
     cursor:pointer;
     transition:var(--transition);
+    z-index:5;
 }
 
-/* 🔥 LABOTA PROJEKTU GALERIJA */
+/* 🔧 LABOTS: pop-up projektu konteineris */
 .projects-container {
     position:absolute;
-    top: calc(100% + 30px); /* zem hero */
+    top: calc(100% + 30px); /* zem hero pogas */
     left:50%;
     transform:translateX(-50%);
     display:none;
@@ -190,7 +189,7 @@ main {
     Skatīt projektus <i class="fas fa-arrow-down"></i>
   </a>
 
-  <!-- POP-UP projekti -->
+  <!-- 🔧 POP-UP projekti -->
   <div class="projects-container" id="projectsContainer">
     <div class="project-card">
       <img src="logo1.png" alt="">
@@ -237,6 +236,7 @@ cta.addEventListener('click', e => {
 
 </body>
 </html>
+
 
 
 
