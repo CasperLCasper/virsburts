@@ -25,10 +25,12 @@
     --color-loading-bg: #ffffff;
     --color-loading-line: #3a86ff;
     --color-loading-animation: #10b981;
+    --color-modal-bg: #ffffff;
+    --color-modal-overlay: rgba(0,0,0,0.7);
+    --color-modal-text: #0a0a0a;
+    --color-close-btn: #666;
     --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
-
-/* DARK MODE - ŠO ES NOŅĒMU, BET TAM JĀATKAL IR! */
 [data-theme="dark"] {
     --logo-src: url('virsburts-balts.png');
     --color-project-name: #ffffff;
@@ -42,8 +44,11 @@
     --color-button-hover: #e5e5e5;
     --color-scroll-line-bg: #ffffff;
     --color-scroll-line-animation: #0a0a0a;
+    --color-modal-bg: #1a1a1a;
+    --color-modal-overlay: rgba(0,0,0,0.85);
+    --color-modal-text: #ffffff;
+    --color-close-btn: #aaa;
 }
-
 body, html { margin:0; padding:0; min-height:100%; font-family:'Inter',sans-serif; background:var(--color-bg); color:var(--color-hero-text); }
 h1 { font-family:'Manrope',sans-serif; letter-spacing:-0.03em; }
 header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100; }
@@ -69,15 +74,221 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 .scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
 @keyframes scrollLine { to{top:100%;} }
 
-/* Projekti kartiņas */
-.projects-container { display:none; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:30px; }
-.project-card { background:var(--color-bg-lines); padding:20px; border-radius:8px; width:250px; display:flex; flex-direction:column; align-items:center; opacity:0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.project-card.show { opacity:1; transform:translateY(0); }
-.project-card img { width:80px; height:80px; margin-bottom:15px; }
-.project-card h3 { margin:0 0 10px; font-size:18px; }
-.project-card p { font-size:14px; text-align:center; margin:0; }
+/* MODAL STILI - NAV MAINĪTA HERO POZĪCIJA */
+.projects-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-modal-overlay);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
 
-@media(max-width:768px){ header{padding:15px 0;} .header-logo{height:49px;} .hero-text{font-size:16px;} .project-name{font-size:32px;} .project-card { width:100%; max-width:300px; } }
+.projects-overlay.show {
+    display: block;
+    opacity: 1;
+}
+
+.projects-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background: var(--color-modal-bg);
+    padding: 40px;
+    border-radius: 16px;
+    z-index: 1000;
+    max-width: 900px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.projects-modal.show {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-bg-lines);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-family: 'Manrope', sans-serif;
+    font-size: 28px;
+    color: var(--color-modal-text);
+    font-weight: 600;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    color: var(--color-close-btn);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    background: var(--color-bg-lines);
+    color: var(--color-modal-text);
+}
+
+.projects-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+/* Projekti kartiņas */
+.project-card {
+    background: var(--color-bg-lines);
+    padding: 25px;
+    border-radius: 12px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.project-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.project-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.project-card h3 {
+    margin: 0 0 12px;
+    font-size: 18px;
+    color: var(--color-modal-text);
+    text-align: center;
+}
+
+.project-card p {
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+    color: var(--color-hero-text);
+    line-height: 1.5;
+}
+
+/* Loading stili */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-loading-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.4s ease;
+}
+
+.loading-line {
+    width: 200px;
+    height: 3px;
+    background: var(--color-loading-line);
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.loading-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--color-loading-animation);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    to { left: 100%; }
+}
+
+@media(max-width: 768px){
+    header{padding:15px 0;} 
+    .header-logo{height:49px;} 
+    .hero-text{font-size:16px;} 
+    .project-name{font-size:32px;}
+    .projects-modal {
+        padding: 25px;
+        width: 95%;
+    }
+    .modal-header h2 {
+        font-size: 24px;
+    }
+    .project-card {
+        width: 100%;
+        max-width: 280px;
+    }
+    .theme-toggle {
+        bottom: 20px;
+        left: 20px;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* Pārlūkprogrammu scrollbar stils */
+.projects-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.projects-modal::-webkit-scrollbar-track {
+    background: var(--color-bg-lines);
+    border-radius: 4px;
+}
+
+.projects-modal::-webkit-scrollbar-thumb {
+    background: var(--color-button-bg);
+    border-radius: 4px;
+}
+
+.projects-modal::-webkit-scrollbar-thumb:hover {
+    background: var(--color-button-hover);
+}
 </style>
 </head>
 <body>
@@ -109,13 +320,26 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     <div class="scroll-indicator" aria-hidden="true">
       <div class="scroll-line"></div>
     </div>
-    <a href="#" class="cta-button" aria-label="Atvērt projektu sarakstu">Skatīt projektus <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+    <a href="#" class="cta-button" id="showProjectsBtn" aria-label="Atvērt projektu sarakstu">Skatīt projektus <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
   </section>
 
-  <!-- Projekti kartiņas -->
-  <div class="projects-container" id="projectsContainer">
+  <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
+    <i class="fas fa-moon"></i>
+  </button>
+</main>
+
+<!-- PROJEKTU MODAL -->
+<div class="projects-overlay" id="projectsOverlay"></div>
+<div class="projects-modal" id="projectsModal">
+  <div class="modal-header">
+    <h2>Mani Projekti</h2>
+    <button class="close-modal" id="closeModal" aria-label="Aizvērt projektu logu">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="projects-grid">
     <div class="project-card">
-      <img src="logo1.png" alt="Projekts 1 logo">
+      <img src="logo1.png" alt="NFT Sepolia Wall logo">
       <h3>NFT Sepolia Wall</h3>
       <p>Minimālistisks dinamiskais NFT projekts testnet vidē.</p>
     </div>
@@ -130,41 +354,82 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
       <p>Apraksts par projektu 3 ar uzsvaru uz lietotāja pieredzi.</p>
     </div>
   </div>
-
-  <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
-    <i class="fas fa-moon"></i>
-  </button>
-</main>
+</div>
 
 <script>
-window.addEventListener('load',()=>{const l=document.getElementById('loading'); l.style.opacity='0'; setTimeout(()=>l.remove(),400);});
-document.getElementById('logo').addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
+// Loading screen
+window.addEventListener('load', () => {
+    const loading = document.getElementById('loading');
+    loading.style.opacity = '0';
+    setTimeout(() => loading.remove(), 400);
+});
 
-// Projekti kartiņas ar fade-in (MODIFICĒTS: NOŅEMT scrollIntoView)
-const ctaButton = document.querySelector('.cta-button');
-const projectsContainer = document.getElementById('projectsContainer');
-const projectCards = projectsContainer.querySelectorAll('.project-card');
+// Logo scroll to top
+document.getElementById('logo').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
-ctaButton.addEventListener('click', (e)=>{
+// PROJEKTU MODAL FUNKCIONALITĀTE
+const showProjectsBtn = document.getElementById('showProjectsBtn');
+const projectsOverlay = document.getElementById('projectsOverlay');
+const projectsModal = document.getElementById('projectsModal');
+const closeModal = document.getElementById('closeModal');
+const projectCards = projectsModal.querySelectorAll('.project-card');
+
+// Parādīt modalo logu
+showProjectsBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    if(projectsContainer.style.display==='flex'){
-        projectsContainer.style.display='none';
-        projectCards.forEach(c=>c.classList.remove('show'));
-    } else {
-        projectsContainer.style.display='flex';
-        projectCards.forEach((c,i)=>setTimeout(()=>c.classList.add('show'), i*150));
-        // NOVĀRTS: Šī rindiņa izraisīja hero pārvietošanos ↓
-        // projectsContainer.scrollIntoView({behavior:'smooth'});
+    
+    // Parādīt overlay un modalo
+    projectsOverlay.classList.add('show');
+    projectsModal.classList.add('show');
+    
+    // Pievienot klases body, lai novērstu scroll aiz modala
+    document.body.style.overflow = 'hidden';
+    
+    // Animēt kartiņas ar nelielu aizkavi
+    projectCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.classList.add('show');
+        }, 100 + (index * 150));
+    });
+});
+
+// Slēpt modalo logu
+function hideProjectsModal() {
+    projectsOverlay.classList.remove('show');
+    projectsModal.classList.remove('show');
+    
+    // Noņemt animācijas no kartiņām
+    projectCards.forEach(card => {
+        card.classList.remove('show');
+    });
+    
+    // Atgriezt scroll
+    document.body.style.overflow = '';
+}
+
+// Aizvērt poga
+closeModal.addEventListener('click', hideProjectsModal);
+
+// Aizvērt, ja klikšķina uz overlay
+projectsOverlay.addEventListener('click', hideProjectsModal);
+
+// Aizvērt ar Escape taustiņu
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && projectsModal.classList.contains('show')) {
+        hideProjectsModal();
     }
 });
 
 // Theme toggle
-const toggle=document.getElementById('themeToggle');
-const root=document.documentElement;
-toggle.addEventListener('click',()=>{
-    const isDark=root.getAttribute('data-theme')==='dark';
-    root.setAttribute('data-theme',isDark?'light':'dark');
-    toggle.innerHTML=isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
+const toggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+
+toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    toggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
 });
 </script>
 
