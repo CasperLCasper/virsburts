@@ -23,7 +23,7 @@
     --color-bg: #ffffff;
     --color-bg-lines: #e5e5e5;
     --color-scroll-line-bg: #10b981;
-    --color-scroll-line-animation: #ffffff;
+    --color-scroll-line-animation: #FFFFFF;
     --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 
@@ -38,8 +38,6 @@
     --color-button-bg: #ffffff;
     --color-button-text: #0a0a0a;
     --color-button-hover: #e5e5e5;
-    --color-scroll-line-bg: #ffffff;
-    --color-scroll-line-animation: #0a0a0a;
 }
 
 body, html {
@@ -65,26 +63,6 @@ header {
     height:var(--logo-height);
     cursor:pointer;
 }
-
-.bg-lines {
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:1;
-}
-
-.bg-lines .line {
-    position:absolute;
-    background:var(--color-bg-lines);
-}
-
-.line-vertical { width:1px; height:100%; }
-.line-horizontal { height:1px; width:100%; }
-
-.line-1 { left:20%; } .line-2 { left:40%; }
-.line-3 { left:60%; } .line-4 { left:80%; }
-.line-5 { top:20%; } .line-6 { top:40%; }
-.line-7 { top:60%; } .line-8 { top:80%; }
 
 main {
     min-height:100vh;
@@ -124,38 +102,8 @@ main {
 }
 
 .highlight {
-    color:var(--color-highlight-text);
     font-weight:500;
-}
-
-.scroll-indicator {
-    margin-bottom:20px;
-    display:flex;
-    justify-content:center;
-    pointer-events:none;
-}
-
-.scroll-line {
-    width:3px;
-    height:42px;
-    background:var(--color-scroll-line-bg);
-    overflow:hidden;
-    border-radius:2px;
-}
-
-.scroll-line::after {
-    content:'';
-    position:absolute;
-    top:-100%;
-    left:0;
-    width:100%;
-    height:100%;
-    background:var(--color-scroll-line-animation);
-    animation:scrollLine 2s infinite;
-}
-
-@keyframes scrollLine {
-    to { top:100%; }
+    color:var(--color-highlight-text);
 }
 
 .cta-button {
@@ -172,19 +120,28 @@ main {
     transition:var(--transition);
 }
 
-/* ✅ POP-UP projekti */
+/* ✅ LABOJUMS #1 — pop-up bez display toggle */
 .projects-container {
     position:absolute;
-    top: calc(100% + 30px);
+    top:100%;
+    margin-top:30px;
     left:50%;
     transform:translateX(-50%);
-    display:none;
-    gap:20px;
+    display:flex;               /* NEMAINĀM */
     flex-wrap:wrap;
+    gap:20px;
     justify-content:center;
-    max-width:900px;
     width:100%;
+    max-width:900px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s ease;
     z-index:5;
+}
+
+.projects-container.open {
+    opacity:1;
+    pointer-events:auto;
 }
 
 .project-card {
@@ -192,15 +149,17 @@ main {
     padding:20px;
     border-radius:8px;
     width:250px;
-    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
     opacity:0;
     transform:translateY(20px);
-    transition:.4s ease;
+    transition:.3s ease;
 }
 
 .project-card.show {
     opacity:1;
-    transform:translateY(0);
+    transform:none;
 }
 
 .theme-toggle {
@@ -221,71 +180,59 @@ main {
 
 <body>
 
-<div class="bg-lines">
-  <div class="line line-vertical line-1"></div>
-  <div class="line line-vertical line-2"></div>
-  <div class="line line-vertical line-3"></div>
-  <div class="line line-vertical line-4"></div>
-  <div class="line line-horizontal line-5"></div>
-  <div class="line line-horizontal line-6"></div>
-  <div class="line line-horizontal line-7"></div>
-  <div class="line line-horizontal line-8"></div>
-</div>
-
 <header>
-  <img src="virsburts-melns.png" class="header-logo">
+  <img src="virsburts-melns.png" class="header-logo" id="logo">
 </header>
 
 <main>
+
 <section class="hero">
+  <h1 class="project-name">Mans Projekts</h1>
+  <p class="project-subtitle">Digitālais risinājums</p>
+  <p class="hero-text">Minimālistisks un elegants risinājums.</p>
 
-<h1 class="project-name">Mans Projekts</h1>
-<p class="project-subtitle">Digitālais risinājums</p>
-<p class="hero-text">
-  Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums.
-</p>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+  </div>
 
-<div class="scroll-indicator">
-  <div class="scroll-line"></div>
-</div>
+  <a href="#" class="cta-button" id="ctaButton">
+    Skatīt projektus <i class="fas fa-arrow-down"></i>
+  </a>
 
-<a href="#" class="cta-button" id="cta">Skatīt projektus <i class="fas fa-arrow-down"></i></a>
-
-<div class="projects-container" id="projects">
-  <div class="project-card">NFT Sepolia Wall</div>
-  <div class="project-card">Projekts 2</div>
-  <div class="project-card">Projekts 3</div>
-</div>
-
+  <div class="projects-container" id="projectsContainer">
+    <div class="project-card">Projekts 1</div>
+    <div class="project-card">Projekts 2</div>
+    <div class="project-card">Projekts 3</div>
+  </div>
 </section>
 
-<button class="theme-toggle" id="toggle"><i class="fas fa-moon"></i></button>
+<button class="theme-toggle" id="themeToggle">
+  <i class="fas fa-moon"></i>
+</button>
+
 </main>
 
 <script>
-const cta = document.getElementById('cta');
-const container = document.getElementById('projects');
-const cards = document.querySelectorAll('.project-card');
+const cta = document.getElementById('ctaButton');
+const box = document.getElementById('projectsContainer');
+const cards = box.querySelectorAll('.project-card');
 
-cta.onclick = e => {
-  e.preventDefault();
-  const open = container.style.display === 'flex';
-  container.style.display = open ? 'none' : 'flex';
-  cards.forEach((c,i)=>setTimeout(()=>c.classList.toggle('show',!open),i*120));
-};
+/* ✅ LABOJUMS #2 — bez scrollIntoView */
+cta.addEventListener('click', e => {
+    e.preventDefault();
+    box.classList.toggle('open');
+    cards.forEach((c,i)=>setTimeout(()=>c.classList.toggle('show'), i*120));
+});
 
-const toggle = document.getElementById('toggle');
-const root = document.documentElement;
-
-toggle.onclick = () => {
-  const dark = root.getAttribute('data-theme') === 'dark';
-  root.setAttribute('data-theme', dark ? 'light' : 'dark');
-  toggle.innerHTML = dark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+/* dark / light paliek */
+document.getElementById('themeToggle').onclick = () => {
+    document.documentElement.toggleAttribute('data-theme');
 };
 </script>
 
 </body>
 </html>
+
 
 
 
