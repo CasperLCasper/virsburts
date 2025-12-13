@@ -9,90 +9,89 @@
 <style>
 :root {
     --logo-height: 65px;
-    --logo-opacity: 1;
-    --logo-src: url('virsburts-melns.png');
     --color-project-name: #0a0a0a;
     --color-project-subtitle: #8c8c8c;
     --color-hero-text: #404040;
     --color-highlight-text: #0a0a0a;
     --color-button-bg: #0a0a0a;
-    --color-button-text: #ffffff;
+    --color-button-text: #fff;
     --color-button-hover: #1a1a1a;
-    --color-bg: #ffffff;
+    --color-bg: #fff;
     --color-bg-lines: #e5e5e5;
-    --color-scroll-line-bg: #10b981;
-    --color-scroll-line-animation: #FFFFFF;
-    --color-loading-bg: #ffffff;
-    --color-loading-line: #3a86ff;
-    --color-loading-animation: #10b981;
     --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 [data-theme="dark"] {
-    --logo-src: url('virsburts-balts.png');
-    --color-project-name: #ffffff;
+    --color-project-name: #fff;
     --color-project-subtitle: #a1a1aa;
     --color-hero-text: #d4d4d8;
-    --color-highlight-text: #ffffff;
+    --color-highlight-text: #fff;
     --color-bg: #0a0a0a;
     --color-bg-lines: #27272a;
-    --color-button-bg: #ffffff;
+    --color-button-bg: #fff;
     --color-button-text: #0a0a0a;
     --color-button-hover: #e5e5e5;
-    --color-scroll-line-bg: #ffffff;
-    --color-scroll-line-animation: #0a0a0a;
 }
-body, html { margin:0; padding:0; min-height:100%; font-family:'Inter',sans-serif; background:var(--color-bg); color:var(--color-hero-text); }
+
+body, html {
+    margin:0; padding:0; min-height:100%; font-family:'Inter',sans-serif;
+    background:var(--color-bg); color:var(--color-hero-text);
+}
+
 h1 { font-family:'Manrope',sans-serif; letter-spacing:-0.03em; }
-header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100; }
-.header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); content:var(--logo-src); }
-main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 20px; position:relative; flex-direction:column; }
-.hero { max-width:720px; text-align:center; position:relative; z-index:2; }
+
+header {
+    position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100;
+}
+
+.header-logo { height:var(--logo-height); cursor:pointer; transition:var(--transition); }
+
+main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 20px; flex-direction:column; }
+
+.hero { max-width:720px; text-align:center; }
 .project-name { font-size:40px; color:var(--color-project-name); margin-bottom:5px; font-weight:600; }
 .project-subtitle { font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--color-project-subtitle); margin-bottom:30px; }
-.hero-text { max-width:560px; margin:0 auto 30px; font-size:18px; color:var(--color-hero-text); }
+.hero-text { max-width:560px; margin:0 auto 30px; font-size:18px; }
 .highlight { color:var(--color-highlight-text); font-weight:500; }
-.cta-button { display:inline-flex; align-items:center; gap:5px; padding:14px 32px; background:var(--color-button-bg); color:var(--color-button-text); border-radius:6px; text-decoration:none; font-weight:500; transition:var(--transition); position:relative; z-index:5; cursor:pointer; }
-.cta-button:hover { background:var(--color-button-hover); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
+
+.cta-button {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:14px 32px; background:var(--color-button-bg); color:var(--color-button-text);
+    border-radius:6px; font-weight:500; cursor:pointer; transition:var(--transition);
+}
+.cta-button:hover { background:var(--color-button-hover); transform:translateY(-2px); }
+
 .bg-lines { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
 .bg-lines .line { position:absolute; background:var(--color-bg-lines); }
 .line-vertical { width:1px; height:100%; }
 .line-horizontal { height:1px; width:100%; }
 .line-1 { left:20%; } .line-2 { left:40%; } .line-3 { left:60%; } .line-4 { left:80%; }
 .line-5 { top:20%; } .line-6 { top:40%; } .line-7 { top:60%; } .line-8 { top:80%; }
-.theme-toggle { position:fixed; bottom:40px; left:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
-.theme-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
-.scroll-indicator { position:relative; margin-top:10px; margin-bottom:20px; display:flex; justify-content:center; pointer-events:none; }
-.scroll-line { width:3px; height:42px; background:var(--color-scroll-line-bg); position:relative; overflow:hidden; border-radius:2px; }
-.scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
-@keyframes scrollLine { to{top:100%;} }
 
-/* Projekti kartiņas */
-.projects-container { display:none; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:30px; }
-.project-card { background:var(--color-bg-lines); padding:20px; border-radius:8px; width:250px; display:flex; flex-direction:column; align-items:center; opacity:0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.theme-toggle { position:fixed; bottom:40px; left:40px; width:52px; height:52px; border-radius:50%;
+    border:none; background:var(--color-button-bg); color:var(--color-button-text);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); }
+.theme-toggle:hover { transform:translateY(-3px); }
+
+.projects-container { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:30px; max-height:0; overflow:hidden; transition: max-height 0.5s ease; }
+.projects-container.show { max-height:2000px; /* liels skaitlis, lai saturu var redzēt */ }
+
+.project-card { background:var(--color-bg-lines); padding:20px; border-radius:8px; width:250px;
+    display:flex; flex-direction:column; align-items:center; opacity:0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease; }
 .project-card.show { opacity:1; transform:translateY(0); }
 .project-card img { width:80px; height:80px; margin-bottom:15px; }
 .project-card h3 { margin:0 0 10px; font-size:18px; }
 .project-card p { font-size:14px; text-align:center; margin:0; }
 
-@media(max-width:768px){ header{padding:15px 0;} .header-logo{height:49px;} .hero-text{font-size:16px;} .project-name{font-size:32px;} .project-card { width:100%; max-width:300px; } }
+@media(max-width:768px){ 
+    .header-logo{height:49px;} 
+    .hero-text{font-size:16px;} 
+    .project-name{font-size:32px;} 
+    .project-card { width:100%; max-width:300px; } 
+}
 </style>
 </head>
 <body>
-
-<div class="loading" id="loading" aria-hidden="true">
-  <div class="loading-line"></div>
-</div>
-
-<div class="bg-lines">
-  <div class="line line-vertical line-1"></div>
-  <div class="line line-vertical line-2"></div>
-  <div class="line line-vertical line-3"></div>
-  <div class="line line-vertical line-4"></div>
-  <div class="line line-horizontal line-5"></div>
-  <div class="line line-horizontal line-6"></div>
-  <div class="line line-horizontal line-7"></div>
-  <div class="line line-horizontal line-8"></div>
-</div>
 
 <header>
   <img src="virsburts-melns.png" alt="Mans Projekts logo" class="header-logo" id="logo">
@@ -103,30 +102,14 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     <h1 id="title" class="project-name">Mans Projekts</h1>
     <p class="project-subtitle">Digitālais risinājums</p>
     <p class="hero-text">Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums, kas fokusējas uz skaidru dizainu, pielāgojamām krāsām un augstu lietojamību.</p>
-    <div class="scroll-indicator" aria-hidden="true">
-      <div class="scroll-line"></div>
-    </div>
-    <a href="#" class="cta-button" aria-label="Atvērt projektu sarakstu">Skatīt projektus <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+    <button class="cta-button" id="showProjects" aria-label="Atvērt projektu sarakstu">Skatīt projektus <i class="fas fa-arrow-down" aria-hidden="true"></i></button>
   </section>
 
-  <!-- Projekti kartiņas -->
-  <div class="projects-container" id="projectsContainer">
-    <div class="project-card">
-      <img src="logo1.png" alt="Projekts 1 logo">
-      <h3>NFT Sepolia Wall</h3>
-      <p>Minimālistisks dinamiskais NFT projekts testnet vidē.</p>
-    </div>
-    <div class="project-card">
-      <img src="logo2.png" alt="Projekts 2 logo">
-      <h3>Projekts 2</h3>
-      <p>Apraksts par projektu 2, kas demonstrē modernu dizainu.</p>
-    </div>
-    <div class="project-card">
-      <img src="logo3.png" alt="Projekts 3 logo">
-      <h3>Projekts 3</h3>
-      <p>Apraksts par projektu 3 ar uzsvaru uz lietotāja pieredzi.</p>
-    </div>
-  </div>
+  <section class="projects-container" id="projectsContainer" aria-label="Projekti">
+    <div class="project-card"><img src="logo1.png" alt="Projekts 1 logo"><h3>NFT Sepolia Wall</h3><p>Minimālistisks dinamiskais NFT projekts testnet vidē.</p></div>
+    <div class="project-card"><img src="logo2.png" alt="Projekts 2 logo"><h3>Projekts 2</h3><p>Apraksts par projektu 2, kas demonstrē modernu dizainu.</p></div>
+    <div class="project-card"><img src="logo3.png" alt="Projekts 3 logo"><h3>Projekts 3</h3><p>Apraksts par projektu 3 ar uzsvaru uz lietotāja pieredzi.</p></div>
+  </section>
 
   <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
     <i class="fas fa-moon"></i>
@@ -134,38 +117,41 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 </main>
 
 <script>
-window.addEventListener('load',()=>{const l=document.getElementById('loading'); l.style.opacity='0'; setTimeout(()=>l.remove(),400);});
+// Scroll uz top
 document.getElementById('logo').addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
 
-// Projekti kartiņas ar fade-in
-const ctaButton = document.querySelector('.cta-button');
+// Projekti fade-in
+const showBtn = document.getElementById('showProjects');
 const projectsContainer = document.getElementById('projectsContainer');
-const projectCards = projectsContainer.querySelectorAll('.project-card');
+const cards = projectsContainer.querySelectorAll('.project-card');
 
-ctaButton.addEventListener('click', (e)=>{
-    e.preventDefault();
-    if(projectsContainer.style.display==='flex'){
-        projectsContainer.style.display='none';
-        projectCards.forEach(c=>c.classList.remove('show'));
+showBtn.addEventListener('click', ()=>{
+    const isShown = projectsContainer.classList.contains('show');
+    if(isShown){
+        projectsContainer.classList.remove('show');
+        cards.forEach(c=>c.classList.remove('show'));
     } else {
-        projectsContainer.style.display='flex';
-        projectCards.forEach((c,i)=>setTimeout(()=>c.classList.add('show'), i*150));
-        projectsContainer.scrollIntoView({behavior:'smooth'});
+        projectsContainer.classList.add('show');
+        cards.forEach((c,i)=>setTimeout(()=>c.classList.add('show'), i*150));
     }
 });
 
-// Theme toggle
-const toggle=document.getElementById('themeToggle');
-const root=document.documentElement;
-toggle.addEventListener('click',()=>{
+// Theme toggle ar localStorage
+const toggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+if(localStorage.getItem('theme')==='dark'){ root.setAttribute('data-theme','dark'); toggle.innerHTML='<i class="fas fa-sun"></i>'; }
+
+toggle.addEventListener('click', ()=>{
     const isDark=root.getAttribute('data-theme')==='dark';
     root.setAttribute('data-theme',isDark?'light':'dark');
     toggle.innerHTML=isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
+    localStorage.setItem('theme', isDark?'light':'dark');
 });
 </script>
 
 </body>
 </html>
+
 
 
 
