@@ -59,7 +59,7 @@ h1 { font-family:'Manrope',sans-serif; letter-spacing:-0.03em; }
 
 /* Header */
 header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100; }
-.header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); content:var(--logo-src); }
+.header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); }
 
 /* Hero section */
 main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 20px; position:relative; }
@@ -90,6 +90,24 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 .scroll-line { width:3px; height:42px; background:var(--color-scroll-line-bg); position:relative; overflow:hidden; border-radius:2px; }
 .scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
 @keyframes scrollLine { to{top:100%;} }
+
+/* Projects section */
+.projects {
+    max-width: 720px;
+    margin: 50px auto;
+    padding: 20px;
+    background: var(--color-bg-lines);
+    border-radius: 8px;
+    display: none;
+}
+.projects h2 {
+    font-family: 'Manrope', sans-serif;
+    margin-bottom: 20px;
+}
+.projects ul { list-style: none; padding: 0; }
+.projects li { margin-bottom: 12px; }
+.projects a { color: var(--color-highlight-text); text-decoration: none; font-weight: 500; }
+.projects a:hover { text-decoration: underline; }
 
 @media(max-width:768px){ header{padding:15px 0;} .header-logo{height:49px;} .hero-text{font-size:16px;} .project-name{font-size:32px;} }
 </style>
@@ -123,8 +141,19 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     <div class="scroll-indicator" aria-hidden="true">
       <div class="scroll-line"></div>
     </div>
-    <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener" class="cta-button" aria-label="Atvērt projektu lapu">Skatīt projektus <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+    <a href="#" class="cta-button" aria-label="Atvērt projektu sarakstu">Skatīt projektus <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
   </section>
+
+  <!-- Projects section -->
+  <section class="projects" id="projects" aria-labelledby="projects-title">
+    <h2 id="projects-title">Mani projekti</h2>
+    <ul>
+      <li><a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener">NFT Sepolia Testnet Dynamic Wall</a></li>
+      <li><a href="#" target="_blank" rel="noopener">Projekts 2</a></li>
+      <li><a href="#" target="_blank" rel="noopener">Projekts 3</a></li>
+    </ul>
+  </section>
+
   <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
     <i class="fas fa-moon"></i>
   </button>
@@ -133,13 +162,33 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 <script>
 window.addEventListener('load',()=>{const l=document.getElementById('loading'); l.style.opacity='0'; setTimeout(()=>l.remove(),400);});
 document.getElementById('logo').addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
+
+// Projects toggle
+const ctaButton = document.querySelector('.cta-button');
+const projectsSection = document.getElementById('projects');
+ctaButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (projectsSection.style.display === 'none') {
+        projectsSection.style.display = 'block';
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        projectsSection.style.display = 'none';
+    }
+});
+
+// Theme toggle
 const toggle=document.getElementById('themeToggle');
 const root=document.documentElement;
-toggle.addEventListener('click',()=>{const isDark=root.getAttribute('data-theme')==='dark';root.setAttribute('data-theme',isDark?'light':'dark');toggle.innerHTML=isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';});
+toggle.addEventListener('click',()=>{
+    const isDark=root.getAttribute('data-theme')==='dark';
+    root.setAttribute('data-theme',isDark?'light':'dark');
+    toggle.innerHTML=isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
+});
 </script>
 
 </body>
 </html>
+
 
 
 
