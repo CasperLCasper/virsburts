@@ -22,6 +22,9 @@
     --color-bg-lines: #e5e5e5;
     --color-scroll-line-bg: #10b981;
     --color-scroll-line-animation: #FFFFFF;
+    --color-loading-bg: #ffffff;
+    --color-loading-line: #3a86ff;
+    --color-loading-animation: #10b981;
     --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 [data-theme="dark"] {
@@ -40,12 +43,27 @@
 }
 body, html { margin:0; padding:0; min-height:100%; font-family:'Inter',sans-serif; background:var(--color-bg); color:var(--color-hero-text); }
 h1 { font-family:'Manrope',sans-serif; letter-spacing:-0.03em; }
+
 header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100; }
 .header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); content:var(--logo-src); }
 
-main { display:flex; flex-direction:column; align-items:flex-start; padding:120px 20px 40px; position:relative; }
+main {
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:0 20px;
+    position:relative;
+}
 
-.hero { max-width:720px; text-align:center; position:relative; z-index:2; width:100%; }
+.hero-wrapper {
+    position:relative;
+    z-index:2;
+    text-align:center;
+}
+
+.hero { max-width:720px; }
 .project-name { font-size:40px; color:var(--color-project-name); margin-bottom:5px; font-weight:600; }
 .project-subtitle { font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--color-project-subtitle); margin-bottom:30px; }
 .hero-text { max-width:560px; margin:0 auto 30px; font-size:18px; color:var(--color-hero-text); }
@@ -78,8 +96,8 @@ main { display:flex; flex-direction:column; align-items:flex-start; padding:120p
     margin-top:30px; 
     width:100%; 
     max-width:800px; 
-    position:relative;  /* pievienots */
-    z-index:3;          /* virs bg-lines */
+    position:relative; 
+    z-index:3;
 }
 .project-card { 
     background:var(--color-bg-lines); 
@@ -129,15 +147,17 @@ main { display:flex; flex-direction:column; align-items:flex-start; padding:120p
 </header>
 
 <main>
-  <section class="hero" aria-labelledby="title">
-    <h1 id="title" class="project-name">Mans Projekts</h1>
-    <p class="project-subtitle">Digitālais risinājums</p>
-    <p class="hero-text">Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums, kas fokusējas uz skaidru dizainu, pielāgojamām krāsām un augstu lietojamību.</p>
-    <div class="scroll-indicator" aria-hidden="true">
-      <div class="scroll-line"></div>
-    </div>
-    <a href="#" class="cta-button" id="ctaButton" aria-label="Atvērt projektu sarakstu">Skatīt projektus <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
-  </section>
+  <div class="hero-wrapper">
+    <section class="hero" aria-labelledby="title">
+      <h1 id="title" class="project-name">Mans Projekts</h1>
+      <p class="project-subtitle">Digitālais risinājums</p>
+      <p class="hero-text">Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums, kas fokusējas uz skaidru dizainu, pielāgojamām krāsām un augstu lietojamību.</p>
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-line"></div>
+      </div>
+      <a href="#" class="cta-button" id="ctaButton" aria-label="Atvērt projektu sarakstu">Skatīt projektus <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+    </section>
+  </div>
 
   <div class="projects-container" id="projectsContainer">
     <div class="project-card">
@@ -184,7 +204,10 @@ ctaButton.addEventListener('click', (e)=>{
 // Theme toggle
 const toggle=document.getElementById('themeToggle');
 const root=document.documentElement;
-if(localStorage.getItem('theme')==='dark'){ root.setAttribute('data-theme','dark'); toggle.innerHTML='<i class="fas fa-sun"></i>'; }
+if(localStorage.getItem('theme')==='dark'){ 
+    root.setAttribute('data-theme','dark'); 
+    toggle.innerHTML='<i class="fas fa-sun"></i>'; 
+}
 
 toggle.addEventListener('click',()=>{
     const isDark=root.getAttribute('data-theme')==='dark';
@@ -196,6 +219,7 @@ toggle.addEventListener('click',()=>{
 
 </body>
 </html>
+
 
 
 
