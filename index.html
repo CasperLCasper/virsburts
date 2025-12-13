@@ -11,7 +11,6 @@
     /* Header Logo */
     --logo-height: 65px;
     --logo-opacity: 1;
-    --logo-src: url('virsburts-melns.png');
 
     /* Teksti */
     --color-project-name: #0a0a0a;
@@ -39,7 +38,6 @@
     --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 [data-theme="dark"] {
-    --logo-src: url('virsburts-balts.png');
     --color-project-name: #ffffff;
     --color-project-subtitle: #a1a1aa;
     --color-hero-text: #d4d4d8;
@@ -49,8 +47,6 @@
     --color-button-bg: #ffffff;
     --color-button-text: #0a0a0a;
     --color-button-hover: #e5e5e5;
-    --color-scroll-line-bg: #ffffff;
-    --color-scroll-line-animation: #0a0a0a;
 }
 
 /* Reset */
@@ -62,7 +58,7 @@ header { position:fixed; top:0; width:100%; display:flex; justify-content:center
 .header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); }
 
 /* Hero section */
-main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 20px; position:relative; }
+main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 20px; position:relative; flex-direction:column; }
 .hero { max-width:720px; text-align:center; position:relative; z-index:2; }
 .project-name { font-size:40px; color:var(--color-project-name); margin-bottom:5px; font-weight:600; }
 .project-subtitle { font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--color-project-subtitle); margin-bottom:30px; }
@@ -70,7 +66,7 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 .highlight { color:var(--color-highlight-text); font-weight:500; }
 
 /* CTA button */
-.cta-button { display:inline-flex; align-items:center; gap:5px; padding:14px 32px; background:var(--color-button-bg); color:var(--color-button-text); border-radius:6px; text-decoration:none; font-weight:500; transition:var(--transition); position:relative; z-index:5; }
+.cta-button { display:inline-flex; align-items:center; gap:5px; padding:14px 32px; background:var(--color-button-bg); color:var(--color-button-text); border-radius:6px; text-decoration:none; font-weight:500; transition:var(--transition); position:relative; z-index:5; cursor:pointer; }
 .cta-button:hover { background:var(--color-button-hover); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
 
 /* Background lines */
@@ -91,25 +87,50 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 .scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
 @keyframes scrollLine { to{top:100%;} }
 
-/* Projects section */
-.projects {
-    max-width: 720px;
-    margin: 50px auto;
-    padding: 20px;
-    background: var(--color-bg-lines);
-    border-radius: 8px;
+/* Projects cards */
+.projects-container {
     display: none;
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
-.projects h2 {
-    font-family: 'Manrope', sans-serif;
-    margin-bottom: 20px;
-}
-.projects ul { list-style: none; padding: 0; }
-.projects li { margin-bottom: 12px; }
-.projects a { color: var(--color-highlight-text); text-decoration: none; font-weight: 500; }
-.projects a:hover { text-decoration: underline; }
 
-@media(max-width:768px){ header{padding:15px 0;} .header-logo{height:49px;} .hero-text{font-size:16px;} .project-name{font-size:32px;} }
+.project-card {
+    background: var(--color-bg-lines);
+    padding: 20px;
+    border-radius: 8px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.project-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+}
+.project-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+.project-card p {
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+}
+@media(max-width:768px){
+    .project-card { width: 100%; max-width: 300px; }
+    .hero-text{font-size:16px;} .project-name{font-size:32px;}
+}
 </style>
 </head>
 <body>
@@ -141,18 +162,27 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     <div class="scroll-indicator" aria-hidden="true">
       <div class="scroll-line"></div>
     </div>
-    <a href="#" class="cta-button" aria-label="Atvērt projektu sarakstu">Skatīt projektus <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+    <a href="#" class="cta-button" aria-label="Atvērt projektu sarakstu">Skatīt projektus <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
   </section>
 
-  <!-- Projects section -->
-  <section class="projects" id="projects" aria-labelledby="projects-title">
-    <h2 id="projects-title">Mani projekti</h2>
-    <ul>
-      <li><a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener">NFT Sepolia Testnet Dynamic Wall</a></li>
-      <li><a href="#" target="_blank" rel="noopener">Projekts 2</a></li>
-      <li><a href="#" target="_blank" rel="noopener">Projekts 3</a></li>
-    </ul>
-  </section>
+  <!-- Projects cards -->
+  <div class="projects-container" id="projectsContainer">
+    <div class="project-card">
+      <img src="logo1.png" alt="Projekts 1 logo">
+      <h3>NFT Sepolia Wall</h3>
+      <p>Minimālistisks dinamiskais NFT projekts testnet vidē.</p>
+    </div>
+    <div class="project-card">
+      <img src="logo2.png" alt="Projekts 2 logo">
+      <h3>Projekts 2</h3>
+      <p>Apraksts par projektu 2, kas demonstrē modernu dizainu.</p>
+    </div>
+    <div class="project-card">
+      <img src="logo3.png" alt="Projekts 3 logo">
+      <h3>Projekts 3</h3>
+      <p>Apraksts par projektu 3 ar uzsvaru uz lietotāja pieredzi.</p>
+    </div>
+  </div>
 
   <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
     <i class="fas fa-moon"></i>
@@ -163,16 +193,16 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 window.addEventListener('load',()=>{const l=document.getElementById('loading'); l.style.opacity='0'; setTimeout(()=>l.remove(),400);});
 document.getElementById('logo').addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
 
-// Projects toggle
+// Projects cards toggle
 const ctaButton = document.querySelector('.cta-button');
-const projectsSection = document.getElementById('projects');
+const projectsContainer = document.getElementById('projectsContainer');
 ctaButton.addEventListener('click', (e) => {
     e.preventDefault();
-    if (projectsSection.style.display === 'none') {
-        projectsSection.style.display = 'block';
-        projectsSection.scrollIntoView({ behavior: 'smooth' });
+    if (projectsContainer.style.display === 'flex') {
+        projectsContainer.style.display = 'none';
     } else {
-        projectsSection.style.display = 'none';
+        projectsContainer.style.display = 'flex';
+        projectsContainer.scrollIntoView({ behavior: 'smooth' });
     }
 });
 
@@ -188,6 +218,7 @@ toggle.addEventListener('click',()=>{
 
 </body>
 </html>
+
 
 
 
