@@ -1,623 +1,368 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mans Projekts</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Mans Projekts — Minimālistisks digitāls risinājums</title>
+  <meta name="description" content="Minimālistisks un elegants digitāls risinājums ar skaidru struktūru, pielāgojamām krāsām un augstu lietojamību." />
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    /* ==========================
+       COLOR & DESIGN CONTROLS
+       (MAIN EDIT AREA)
+    ========================== */
+    :root {
             /* ATSEVIŠĶAS KRĀSAS KATRAM ELEMENTAM */
             
             /* 1. Header Logo */
             --logo-height: 65px;
             --logo-opacity: 0.9;
-            
+            --logo-src: url('virsburts-melns.png');
+
             /* 2. Teksti */
-            --color-project-name: #0a0a0a;          /* Projekta nosaukums */
-            --color-project-subtitle: #8c8c8c;      /* Apakšvirsraksts */
-            --color-hero-text: #404040;             /* Galvenais teksts */
-            --color-highlight-text: #0a0a0a;        /* Izceltais teksts */
+            --color-project-name: #0a0a0a;
+            --color-project-subtitle: #8c8c8c;
+            --color-hero-text: #404040;
+            --color-highlight-text: #0a0a0a;
             
             /* 3. Poga */
-            --color-button-bg: #0a0a0a;             /* Pogas fons */
-            --color-button-text: #ffffff;           /* Pogas teksts */
-            --color-button-hover: #1a1a1a;          /* Pogas hover */
+            --color-button-bg: #0a0a0a;
+            --color-button-text: #ffffff;
+            --color-button-hover: #1a1a1a;
             
             /* 4. Fona elementi */
-            --color-bg-lines: #e5e5e5;              /* Fona līnijas */
-            --color-scroll-line-bg: #10b981;        /* Scroll līnijas fons */
-            --color-scroll-line-animation: #FFFFFF; /* Scroll animācija */
+            --color-bg: #ffffff;
+            --color-bg-lines: #e5e5e5;
+            --color-scroll-line-bg: #10b981;
+            --color-scroll-line-animation: #ffffff;
             
             /* 5. Loading ekrāns */
-            --color-loading-bg: #ffffff;            /* Loading fons */
-            --color-loading-line: #3a86ff;          /* Loading līnija */
-            --color-loading-animation: #10b981;     /* Loading animācija */
-            
-            /* Bāzes vērtības */
+            --color-loading-bg: #ffffff;
+            --color-loading-line: #3a86ff;
+            --color-loading-animation: #10b981;
+
+            /* Motion */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+
+        /* ==========================
+           DARK THEME OVERRIDES
+        ========================== */
+        [data-theme="dark"] {
+            /* Logo (balts) */
+            --logo-src: url('virsburts-balts.png');
+
+            /* Text */
+            --color-project-name: #ffffff;
+            --color-project-subtitle: #a1a1aa;
+            --color-hero-text: #d4d4d8;
+            --color-highlight-text: #ffffff;
+
+            /* Background */
+            --color-bg: #0a0a0a;
+            --color-bg-lines: #27272a;
+
+            /* Button */
+            --color-button-bg: #ffffff;
+            --color-button-text: #0a0a0a;
+            --color-button-hover: #e5e5e5;
+
+            /* Scroll */
+            --color-scroll-line-bg: #ffffff;
+            --color-scroll-line-animation: #0a0a0a;
         }
-        
-        html, body {
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--color-hero-text);
-            background-color: #ffffff;
-            line-height: 1.6;
-            font-weight: 400;
-            position: relative;
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Manrope', sans-serif;
-            font-weight: 600;
-            letter-spacing: -0.025em;
-        }
-        
-        /* Header - ONLY LOGO */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: transparent;
-            z-index: 1000;
-            padding: 2rem 0;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        /* Header logo - top center */
-        .header-logo {
-            height: var(--logo-height);
-            width: auto;
-            opacity: var(--logo-opacity);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        
-        .header-logo:hover {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-        
-        /* Hero Section - Centered Content */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 0 2rem;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* Logo Display - NO LOGO HERE */
-        .logo-display {
-            margin-bottom: 4rem;
-        }
-        
-        /* Project Name */
-        .project-name {
-            font-family: 'Manrope', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 400;
-            color: var(--color-project-name);
-            letter-spacing: -0.5px;
-            margin-bottom: 0.5rem;
-        }
-        
-        .project-subtitle {
-            font-size: 0.9rem;
-            color: var(--color-project-subtitle);
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        /* Hero Text */
-        .hero-text {
-            font-size: 1.125rem;
-            color: var(--color-hero-text);
-            line-height: 1.8;
-            max-width: 600px;
-            margin: 0 auto 3rem;
-            font-weight: 400;
-        }
-        
-        .highlight {
-            color: var(--color-highlight-text);
-            font-weight: 500;
-        }
-        
-        /* CTA Button */
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0.875rem 2rem;
-            background: var(--color-button-bg);
-            color: var(--color-button-text);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            border: none;
-            border-radius: 6px;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        
-        .cta-button:hover {
-            background: var(--color-button-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .button-icon {
-            transition: var(--transition);
-        }
-        
-        .cta-button:hover .button-icon {
-            transform: translateX(3px);
-        }
-        
-        /* Background Elements - Minimal */
-        .bg-lines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .line {
-            position: absolute;
-            background: var(--color-bg-lines);
-        }
-        
-        .line-vertical {
-            width: 1px;
-            height: 100%;
-        }
-        
-        .line-horizontal {
-            height: 1px;
-            width: 100%;
-        }
-        
-        .line-1 { left: 20%; }
-        .line-2 { left: 40%; }
-        .line-3 { left: 60%; }
-        .line-4 { left: 80%; }
-        .line-5 { top: 20%; }
-        .line-6 { top: 40%; }
-        .line-7 { top: 60%; }
-        .line-8 { top: 80%; }
-        
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #8c8c8c;
-            opacity: 0.7;
-            z-index: 2;
-        }
-        
-        .scroll-line {
-            width: 3px;
-            height: 40px;
-            background: var(--color-scroll-line-bg);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .scroll-line::after {
-            content: '';
-            position: absolute;
-            top: -100%;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--color-scroll-line-animation);
-            animation: scrollLine 2s infinite;
-        }
-        
-        @keyframes scrollLine {
-            0% {
-                top: -100%;
-            }
-            100% {
-                top: 100%;
-            }
-        }
-        
-        /* Logo error handling */
-        .logo-placeholder {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--color-project-name);
-            opacity: var(--logo-opacity);
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--color-bg-lines);
-            border-radius: 4px;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .project-name {
-                font-size: 2rem;
-            }
-            
-            .header-logo {
-                height: calc(var(--logo-height) * 0.75);
-            }
-            
-            .hero-text {
-                font-size: 1rem;
-                padding: 0 1rem;
-            }
-            
-            .cta-button {
-                padding: 0.75rem 1.75rem;
-                font-size: 0.9rem;
-            }
-            
-            .line-1, .line-2, .line-3, .line-4 {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .project-name {
-                font-size: 1.75rem;
-            }
-            
-            .header-logo {
-                height: calc(var(--logo-height) * 0.6);
-            }
-            
-            .hero {
-                padding: 0 1rem;
-            }
-        }
-        
-        /* Loading Animation */
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--color-loading-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-        
-        .loading-content {
-            text-align: center;
-        }
-        
-        .loading-line {
-            width: 100px;
-            height: 1px;
-            background: var(--color-loading-line);
-            position: relative;
-            overflow: hidden;
-            margin: 1rem auto;
-        }
-        
-        .loading-line::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 0;
-            background: var(--color-loading-animation);
-            animation: loading 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes loading {
-            0% {
-                left: 0;
-                width: 0;
-            }
-            50% {
-                width: 100%;
-            }
-            100% {
-                left: 100%;
-                width: 0;
-            }
-        }
-    </style>
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* ==========================
+       RESET
+    ========================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-hero-text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-family: 'Manrope', system-ui, sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    /* ==========================
+       HEADER
+    ========================== */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 0;
+      z-index: 100;
+    }
+
+    .header-logo {
+      height: var(--logo-height);
+      opacity: var(--logo-opacity);
+      cursor: pointer;
+      transition: var(--transition);
+      content: var(--logo-src);
+    }
+
+    .header-logo:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    /* ==========================
+       HERO
+    ========================== */
+    main {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+
+    .hero {
+      max-width: 720px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .project-name {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--color-project-name);
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+
+    .project-subtitle {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-project-subtitle);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-text {
+      max-width: 560px;
+      margin: 0 auto 3rem;
+      font-size: 1.05rem;
+      color: var(--color-hero-text);
+    }
+
+    .highlight {
+      color: var(--color-highlight-text);
+      font-weight: 500;
+    }
+
+    /* ==========================
+       CTA
+    ========================== */
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: var(--color-button-bg);
+      color: var(--color-button-text);
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .cta-button:hover {
+      background: var(--color-button-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    /* ==========================
+       BACKGROUND GRID
+    ========================== */
+    .grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background-image:
+        linear-gradient(to right, var(--color-bg-lines) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-bg-lines) 1px, transparent 1px);
+      background-size: 20% 20%;
+    }
+
+    /* ==========================
+       SCROLL INDICATOR
+    ========================== */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 40px;
+      background: var(--color-scroll-line-bg);
+      overflow: hidden;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--color-scroll-line-animation);
+      animation: scroll 2s infinite;
+    }
+
+    @keyframes scroll {
+      to { top: 100%; }
+    }
+
+    /* ==========================
+       LOADING
+    ========================== */
+    .loading {
+      position: fixed;
+      inset: 0;
+      background: var(--color-loading-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .loading-line {
+      width: 120px;
+      height: 1px;
+      background: var(--color-loading-line);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .loading-line::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--color-loading-animation);
+      animation: loading 1.2s ease-in-out infinite;
+    }
+
+    @keyframes loading {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* ==========================
+       RESPONSIVE
+    ========================== */
+    @media (max-width: 768px) {
+      header { padding: 1.5rem 0; }
+      .header-logo { height: calc(var(--logo-height) * 0.75); }
+      .hero-text { font-size: 1rem; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Loading Animation -->
-    <div class="loading" id="loading">
-        <div class="loading-content">
-            <div class="loading-line"></div>
-        </div>
-    </div>
-    
-    <!-- Header - ONLY LOGO -->
-    <header>
-        <div class="header-content">
-            <!-- Logo file: virsburts-melns.png -->
-            <img src="virsburts-melns.png" alt="Logo" class="header-logo" id="headerLogo">
-        </div>
-    </header>
-    
-    <!-- Hero Section -->
-    <main class="hero">
-        <!-- Background Lines -->
-        <div class="bg-lines">
-            <div class="line line-vertical line-1"></div>
-            <div class="line line-vertical line-2"></div>
-            <div class="line line-vertical line-3"></div>
-            <div class="line line-vertical line-4"></div>
-            <div class="line line-horizontal line-5"></div>
-            <div class="line line-horizontal line-6"></div>
-            <div class="line line-horizontal line-7"></div>
-            <div class="line line-horizontal line-8"></div>
-        </div>
-        
-        <!-- Content -->
-        <div class="hero-content">
-            <!-- NO LOGO HERE - Just project name and subtitle -->
-            <div class="logo-display">
-                <h1 class="project-name">Mans Projekts</h1>
-                <div class="project-subtitle">Digitālais Risinājums</div>
-            </div>
-            
-            <!-- Text -->
-            <p class="hero-text">
-                Šis ir <span class="highlight">minimālistisks un elegants</span> digitālais risinājums, 
-                kas apvieno funkcionalitāti ar estētisku dizainu. Mēs veidojam produktus, 
-                kas ir <span class="highlight">intuitīvi un efektīvi</span>.
-            </p>
-            
-            <!-- Button WITH LINK -->
-            <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" class="cta-button" id="ctaButton" target="_blank">
-                <span>Pāriet pie projektiem</span>
-                <i class="fas fa-arrow-right button-icon"></i>
-            </a>
-            
-            <!-- Scroll Indicator -->
-            <div class="scroll-indicator">
-                <div class="scroll-line"></div>
-            </div>
-        </div>
-    </main>
-    
+
+  <!-- Loading -->
+  <div class="loading" id="loading" aria-hidden="true">
+    <div class="loading-line"></div>
+  </div>
+
+  <!-- Background -->
+  <div class="grid" aria-hidden="true"></div>
+
+    <!-- Header -->
+  <header>
+    <img src="virsburts-melns.png" alt="Mans Projekts logo" class="header-logo" id="logo" />
+
+    <!-- Theme toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
+      <i class="fas fa-moon"></i>
+    </button>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <h1 id="title" class="project-name">Mans Projekts</h1>
+      <p class="project-subtitle">Digitālais risinājums</p>
+
+      <p class="hero-text">
+        Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums,
+        kas fokusējas uz skaidru dizainu, pielāgojamām krāsām un augstu lietojamību.
+      </p>
+
+      <a
+        href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/"
+        target="_blank"
+        rel="noopener"
+        class="cta-button"
+        aria-label="Atvērt projektu lapu"
+      >
+        Skatīt projektus
+        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </section>
+
+    <div class="scroll-indicator" aria-hidden="true"></div>
+  </main>
+
     <script>
-        // Loading Animation
-        window.addEventListener('load', function() {
-            const loading = document.getElementById('loading');
-            setTimeout(() => {
-                loading.style.opacity = '0';
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                    
-                    // Check if logo loaded successfully
-                    checkLogo();
-                    
-                    // Animate content
-                    animateContent();
-                }, 500);
-            }, 800);
-        });
-        
-        // Check if logo file exists and loads correctly
-        function checkLogo() {
-            const headerLogo = document.getElementById('headerLogo');
-            
-            // Function to handle logo loading errors
-            function handleLogoError(img) {
-                console.log('Logo nav atrasts:', img.src);
-                
-                // Show placeholder text instead
-                img.style.display = 'none';
-                document.querySelector('.header-content').innerHTML = `
-                    <div class="logo-placeholder">
-                        LOGO
-                    </div>
-                `;
-            }
-            
-            // Add error handler
-            headerLogo.onerror = () => handleLogoError(headerLogo);
-            
-            // Test if logo loaded successfully
-            if (headerLogo.complete && headerLogo.naturalHeight === 0) {
-                handleLogoError(headerLogo);
-            }
-            
-            // Try alternative logo names if first one fails
-            setTimeout(() => {
-                if (headerLogo.naturalHeight === 0) {
-                    console.log('Mēģinu alternatīvus logo failu nosaukumus...');
-                    
-                    const alternativeLogos = [
-                        'virsburts-1.png',
-                        'logo.png',
-                        'Logo.png',
-                        'virsburts.png',
-                        'Virsburts.png'
-                    ];
-                    
-                    tryAlternativeLogos(alternativeLogos, 0);
-                }
-            }, 1000);
-        }
-        
-        // Try alternative logo names
-        function tryAlternativeLogos(logoList, index) {
-            if (index >= logoList.length) return;
-            
-            const testImage = new Image();
-            testImage.onload = function() {
-                console.log('✅ Logo atrasts:', logoList[index]);
-                document.getElementById('headerLogo').src = logoList[index];
-                document.getElementById('headerLogo').style.display = 'block';
-            };
-            
-            testImage.onerror = function() {
-                console.log('❌ Logo nav atrasts:', logoList[index]);
-                tryAlternativeLogos(logoList, index + 1);
-            };
-            
-            testImage.src = logoList[index];
-        }
-        
-        // Logo hover effects
-        const headerLogo = document.getElementById('headerLogo');
-        
-        headerLogo.addEventListener('mouseenter', function() {
-            this.style.opacity = '1';
-            this.style.transform = 'scale(1.05)';
-        });
-        
-        headerLogo.addEventListener('mouseleave', function() {
-            this.style.opacity = 'var(--logo-opacity)';
-            this.style.transform = 'scale(1)';
-        });
-        
-        // CTA Button hover effects (link already works, but we add extra styles)
-        const ctaButton = document.getElementById('ctaButton');
-        
-        ctaButton.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
-            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-        });
-        
-        ctaButton.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = 'none';
-        });
-        
-        // Button click animation (optional, since link will navigate away)
-        ctaButton.addEventListener('mousedown', function() {
-            this.style.transform = 'scale(0.98)';
-            this.style.backgroundColor = '#333';
-        });
-        
-        ctaButton.addEventListener('mouseup', function() {
-            this.style.transform = '';
-            this.style.backgroundColor = '';
-        });
-        
-        // Header logo click - scroll to top
-        headerLogo.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            this.style.opacity = '0.7';
-            this.style.transform = 'scale(0.95)';
-            
-            setTimeout(() => {
-                this.style.opacity = 'var(--logo-opacity)';
-                this.style.transform = 'scale(1)';
-            }, 200);
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
-        // Background lines animation on mouse move
-        document.addEventListener('mousemove', (e) => {
-            const lines = document.querySelectorAll('.line');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-            
-            lines.forEach((line, index) => {
-                const speed = 0.0005;
-                const x = (mouseX * 100 * speed * index) - 50;
-                const y = (mouseY * 100 * speed * index) - 50;
-                
-                if (line.classList.contains('line-vertical')) {
-                    line.style.transform = `translateX(${x}px)`;
-                }
-                
-                if (line.classList.contains('line-horizontal')) {
-                    line.style.transform = `translateY(${y}px)`;
-                }
-            });
-        });
-        
-        // Animate content on load
-        function animateContent() {
-            const logoDisplay = document.querySelector('.logo-display');
-            const heroText = document.querySelector('.hero-text');
-            const ctaSection = document.querySelector('.cta-button');
-            
-            // Set initial state for animation
-            logoDisplay.style.opacity = '0';
-            logoDisplay.style.transform = 'translateY(20px)';
-            logoDisplay.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            
-            heroText.style.opacity = '0';
-            heroText.style.transform = 'translateY(20px)';
-            heroText.style.transition = 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s';
-            
-            ctaSection.style.opacity = '0';
-            ctaSection.style.transform = 'translateY(20px)';
-            ctaSection.style.transition = 'opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s';
-            
-            // Animate in
-            setTimeout(() => {
-                logoDisplay.style.opacity = '1';
-                logoDisplay.style.transform = 'translateY(0)';
-                
-                heroText.style.opacity = '1';
-                heroText.style.transform = 'translateY(0)';
-                
-                ctaSection.style.opacity = '1';
-                ctaSection.style.transform = 'translateY(0)';
-            }, 300);
-        }
-        
-        // Window resize - adjust background lines
-        function adjustLines() {
-            const lines = document.querySelectorAll('.line-vertical');
-            lines.forEach((line, index) => {
-                const percentage = (index + 1) * 20; // 20%, 40%, 60%, 80%
-                line.style.left = `${percentage}%`;
-            });
-        }
-        
-        // Initial adjustments
-        adjustLines();
-        window.addEventListener('resize', adjustLines);
-    </script>
+    // Loading
+    window.addEventListener('load', () => {
+      const loading = document.getElementById('loading');
+      loading.style.opacity = '0';
+      setTimeout(() => loading.remove(), 400);
+    });
+
+    // Scroll to top
+    document.getElementById('logo').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Theme toggle (logo included)
+    const toggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    toggle.addEventListener('click', () => {
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      toggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    });
+  </script>
+
 </body>
 </html>
+
