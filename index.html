@@ -1,296 +1,90 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mans Projekts — Minimālistisks digitāls risinājums</title>
   <meta name="description" content="Minimālistisks un elegants digitāls risinājums ar skaidru struktūru, pielāgojamām krāsām un augstu lietojamību." />
 
-  <!-- Performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
-    /* ==========================
-       COLOR & DESIGN CONTROLS
-       (MAIN EDIT AREA)
-    ========================== */
-    :root {
+        :root {
             /* ATSEVIŠĶAS KRĀSAS KATRAM ELEMENTAM */
-            
             /* 1. Header Logo */
             --logo-height: 65px;
             --logo-opacity: 0.9;
             --logo-src: url('virsburts-melns.png');
-
             /* 2. Teksti */
             --color-project-name: #0a0a0a;
             --color-project-subtitle: #8c8c8c;
             --color-hero-text: #404040;
             --color-highlight-text: #0a0a0a;
-            
             /* 3. Poga */
             --color-button-bg: #0a0a0a;
             --color-button-text: #ffffff;
             --color-button-hover: #1a1a1a;
-            
             /* 4. Fona elementi */
             --color-bg: #ffffff;
             --color-bg-lines: #e5e5e5;
             --color-scroll-line-bg: #10b981;
-            --color-scroll-line-animation: #ffffff;
-            
+            --color-scroll-line-animation: #FFFFFF;
             /* 5. Loading ekrāns */
             --color-loading-bg: #ffffff;
             --color-loading-line: #3a86ff;
             --color-loading-animation: #10b981;
-
             /* Motion */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ==========================
-           DARK THEME OVERRIDES
-        ========================== */
+        /* Dark theme overrides */
         [data-theme="dark"] {
-            /* Logo (balts) */
             --logo-src: url('virsburts-balts.png');
-
-            /* Text */
             --color-project-name: #ffffff;
             --color-project-subtitle: #a1a1aa;
             --color-hero-text: #d4d4d8;
             --color-highlight-text: #ffffff;
-
-            /* Background */
             --color-bg: #0a0a0a;
             --color-bg-lines: #27272a;
-
-            /* Button */
             --color-button-bg: #ffffff;
             --color-button-text: #0a0a0a;
             --color-button-hover: #e5e5e5;
-
-            /* Scroll */
             --color-scroll-line-bg: #ffffff;
             --color-scroll-line-animation: #0a0a0a;
         }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
+        /* Reset */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter', sans-serif; background:var(--color-bg); color:var(--color-hero-text); line-height:1.6; min-height:100vh; }
+        h1 { font-family:'Manrope', sans-serif; letter-spacing:-0.03em; }
 
-    /* ==========================
-       RESET
-    ========================== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:2rem 0; z-index:100; }
+        .header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); content:var(--logo-src); }
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: var(--color-bg);
-      color: var(--color-hero-text);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
+        main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 1.5rem; position:relative; }
+        .hero { max-width:720px; text-align:center; position:relative; z-index:2; }
+        .project-name { font-size:clamp(1.75rem, 4vw, 2.5rem); color:var(--color-project-name); margin-bottom:0.25rem; font-weight:600; }
+        .project-subtitle { font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--color-project-subtitle); margin-bottom:2.5rem; }
+        .hero-text { max-width:560px; margin:0 auto 3rem; font-size:1.05rem; color:var(--color-hero-text); }
+        .highlight { color:var(--color-highlight-text); font-weight:500; }
 
-    h1 {
-      font-family: 'Manrope', system-ui, sans-serif;
-      letter-spacing: -0.03em;
-    }
+        .cta-button { display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; background:var(--color-button-bg); color:var(--color-button-text); border-radius:6px; text-decoration:none; font-weight:500; transition:var(--transition); }
+        .cta-button:hover { background:var(--color-button-hover); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
 
-    /* ==========================
-       HEADER
-    ========================== */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      padding: 2rem 0;
-      z-index: 100;
-    }
+        /* Theme toggle button */
+        .theme-toggle { position:fixed; bottom:2.5rem; left:2.5rem; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
+        .theme-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
 
-    .header-logo {
-      height: var(--logo-height);
-      opacity: var(--logo-opacity);
-      cursor: pointer;
-      transition: var(--transition);
-      content: var(--logo-src);
-    }
+        /* Scroll indicator */
+        .scroll-indicator { position:fixed; bottom:4.6rem; left:2.5rem; z-index:25; pointer-events:none; }
+        .scroll-line { width:3px; height:42px; background:var(--color-scroll-line-bg); position:relative; overflow:hidden; border-radius:2px; transform:translateY(18px); }
+        .scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
+        @keyframes scrollLine { to{top:100%;} }
 
-    .header-logo:hover {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-
-    /* ==========================
-       HERO
-    ========================== */
-    main {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 1.5rem;
-      position: relative;
-    }
-
-    .hero {
-      max-width: 720px;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .project-name {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      color: var(--color-project-name);
-      margin-bottom: 0.25rem;
-      font-weight: 600;
-    }
-
-    .project-subtitle {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--color-project-subtitle);
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-text {
-      max-width: 560px;
-      margin: 0 auto 3rem;
-      font-size: 1.05rem;
-      color: var(--color-hero-text);
-    }
-
-    .highlight {
-      color: var(--color-highlight-text);
-      font-weight: 500;
-    }
-
-    /* ==========================
-       CTA
-    ========================== */
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 2rem;
-      background: var(--color-button-bg);
-      color: var(--color-button-text);
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition);
-    }
-
-    .cta-button:hover {
-      background: var(--color-button-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-
-    /* ==========================
-       BACKGROUND GRID
-    ========================== */
-    .grid {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background-image:
-        linear-gradient(to right, var(--color-bg-lines) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--color-bg-lines) 1px, transparent 1px);
-      background-size: 20% 20%;
-    }
-
-    /* ==========================
-       SCROLL INDICATOR
-    ========================== */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 3px;
-      height: 40px;
-      background: var(--color-scroll-line-bg);
-      overflow: hidden;
-    }
-
-    .scroll-indicator::after {
-      content: '';
-      position: absolute;
-      top: -100%;
-      width: 100%;
-      height: 100%;
-      background: var(--color-scroll-line-animation);
-      animation: scroll 2s infinite;
-    }
-
-    @keyframes scroll {
-      to { top: 100%; }
-    }
-
-    /* ==========================
-       LOADING
-    ========================== */
-    .loading {
-      position: fixed;
-      inset: 0;
-      background: var(--color-loading-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-    }
-
-    .loading-line {
-      width: 120px;
-      height: 1px;
-      background: var(--color-loading-line);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .loading-line::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--color-loading-animation);
-      animation: loading 1.2s ease-in-out infinite;
-    }
-
-    @keyframes loading {
-      0% { transform: translateX(-100%); }
-      50% { transform: translateX(0); }
-      100% { transform: translateX(100%); }
-    }
-
-    /* ==========================
-       RESPONSIVE
-    ========================== */
-    @media (max-width: 768px) {
-      header { padding: 1.5rem 0; }
-      .header-logo { height: calc(var(--logo-height) * 0.75); }
-      .hero-text { font-size: 1rem; }
-    }
+        /* Responsive */
+        @media(max-width:768px){ header{padding:1.5rem 0;} .header-logo{height:calc(var(--logo-height)*0.75);} .hero-text{font-size:1rem;} }
   </style>
 </head>
 <body>
@@ -300,69 +94,48 @@
     <div class="loading-line"></div>
   </div>
 
-  <!-- Background -->
+  <!-- Background grid -->
   <div class="grid" aria-hidden="true"></div>
 
-    <!-- Header -->
+  <!-- Header -->
   <header>
     <img src="virsburts-melns.png" alt="Mans Projekts logo" class="header-logo" id="logo" />
-
-    <!-- Theme toggle -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
-      <i class="fas fa-moon"></i>
-    </button>
   </header>
 
-  <!-- Main -->
+  <!-- Hero -->
   <main>
     <section class="hero" aria-labelledby="title">
       <h1 id="title" class="project-name">Mans Projekts</h1>
       <p class="project-subtitle">Digitālais risinājums</p>
-
-      <p class="hero-text">
-        Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums,
-        kas fokusējas uz skaidru dizainu, pielāgojamām krāsām un augstu lietojamību.
-      </p>
-
-      <a
-        href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/"
-        target="_blank"
-        rel="noopener"
-        class="cta-button"
-        aria-label="Atvērt projektu lapu"
-      >
-        Skatīt projektus
-        <i class="fas fa-arrow-right" aria-hidden="true"></i>
-      </a>
+      <p class="hero-text">Šis ir <span class="highlight">minimālistisks un elegants</span> digitāls risinājums, kas fokusējas uz skaidru dizainu, pielāgojamām krāsām un augstu lietojamību.</p>
+      <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener" class="cta-button" aria-label="Atvērt projektu lapu">Skatīt projektus <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
     </section>
 
-    <div class="scroll-indicator" aria-hidden="true"></div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-line"></div>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
+      <i class="fas fa-moon"></i>
+    </button>
   </main>
 
-    <script>
+  <script>
     // Loading
-    window.addEventListener('load', () => {
-      const loading = document.getElementById('loading');
-      loading.style.opacity = '0';
-      setTimeout(() => loading.remove(), 400);
-    });
-
+    window.addEventListener('load',()=>{const l=document.getElementById('loading'); l.style.opacity='0'; setTimeout(()=>l.remove(),400);});
+    
     // Scroll to top
-    document.getElementById('logo').addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    document.getElementById('logo').addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
 
-    // Theme toggle (logo included)
-    const toggle = document.getElementById('themeToggle');
-    const root = document.documentElement;
-
-    toggle.addEventListener('click', () => {
-      const isDark = root.getAttribute('data-theme') === 'dark';
-      root.setAttribute('data-theme', isDark ? 'light' : 'dark');
-      toggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    // Theme toggle
+    const toggle=document.getElementById('themeToggle');
+    const root=document.documentElement;
+    toggle.addEventListener('click',()=>{
+      const isDark=root.getAttribute('data-theme')==='dark';
+      root.setAttribute('data-theme',isDark?'light':'dark');
+      toggle.innerHTML=isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
     });
   </script>
 
 </body>
 </html>
-
