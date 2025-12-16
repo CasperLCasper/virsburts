@@ -77,6 +77,8 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 .line-5 { top:20%; } .line-6 { top:40%; } .line-7 { top:60%; } .line-8 { top:80%; }
 .theme-toggle { position:fixed; bottom:40px; left:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
 .theme-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
+.info-toggle { position:fixed; bottom:40px; right:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
+.info-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
 .scroll-indicator { position:relative; margin-top:10px; margin-bottom:20px; display:flex; justify-content:center; pointer-events:none; }
 .scroll-line { width:3px; height:42px; background:var(--color-scroll-line-bg); position:relative; overflow:hidden; border-radius:2px; }
 .scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
@@ -97,11 +99,7 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
 }
-
-.projects-overlay.show {
-    display: block;
-    opacity: 1;
-}
+.projects-overlay.show { display: block; opacity: 1; }
 
 .projects-modal {
     display: none;
@@ -121,237 +119,51 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     opacity: 0;
     transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
+.projects-modal.show { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
-.projects-modal.show {
-    display: block;
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
+.modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; padding-bottom:20px; border-bottom:1px solid var(--color-bg-lines); }
+.modal-header h2 { margin:0; font-family:'Manrope',sans-serif; font-size:28px; color:var(--color-modal-text); font-weight:600; }
+.close-modal { background:none; border:none; color:var(--color-close-btn); font-size:24px; cursor:pointer; padding:8px; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; transition:var(--transition); }
+.close-modal:hover { background: var(--color-bg-lines); color: var(--color-modal-text); }
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--color-bg-lines);
-}
+.projects-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:25px; }
+.project-card { background: var(--color-card-bg); padding:25px; border-radius:12px; border:1px solid var(--color-card-border); display:flex; flex-direction:column; align-items:center; opacity:0; transform:translateY(20px); transition:opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center; }
+.project-card.show { opacity:1; transform:translateY(0); }
+.project-card:hover { transform:translateY(-5px); box-shadow:0 15px 35px rgba(0,0,0,0.1); }
+[data-theme="dark"] .project-card:hover { box-shadow:0 15px 35px rgba(0,0,0,0.3); }
 
-.modal-header h2 {
-    margin: 0;
-    font-family: 'Manrope', sans-serif;
-    font-size: 28px;
-    color: var(--color-modal-text);
-    font-weight: 600;
-}
+.project-card img { width:120px; height:120px; margin-bottom:20px; object-fit:contain; border-radius:12px; }
+.project-card h3 { margin:0 0 15px; font-size:20px; color:var(--color-modal-text); font-family:'Manrope',sans-serif; font-weight:600; line-height:1.3; }
+.project-description { font-size:14px; color:var(--color-hero-text); line-height:1.5; margin-bottom:20px; flex-grow:1; max-width:250px; }
+.project-link { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px 20px; background:var(--color-button-bg); color:var(--color-button-text); border-radius:8px; text-decoration:none; font-size:14px; font-weight:500; transition:var(--transition); border:none; cursor:pointer; margin-top:auto; }
+.project-link:hover { background:var(--color-button-hover); transform:translateY(-2px); box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+.project-link i { font-size:14px; }
 
-.close-modal {
-    background: none;
-    border: none;
-    color: var(--color-close-btn);
-    font-size: 24px;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-}
+.loading { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--color-loading-bg); display:flex; align-items:center; justify-content:center; z-index:9999; transition:opacity 0.4s ease; }
+.loading-line { width:200px; height:3px; background:var(--color-loading-line); position:relative; overflow:hidden; border-radius:2px; }
+.loading-line::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:var(--color-loading-animation); animation:loading 1.5s infinite; }
+@keyframes loading { to { left:100%; } }
 
-.close-modal:hover {
-    background: var(--color-bg-lines);
-    color: var(--color-modal-text);
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-/* PROJEKTU KARTIŅAS */
-.project-card {
-    background: var(--color-card-bg);
-    padding: 25px;
-    border-radius: 12px;
-    border: 1px solid var(--color-card-border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    text-align: center;
-}
-
-.project-card.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-}
-
-[data-theme="dark"] .project-card:hover {
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-}
-
-/* LOGO */
-.project-card img {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 20px;
-    object-fit: contain;
-    border-radius: 12px;
-}
-
-/* PROJEKTA NOSAUKUMS */
-.project-card h3 {
-    margin: 0 0 15px;
-    font-size: 20px;
-    color: var(--color-modal-text);
-    font-family: 'Manrope', sans-serif;
-    font-weight: 600;
-    line-height: 1.3;
-}
-
-/* ĪSS APRAKSTS */
-.project-description {
-    font-size: 14px;
-    color: var(--color-hero-text);
-    line-height: 1.5;
-    margin-bottom: 20px;
-    flex-grow: 1;
-    max-width: 250px;
-}
-
-/* VIENKĀRŠĀ POGA */
-.project-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    padding: 12px 20px;
-    background: var(--color-button-bg);
-    color: var(--color-button-text);
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: var(--transition);
-    border: none;
-    cursor: pointer;
-    margin-top: auto;
-}
-
-.project-link:hover {
-    background: var(--color-button-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.project-link i {
-    font-size: 14px;
-}
-
-/* Loading stili */
-.loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--color-loading-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.4s ease;
-}
-
-.loading-line {
-    width: 200px;
-    height: 3px;
-    background: var(--color-loading-line);
-    position: relative;
-    overflow: hidden;
-    border-radius: 2px;
-}
-
-.loading-line::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: var(--color-loading-animation);
-    animation: loading 1.5s infinite;
-}
-
-@keyframes loading {
-    to { left: 100%; }
-}
-
-@media(max-width: 768px){
+@media(max-width:768px){
     header{padding:15px 0;} 
     .header-logo{height:49px;} 
     .hero-text{font-size:16px;} 
     .project-name{font-size:32px;}
-    .projects-modal {
-        padding: 25px;
-        width: 95%;
-    }
-    .modal-header h2 {
-        font-size: 24px;
-    }
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    .project-card {
-        padding: 20px;
-    }
-    .theme-toggle {
-        bottom: 20px;
-        left: 20px;
-        width: 44px;
-        height: 44px;
-    }
+    .projects-modal { padding:25px; width:95%; }
+    .modal-header h2 { font-size:24px; }
+    .projects-grid { grid-template-columns:1fr; gap:20px; }
+    .project-card { padding:20px; }
+    .theme-toggle, .info-toggle { bottom:20px; width:44px; height:44px; }
 }
-
-/* Pārlūkprogrammu scrollbar stils */
-.projects-modal::-webkit-scrollbar {
-    width: 8px;
-}
-
-.projects-modal::-webkit-scrollbar-track {
-    background: var(--color-bg-lines);
-    border-radius: 4px;
-}
-
-.projects-modal::-webkit-scrollbar-thumb {
-    background: var(--color-button-bg);
-    border-radius: 4px;
-}
-
-.projects-modal::-webkit-scrollbar-thumb:hover {
-    background: var(--color-button-hover);
-}
+.projects-modal::-webkit-scrollbar { width:8px; }
+.projects-modal::-webkit-scrollbar-track { background:var(--color-bg-lines); border-radius:4px; }
+.projects-modal::-webkit-scrollbar-thumb { background:var(--color-button-bg); border-radius:4px; }
+.projects-modal::-webkit-scrollbar-thumb:hover { background:var(--color-button-hover); }
 </style>
 </head>
 <body>
 
-<div class="loading" id="loading" aria-hidden="true">
-  <div class="loading-line"></div>
-</div>
+<div class="loading" id="loading" aria-hidden="true"><div class="loading-line"></div></div>
 
 <div class="bg-lines">
   <div class="line line-vertical line-1"></div>
@@ -373,149 +185,129 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     <h1 id="title" class="project-name">From Action to Form</h1>
     <p class="project-subtitle">See actions, processes, and interactions unfold</p>
     <p class="hero-text">A space where actions and processes become visible, where their rhythm, consequences, and interactions take shape</p>
-    <div class="scroll-indicator" aria-hidden="true">
-      <div class="scroll-line"></div>
-    </div>
+    <div class="scroll-indicator" aria-hidden="true"><div class="scroll-line"></div></div>
     <a href="#" class="cta-button" id="showProjectsBtn" aria-label="Explore the Horizons">Explore the Horizons <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
   </section>
 
-  <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu">
-    <i class="fas fa-moon"></i>
-  </button>
+  <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu"><i class="fas fa-moon"></i></button>
+  <button class="info-toggle" id="infoToggle" aria-label="Par telpu"><i class="fas fa-info"></i></button>
 </main>
 
-<!-- PROJEKTU MODAL -->
+<!-- Horizons Modal -->
 <div class="projects-overlay" id="projectsOverlay"></div>
 <div class="projects-modal" id="projectsModal">
   <div class="modal-header">
     <h2>The Horizons</h2>
-    <button class="close-modal" id="closeModal" aria-label="Aizvērt projektu logu">
-      <i class="fas fa-times"></i>
-    </button>
+    <button class="close-modal" id="closeModal" aria-label="Aizvērt projektu logu"><i class="fas fa-times"></i></button>
   </div>
   <div class="projects-grid">
-    <!-- 1. Projekts -->
     <div class="project-card">
       <img src="dynamic-wallet.png" alt="NFT Sepolia Wall logo" loading="lazy">
       <h3>Dynamic Wallet Vizualizer</h3>
       <p class="project-description">Dinamisks NFT mākslas projekts uz Sepolia testnet ar unikālu ģenerēšanu.</p>
-      <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">
-        <i class="fas fa-external-link-alt"></i>
-        Pāriet pie projekta
-      </a>
+      <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Pāriet pie projekta</a>
     </div>
-
-    <!-- 2. Projekts -->
     <div class="project-card">
       <img src="logo2.png" alt="Design System logo" loading="lazy">
       <h3>Minimal Design System</h3>
       <p class="project-description">Konsekventa dizaina sistēma mūsdienu web lietotnēm ar komponentu bibliotēku.</p>
-      <a href="https://design-system-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link">
-        <i class="fas fa-external-link-alt"></i>
-        Pāriet pie projekta
-      </a>
+      <a href="https://design-system-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Pāriet pie projekta</a>
     </div>
-
-    <!-- 3. Projekts -->
     <div class="project-card">
       <img src="logo3.png" alt="E-commerce AI logo" loading="lazy">
       <h3>AI Powered E-Commerce</h3>
       <p class="project-description">Inteliģenta e-veikala platforma ar ML ieteikumu sistēmu un personalizētu pieredzi.</p>
-      <a href="https://ai-ecommerce-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link">
-        <i class="fas fa-external-link-alt"></i>
-        Pāriet pie projekta
-      </a>
+      <a href="https://ai-ecommerce-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Pāriet pie projekta</a>
     </div>
   </div>
 </div>
 
+<!-- Info Modal -->
+<div class="projects-overlay" id="infoOverlay"></div>
+<div class="projects-modal" id="infoModal">
+  <div class="modal-header">
+    <h2>Par telpu</h2>
+    <button class="close-modal" id="closeInfoModal" aria-label="Aizvērt info logu"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="projects-grid">
+    <p style="padding:20px; color: var(--color-modal-text); font-size:16px;">Šī ir informatīva telpa, kurā varam parādīt papildus informāciju vai paskaidrojumus par projektu. Saturu vari pielāgot pēc vajadzības.</p>
+  </div>
+</div>
+
 <script>
-// Loading screen
+// Loading
 window.addEventListener('load', () => {
     const loading = document.getElementById('loading');
     loading.style.opacity = '0';
     setTimeout(() => loading.remove(), 400);
 });
 
-// Logo scroll to top
+// Scroll top on logo click
 document.getElementById('logo').addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// PROJEKTU MODAL FUNKCIONALITĀTE
+// Horizons modal
 const showProjectsBtn = document.getElementById('showProjectsBtn');
 const projectsOverlay = document.getElementById('projectsOverlay');
 const projectsModal = document.getElementById('projectsModal');
 const closeModal = document.getElementById('closeModal');
 const projectCards = projectsModal.querySelectorAll('.project-card');
 
-// Parādīt modalo logu
 showProjectsBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    
-    // Parādīt overlay un modalo
     projectsOverlay.classList.add('show');
     projectsModal.classList.add('show');
-    
-    // Pievienot klases body, lai novērstu scroll aiz modala
     document.body.style.overflow = 'hidden';
-    
-    // Animēt kartiņas ar nelielu aizkavi
-    projectCards.forEach((card, index) => {
-        setTimeout(() => {
-            card.classList.add('show');
-        }, 100 + (index * 150));
-    });
+    projectCards.forEach((card, i) => { setTimeout(() => card.classList.add('show'), 100 + i*150); });
 });
-
-// Slēpt modalo logu
 function hideProjectsModal() {
     projectsOverlay.classList.remove('show');
     projectsModal.classList.remove('show');
-    
-    // Noņemt animācijas no kartiņām
-    projectCards.forEach(card => {
-        card.classList.remove('show');
-    });
-    
-    // Atgriezt scroll
+    projectCards.forEach(card => card.classList.remove('show'));
     document.body.style.overflow = '';
 }
-
-// Aizvērt poga
 closeModal.addEventListener('click', hideProjectsModal);
-
-// Aizvērt, ja klikšķina uz overlay
 projectsOverlay.addEventListener('click', hideProjectsModal);
+document.addEventListener('keydown', (e) => { if(e.key==='Escape' && projectsModal.classList.contains('show')) hideProjectsModal(); });
 
-// Aizvērt ar Escape taustiņu
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && projectsModal.classList.contains('show')) {
-        hideProjectsModal();
-    }
+// Info modal
+const infoToggle = document.getElementById('infoToggle');
+const infoOverlay = document.getElementById('infoOverlay');
+const infoModal = document.getElementById('infoModal');
+const closeInfoModal = document.getElementById('closeInfoModal');
+
+infoToggle.addEventListener('click', () => {
+    infoOverlay.classList.add('show');
+    infoModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
 });
+function hideInfoModal() {
+    infoOverlay.classList.remove('show');
+    infoModal.classList.remove('show');
+    document.body.style.overflow = '';
+}
+closeInfoModal.addEventListener('click', hideInfoModal);
+infoOverlay.addEventListener('click', hideInfoModal);
+document.addEventListener('keydown', (e) => { if(e.key==='Escape' && infoModal.classList.contains('show')) hideInfoModal(); });
 
-// Theme toggle ar localStorage
+// Theme toggle
 const toggle = document.getElementById('themeToggle');
 const root = document.documentElement;
-
-// Pārbaudīt saglabāto tēmu
 const savedTheme = localStorage.getItem('theme') || 'light';
 root.setAttribute('data-theme', savedTheme);
-toggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-
+toggle.innerHTML = savedTheme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
 toggle.addEventListener('click', () => {
-    const isDark = root.getAttribute('data-theme') === 'dark';
-    const newTheme = isDark ? 'light' : 'dark';
-    
+    const isDark = root.getAttribute('data-theme')==='dark';
+    const newTheme = isDark ? 'light':'dark';
     root.setAttribute('data-theme', newTheme);
-    toggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    toggle.innerHTML = isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
     localStorage.setItem('theme', newTheme);
 });
 </script>
-
 </body>
 </html>
+
 
 
 
