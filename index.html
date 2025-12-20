@@ -75,50 +75,19 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 .line-horizontal { height:1px; width:100%; }
 .line-1 { left:20%; } .line-2 { left:40%; } .line-3 { left:60%; } .line-4 { left:80%; }
 .line-5 { top:20%; } .line-6 { top:40%; } .line-7 { top:60%; } .line-8 { top:80%; }
-.theme-toggle { position:fixed; bottom:40px; left:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
-.theme-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
-.info-toggle { position:fixed; bottom:40px; right:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
-.info-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
+.theme-toggle, .info-toggle { position:fixed; bottom:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
+.theme-toggle:hover, .info-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
+.theme-toggle { left:40px; } .info-toggle { right:40px; }
 .scroll-indicator { position:relative; margin-top:10px; margin-bottom:20px; display:flex; justify-content:center; pointer-events:none; }
 .scroll-line { width:3px; height:42px; background:var(--color-scroll-line-bg); position:relative; overflow:hidden; border-radius:2px; }
 .scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
 @keyframes scrollLine { to{top:100%;} }
 
 /* MODAL STILI */
-.projects-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--color-modal-overlay);
-    z-index: 999;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
+.projects-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--color-modal-overlay); z-index: 999; opacity: 0; transition: opacity 0.3s ease; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
 .projects-overlay.show { display: block; opacity: 1; }
 
-.projects-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.95);
-    background: var(--color-modal-bg);
-    padding: 40px;
-    border-radius: 16px;
-    z-index: 1000;
-    max-width: 900px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 25px 80px rgba(0,0,0,0.3);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-}
+.projects-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); background: var(--color-modal-bg); padding: 40px; border-radius: 16px; z-index: 1000; max-width: 900px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 25px 80px rgba(0,0,0,0.3); opacity: 0; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
 .projects-modal.show { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
 .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; padding-bottom:20px; border-bottom:1px solid var(--color-bg-lines); }
@@ -128,8 +97,7 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 
 .projects-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:25px; }
 
-.project-card { background: var(--color-card-bg); padding:25px; border-radius:12px; border:1px solid var(--color-card-border); display:flex; flex-direction:column; align-items:center; opacity:0; transform:translateY(5px); transition: opacity 0.4s ease-out, transform 0.4s ease-out,
- box-shadow 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center; }
+.project-card { background: var(--color-card-bg); padding:25px; border-radius:12px; border:1px solid var(--color-card-border); display:flex; flex-direction:column; align-items:center; opacity:0; transform:translateY(5px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center; will-change: transform, opacity; }
 .project-card.show { opacity:1; transform:translateY(0); }
 .project-card:hover { transform:translateY(-5px); box-shadow:0 15px 35px rgba(0,0,0,0.1); }
 [data-theme="dark"] .project-card:hover { box-shadow:0 15px 35px rgba(0,0,0,0.3); }
@@ -215,8 +183,7 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
     <button class="close-modal" id="closeInfoModal" aria-label="Aizvērt info logu"><i class="fas fa-times"></i></button>
   </div>
   <div class="info-content">
-    <p style="padding:0px; color: var(--color-modal-text); font-size:16px;">
-    This is a space.</p>
+    <p style="padding:0px; color: var(--color-modal-text); font-size:16px;">This is a space.</p>
     <p>A space where actions, interactions, and digital processes take form.<br>Where movement becomes visible.<br>Where change leaves a trace.</p>
     <p>The space exists to observe — not to optimize or control.<br>To explore patterns, rhythms, and relationships as they emerge.</p>
     <p>Horizons appear over time.<br>Each one opens a new way to look, interact, or perceive.<br>They are not steps in a plan — they are moments of focus.</p>
@@ -275,31 +242,32 @@ showProjectsBtn.addEventListener('click', (e) => {
     projectsOverlay.classList.add('show');
     projectsModal.classList.add('show');
     document.body.style.overflow = 'hidden';
-
-    // iztīra esošos (ja modal tiek atvērts vairākas reizes)
     projectsGrid.innerHTML = '';
 
-    horizons.forEach((h, i) => {
-        if(h.active){
-            const card = document.createElement('div');
-            card.className = 'project-card';
-            card.innerHTML = `
-                <img src="${h.img}" alt="${h.title}" loading="lazy">
-                <h3>${h.title}</h3>
-                <p class="project-description">${h.desc}</p>
-                <a href="${h.link}" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Pāriet pie projekta</a>
-            `;
-            projectsGrid.appendChild(card);
-            setTimeout(()=>card.classList.add('show'), 50 + i*50);
-        }
+    // Ātra animācija ar requestAnimationFrame
+    let delay = 0;
+    horizons.forEach((h) => {
+        if(!h.active) return;
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.innerHTML = `
+            <img src="${h.img}" alt="${h.title}" loading="lazy">
+            <h3>${h.title}</h3>
+            <p class="project-description">${h.desc}</p>
+            <a href="${h.link}" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Pāriet pie projekta</a>
+        `;
+        projectsGrid.appendChild(card);
+        requestAnimationFrame(() => {
+            setTimeout(() => card.classList.add('show'), delay);
+        });
+        delay += 50;
     });
 });
 
 function hideProjectsModal() {
     projectsOverlay.classList.remove('show');
     projectsModal.classList.remove('show');
-    const allCards = projectsGrid.querySelectorAll('.project-card');
-    allCards.forEach(card => card.classList.remove('show'));
+    projectsGrid.querySelectorAll('.project-card').forEach(card => card.classList.remove('show'));
     document.body.style.overflow = '';
 }
 
@@ -318,11 +286,13 @@ infoToggle.addEventListener('click', () => {
     infoModal.classList.add('show');
     document.body.style.overflow = 'hidden';
 });
+
 function hideInfoModal() {
     infoOverlay.classList.remove('show');
     infoModal.classList.remove('show');
     document.body.style.overflow = '';
 }
+
 closeInfoModal.addEventListener('click', hideInfoModal);
 infoOverlay.addEventListener('click', hideInfoModal);
 document.addEventListener('keydown', (e) => { if(e.key==='Escape' && infoModal.classList.contains('show')) hideInfoModal(); });
@@ -333,6 +303,7 @@ const root = document.documentElement;
 const savedTheme = localStorage.getItem('theme') || 'light';
 root.setAttribute('data-theme', savedTheme);
 toggle.innerHTML = savedTheme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+
 toggle.addEventListener('click', () => {
     const isDark = root.getAttribute('data-theme')==='dark';
     const newTheme = isDark ? 'light':'dark';
@@ -343,6 +314,7 @@ toggle.addEventListener('click', () => {
 </script>
 </body>
 </html>
+
 
 
 
