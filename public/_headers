@@ -1,5 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-uMbMOtix87FQWPlngI/C2Kq6sTf2G2pVYqKEML5IRKc=' https://cdn.jsdelivr.net; connect-src 'self' https: wss:; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; video-src 'self' blob:; object-src 'none'; frame-ancestors 'none';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-RszvN+a1w+Y650462W99yHwI+G5g3ZAnx7vQat3HOnI=' 'sha256-ZswfTY7H35rbv8WC7NXBoiC7WNu86vSzCDChNWwZZDM=' 'sha256-M6NvjhuqNMeZq862AEmeYYU/qoMQ6oai3AihkQ13KIE=' https://cdn.jsdelivr.net; connect-src 'self' https: wss:; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; video-src 'self' blob:; object-src 'none'; frame-ancestors 'none';
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
