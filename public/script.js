@@ -1,124 +1,69 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elementi
-    const themeToggle = document.getElementById('themeToggle');
-    const logo = document.getElementById('logo');
+window.addEventListener('load', () => {
     const loading = document.getElementById('loading');
-    
-    const showProjectsBtn = document.getElementById('showProjectsBtn');
-    const projectsOverlay = document.getElementById('projectsOverlay');
-    const projectsModal = document.getElementById('projectsModal');
-    const closeModal = document.getElementById('closeModal');
-    
-    const infoToggle = document.getElementById('infoToggle');
-    const infoOverlay = document.getElementById('infoOverlay');
-    const infoModal = document.getElementById('infoModal');
-    const closeInfoModal = document.getElementById('closeInfoModal');
-    
-    const cards = document.querySelectorAll('.project-card');
+    loading.style.opacity = '0';
+    setTimeout(() => loading.remove(), 400);
+});
 
-    // 1. Ielādes ekrāna noņemšana
-    window.addEventListener('load', () => {
-        if (loading) {
-            loading.style.opacity = '0';
-            setTimeout(() => loading.style.display = 'none', 400);
-        }
-    });
+document.getElementById('logo').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
-    // Rezerves variants, ja 'load' notikums kavējas
-    setTimeout(() => {
-        if (loading && loading.style.display !== 'none') {
-            loading.style.opacity = '0';
-            setTimeout(() => loading.style.display = 'none', 400);
-        }
-    }, 2000);
+const showProjectsBtn = document.getElementById('showProjectsBtn');
+const projectsOverlay = document.getElementById('projectsOverlay');
+const projectsModal = document.getElementById('projectsModal');
+const closeModal = document.getElementById('closeModal');
+const projectCards = projectsModal.querySelectorAll('.project-card');
 
-    // 2. Logo vadības funkcija (CSP droša)
-    function updateLogo(isDark) {
-        if (logo) {
-            logo.src = isDark ? 'virsburts-balts.png' : 'virsburts-melns.png';
-        }
-    }
+showProjectsBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    projectsOverlay.classList.add('show');
+    projectsModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    projectCards.forEach((card, i) => { setTimeout(() => card.classList.add('show'), 100 + i*150); });
+});
 
-    // 3. Tēmas inicializācija (no localStorage)
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        updateLogo(true);
-    } else {
-        document.documentElement.removeAttribute('data-theme');
-        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        updateLogo(false);
-    }
+function hideProjectsModal() {
+    projectsOverlay.classList.remove('show');
+    projectsModal.classList.remove('show');
+    projectCards.forEach(card => card.classList.remove('show'));
+    document.body.style.overflow = '';
+}
 
-    // 4. Tēmas pārslēgšanas notikums
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            if (isDark) {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                updateLogo(false);
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                updateLogo(true);
-            }
-        });
-    }
+closeModal.addEventListener('click', hideProjectsModal);
+projectsOverlay.addEventListener('click', hideProjectsModal);
+document.addEventListener('keydown', (e) => { if(e.key==='Escape' && projectsModal.classList.contains('show')) hideProjectsModal(); });
 
-    // 5. Modālo logu atvēršanas/aizvēršanas loģika
-    function openModal(modal, overlay) {
-        if (!modal || !overlay) return;
-        overlay.classList.add('show');
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
+const infoToggle = document.getElementById('infoToggle');
+const infoOverlay = document.getElementById('infoOverlay');
+const infoModal = document.getElementById('infoModal');
+const closeInfoModal = document.getElementById('closeInfoModal');
 
-        // Ja tas ir projektu modālais logs, parādām kārtis ar animāciju
-        if (modal.id === 'projectsModal') {
-            cards.forEach((card, index) => {
-                setTimeout(() => card.classList.add('show'), index * 100);
-            });
-        }
-    }
+infoToggle.addEventListener('click', () => {
+    infoOverlay.classList.add('show');
+    infoModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+});
 
-    function closeModalWindow(modal, overlay) {
-        if (!modal || !overlay) return;
-        modal.classList.remove('show');
-        overlay.classList.remove('show');
-        document.body.style.overflow = '';
+function hideInfoModal() {
+    infoOverlay.classList.remove('show');
+    infoModal.classList.remove('show');
+    document.body.style.overflow = '';
+}
 
-        if (modal.id === 'projectsModal') {
-            cards.forEach(card => card.classList.remove('show'));
-        }
-    }
+closeInfoModal.addEventListener('click', hideInfoModal);
+infoOverlay.addEventListener('click', hideInfoModal);
+document.addEventListener('keydown', (e) => { if(e.key==='Escape' && infoModal.classList.contains('show')) hideInfoModal(); });
 
-    // Projektu modālais logs
-    if (showProjectsBtn) {
-        showProjectsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal(projectsModal, projectsOverlay);
-        });
-    }
-    if (closeModal) closeModal.addEventListener('click', () => closeModalWindow(projectsModal, projectsOverlay));
-    if (projectsOverlay) projectsOverlay.addEventListener('click', () => closeModalWindow(projectsModal, projectsOverlay));
+const toggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const savedTheme = localStorage.getItem('theme') || 'light';
+root.setAttribute('data-theme', savedTheme);
+toggle.innerHTML = savedTheme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
 
-    // Info modālais logs
-    if (infoToggle) {
-        infoToggle.addEventListener('click', () => openModal(infoModal, infoOverlay));
-    }
-    if (closeInfoModal) closeInfoModal.addEventListener('click', () => closeModalWindow(infoModal, infoOverlay));
-    if (infoOverlay) infoOverlay.addEventListener('click', () => closeModalWindow(infoModal, infoOverlay));
-
-    // ESC taustiņš logu aizvēršanai
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeModalWindow(projectsModal, projectsOverlay);
-            closeModalWindow(infoModal, infoOverlay);
-        }
-    });
+toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme')==='dark';
+    const newTheme = isDark ? 'light':'dark';
+    root.setAttribute('data-theme', newTheme);
+    toggle.innerHTML = isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
+    localStorage.setItem('theme', newTheme);
 });
