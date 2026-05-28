@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V I R S B U R T S</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+    --logo-height: 65px;
+    --logo-opacity: 1;
+    --logo-src: url('virsburts-melns.png');
+    --color-project-name: #0a0a0a;
+    --color-project-subtitle: #0a0a0a;
+    --color-hero-text: #404040;
+    --color-highlight-text: #0a0a0a;
+    --color-button-bg: #0a0a0a;
+    --color-button-text: #ffffff;
+    --color-button-hover: #1a1a1a;
+    --color-bg: #ffffff;
+    --color-bg-lines: #e5e5e5;
+    --color-scroll-line-bg: #10b981;
+    --color-scroll-line-animation: #FFFFFF;
+    --color-loading-bg: #ffffff;
+    --color-loading-line: #3a86ff;
+    --color-loading-animation: #10b981;
+    --color-modal-bg: #ffffff;
+    --color-modal-overlay: rgba(0,0,0,0.7);
+    --color-modal-text: #0a0a0a;
+    --color-close-btn: #666;
+    --color-card-bg: #f8f9fa;
+    --color-card-border: #e9ecef;
+    --color-link: #0d6efd;
+    --color-link-hover: #0a58ca;
+    --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+    --logo-src: url('virsburts-balts.png');
+    --color-project-name: #ffffff;
+    --color-project-subtitle: #ffffff;
+    --color-hero-text: #d4d4d8;
+    --color-highlight-text: #ffffff;
+    --color-bg: #0a0a0a;
+    --color-bg-lines: #27272a;
+    --color-button-bg: #ffffff;
+    --color-button-text: #0a0a0a;
+    --color-button-hover: #e5e5e5;
+    --color-scroll-line-bg: #ffffff;
+    --color-scroll-line-animation: #0a0a0a;
+    --color-modal-bg: #1a1a1a;
+    --color-modal-overlay: rgba(0,0,0,0.85);
+    --color-modal-text: #ffffff;
+    --color-close-btn: #aaa;
+    --color-card-bg: #2d2d2d;
+    --color-card-border: #444;
+    --color-link: #6ea8fe;
+    --color-link-hover: #9ec5fe;
+}
+body, html { margin:0; padding:0; min-height:100%; font-family:'Inter',sans-serif; background:var(--color-bg); color:var(--color-hero-text); }
+h1 { font-family:'Manrope',sans-serif; letter-spacing:-0.03em; }
+header { position:fixed; top:0; width:100%; display:flex; justify-content:center; padding:20px 0; z-index:100; }
+.header-logo { height:var(--logo-height); opacity:var(--logo-opacity); cursor:pointer; transition:var(--transition); content:var(--logo-src); }
+main { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:0 20px; position:relative; flex-direction:column; }
+.hero { max-width:720px; text-align:center; position:relative; z-index:2; }
+.project-name { font-size:23px; color:var(--color-project-name); margin-bottom:5px; font-weight:600; }
+.project-subtitle { font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--color-project-subtitle); margin-bottom:30px; }
+.hero-text { max-width:560px; margin:0 auto 30px; font-size:18px; color:var(--color-hero-text); }
+.highlight { color:var(--color-highlight-text); font-weight:500; }
+.cta-button { display:inline-flex; align-items:center; gap:5px; padding:14px 32px; background:var(--color-button-bg); color:var(--color-button-text); border-radius:6px; text-decoration:none; font-weight:500; transition:var(--transition); position:relative; z-index:5; cursor:pointer; }
+.cta-button:hover { background:var(--color-button-hover); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.12); }
+.bg-lines { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+.bg-lines .line { position:absolute; background:var(--color-bg-lines); }
+.line-vertical { width:1px; height:100%; }
+.line-horizontal { height:1px; width:100%; }
+.line-1 { left:20%; } .line-2 { left:40%; } .line-3 { left:60%; } .line-4 { left:80%; }
+.line-5 { top:20%; } .line-6 { top:40%; } .line-7 { top:60%; } .line-8 { top:80%; }
+.theme-toggle { position:fixed; bottom:40px; left:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
+.theme-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
+.info-toggle { position:fixed; bottom:40px; right:40px; width:52px; height:52px; border-radius:50%; border:none; background:var(--color-button-bg); color:var(--color-button-text); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:20; transition:var(--transition); box-shadow:0 10px 30px rgba(0,0,0,.15); }
+.info-toggle:hover { transform:translateY(-3px); box-shadow:0 15px 40px rgba(0,0,0,.2); }
+.scroll-indicator { position:relative; margin-top:10px; margin-bottom:20px; display:flex; justify-content:center; pointer-events:none; }
+.scroll-line { width:3px; height:42px; background:var(--color-scroll-line-bg); position:relative; overflow:hidden; border-radius:2px; }
+.scroll-line::after { content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--color-scroll-line-animation); animation:scrollLine 2s infinite; }
+@keyframes scrollLine { to{top:100%;} }
+
+/* MODAL STILI */
+.projects-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-modal-overlay);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+.projects-overlay.show { display: block; opacity: 1; }
+
+.projects-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background: var(--color-modal-bg);
+    padding: 40px;
+    border-radius: 16px;
+    z-index: 1000;
+    max-width: 900px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.projects-modal.show { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+.modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; padding-bottom:20px; border-bottom:1px solid var(--color-bg-lines); }
+.modal-header h2 { margin:0; font-family:'Manrope',sans-serif; font-size:28px; color:var(--color-modal-text); font-weight:600; }
+.close-modal { background:none; border:none; color:var(--color-close-btn); font-size:24px; cursor:pointer; padding:8px; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; transition:var(--transition); }
+.close-modal:hover { background: var(--color-bg-lines); color: var(--color-modal-text); }
+
+.projects-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:25px; }
+.project-card { background: var(--color-card-bg); padding:25px; border-radius:12px; border:1px solid var(--color-card-border); display:flex; flex-direction:column; align-items:center; opacity:0; transform:translateY(20px); transition:opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease; box-shadow:0 5px 15px rgba(0,0,0,0.05); text-align:center; }
+.project-card.show { opacity:1; transform:translateY(0); }
+.project-card:hover { transform:translateY(-5px); box-shadow:0 15px 35px rgba(0,0,0,0.1); }
+[data-theme="dark"] .project-card:hover { box-shadow:0 15px 35px rgba(0,0,0,0.3); }
+
+.project-card img { width:120px; height:120px; margin-bottom:20px; object-fit:contain; border-radius:12px; }
+.project-card h3 { margin:0 0 15px; font-size:20px; color:var(--color-modal-text); font-family:'Manrope',sans-serif; font-weight:600; line-height:1.3; }
+.project-description { font-size:14px; color:var(--color-hero-text); line-height:1.5; margin-bottom:20px; flex-grow:1; max-width:250px; }
+.project-link { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:12px 20px; background:var(--color-button-bg); color:var(--color-button-text); border-radius:8px; text-decoration:none; font-size:14px; font-weight:500; transition:var(--transition); border:none; cursor:pointer; margin-top:auto; }
+.project-link:hover { background:var(--color-button-hover); transform:translateY(-2px); box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+.project-link i { font-size:14px; }
+
+.loading { position:fixed; top:0; left:0; width:100%; height:100%; background:var(--color-loading-bg); display:flex; align-items:center; justify-content:center; z-index:9999; transition:opacity 0.4s ease; }
+.loading-line { width:200px; height:3px; background:var(--color-loading-line); position:relative; overflow:hidden; border-radius:2px; }
+.loading-line::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:var(--color-loading-animation); animation:loading 1.5s infinite; }
+@keyframes loading { to { left:100%; } }
+
+@media(max-width:768px){
+    header{padding:15px 0;} 
+    .header-logo{height:49px;} 
+    .hero-text{font-size:16px;} 
+    .project-name{font-size:32px;}
+    .projects-modal { padding:25px; width:95%; }
+    .modal-header h2 { font-size:24px; }
+    .projects-grid { grid-template-columns:1fr; gap:20px; }
+    .project-card { padding:20px; }
+    .theme-toggle, .info-toggle { bottom:20px; width:44px; height:44px; }
+}
+.projects-modal::-webkit-scrollbar { width:8px; }
+.projects-modal::-webkit-scrollbar-track { background:var(--color-bg-lines); border-radius:4px; }
+.projects-modal::-webkit-scrollbar-thumb { background:var(--color-button-bg); border-radius:4px; }
+.projects-modal::-webkit-scrollbar-thumb:hover { background:var(--color-button-hover); }
+</style>
+</head>
+<body>
+
+<div class="loading" id="loading" aria-hidden="true"><div class="loading-line"></div></div>
+
+<div class="bg-lines">
+  <div class="line line-vertical line-1"></div>
+  <div class="line line-vertical line-2"></div>
+  <div class="line line-vertical line-3"></div>
+  <div class="line line-vertical line-4"></div>
+  <div class="line line-horizontal line-5"></div>
+  <div class="line line-horizontal line-6"></div>
+  <div class="line line-horizontal line-7"></div>
+  <div class="line line-horizontal line-8"></div>
+</div>
+
+<header>
+  <img src="virsburts-melns.png" alt="V I R S B U R T S logo" class="header-logo" id="logo">
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="title">
+    <h1 id="title" class="project-name">From Action to Form</h1>
+    <p class="project-subtitle">Observe how elements, actions, processes, and interactions reveal themselves</p>
+    <p class="hero-text">A space where elements, actions, and processes come alive — where their rhythm, consequences, and interactions take shape</p>
+    <div class="scroll-indicator" aria-hidden="true"><div class="scroll-line"></div></div>
+    <a href="#" class="cta-button" id="showProjectsBtn" aria-label="Explore the Horizons">Explore the Horizons <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+  </section>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu"><i class="fas fa-moon"></i></button>
+  <button class="info-toggle" id="infoToggle" aria-label="Par telpu"><i class="fas fa-info"></i></button>
+</main>
+
+<!-- Horizons Modal -->
+<div class="projects-overlay" id="projectsOverlay"></div>
+<div class="projects-modal" id="projectsModal">
+  <div class="modal-header">
+    <h2>The Horizons</h2>
+    <button class="close-modal" id="closeModal" aria-label="Aizvērt projektu logu"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <img src="dynamic-wallet.png" alt="NFT Sepolia Wall logo" loading="lazy">
+      <h3>Dynamic Wallet Vizualizer</h3>
+      <p class="project-description">Dinamisks NFT mākslas projekts uz Sepolia testnet ar unikālu ģenerēšanu.</p>
+      <a href="https://11-nft-sepolia-testnet-dynamic-wall.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Pāriet pie projekta</a>
+    </div>
+    <div class="project-card">
+      <img src="logo2.png" alt="Design System logo" loading="lazy">
+      <h3>Minimal Design System</h3>
+      <p class="project-description">Konsekventa dizaina sistēma mūsdienu web lietotnēm ar komponentu bibliotēku.</p>
+      <a href="https://design-system-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Pāriet pie projekta</a>
+    </div>
+    <div class="project-card">
+      <img src="logo3.png" alt="E-commerce AI logo" loading="lazy">
+      <h3>AI Powered E-Commerce</h3>
+      <p class="project-description">Inteliģenta e-veikala platforma ar ML ieteikumu sistēmu un personalizētu pieredzi.</p>
+      <a href="https://ai-ecommerce-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Pāriet pie projekta</a>
+    </div>
+  </div>
+</div>
+
+<!-- Info Modal -->
+<div class="projects-overlay" id="infoOverlay"></div>
+<div class="projects-modal" id="infoModal">
+  <div class="modal-header">
+    <h2>About a space</h2>
+    <button class="close-modal" id="closeInfoModal" aria-label="Aizvērt info logu"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="info-content">
+    <p style="padding:0px; color: var(--color-modal-text); font-size:16px;">
+    
+This is a space.</p>
+        
+         <p>
+A space where actions, interactions, and digital processes take form.
+Where movement becomes visible.
+Where change leaves a trace.
+         <p>
+
+         <p>
+The space exists to observe — not to optimize or control.
+To explore patterns, rhythms, and relationships as they emerge.
+         <p>
+
+         <p>
+Horizons appear over time.
+Each one opens a new way to look, interact, or perceive.
+They are not steps in a plan — they are moments of focus.
+         <p>
+
+         <p>
+NFTs belong to this space as artifacts.
+         <p>
+
+         <p>
+Genesis NFTs mark the beginning.
+Access NFTs open doors to specific horizons.
+         <p>
+
+         <p>
+Nothing here asks for belief in the future.
+What exists, exists now — visible and usable.
+         <p>
+
+         <p>
+The space grows through presence, exploration, and time.
+         <p>
+
+</p>
+  </div>
+</div>
+
+<script>
+// Loading
+window.addEventListener('load', () => {
+    const loading = document.getElementById('loading');
+    loading.style.opacity = '0';
+    setTimeout(() => loading.remove(), 400);
+});
+
+// Scroll top on logo click
+document.getElementById('logo').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Horizons modal
+const showProjectsBtn = document.getElementById('showProjectsBtn');
+const projectsOverlay = document.getElementById('projectsOverlay');
+const projectsModal = document.getElementById('projectsModal');
+const closeModal = document.getElementById('closeModal');
+const projectCards = projectsModal.querySelectorAll('.project-card');
+
+showProjectsBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    projectsOverlay.classList.add('show');
+    projectsModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    projectCards.forEach((card, i) => { setTimeout(() => card.classList.add('show'), 100 + i*150); });
+});
+function hideProjectsModal() {
+    projectsOverlay.classList.remove('show');
+    projectsModal.classList.remove('show');
+    projectCards.forEach(card => card.classList.remove('show'));
+    document.body.style.overflow = '';
+}
+closeModal.addEventListener('click', hideProjectsModal);
+projectsOverlay.addEventListener('click', hideProjectsModal);
+document.addEventListener('keydown', (e) => { if(e.key==='Escape' && projectsModal.classList.contains('show')) hideProjectsModal(); });
+
+// Info modal
+const infoToggle = document.getElementById('infoToggle');
+const infoOverlay = document.getElementById('infoOverlay');
+const infoModal = document.getElementById('infoModal');
+const closeInfoModal = document.getElementById('closeInfoModal');
+
+infoToggle.addEventListener('click', () => {
+    infoOverlay.classList.add('show');
+    infoModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+});
+function hideInfoModal() {
+    infoOverlay.classList.remove('show');
+    infoModal.classList.remove('show');
+    document.body.style.overflow = '';
+}
+closeInfoModal.addEventListener('click', hideInfoModal);
+infoOverlay.addEventListener('click', hideInfoModal);
+document.addEventListener('keydown', (e) => { if(e.key==='Escape' && infoModal.classList.contains('show')) hideInfoModal(); });
+
+// Theme toggle
+const toggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const savedTheme = localStorage.getItem('theme') || 'light';
+root.setAttribute('data-theme', savedTheme);
+toggle.innerHTML = savedTheme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme')==='dark';
+    const newTheme = isDark ? 'light':'dark';
+    root.setAttribute('data-theme', newTheme);
+    toggle.innerHTML = isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
+    localStorage.setItem('theme', newTheme);
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
