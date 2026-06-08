@@ -4,7 +4,7 @@
 
 window.MAINTENANCE_CONFIG = {
   // 🛠️ NOMAINI UZ true, LAI IESLĒGTU APKOPES REŽĪMU // NOMAINI UZ false, LAI IZSLĒGTU APKOPES REŽĪMU
-  isMaintenance: true, 
+  isMaintenance: false, 
   
   // Ziņojumi, ko lietotājs redzēs uz ekrāna
   title: '🛠️ TEHNISKĀ APKOPE / MAINTENANCE 🛠️',
