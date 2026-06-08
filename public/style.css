@@ -183,21 +183,12 @@ html[data-maintenance="true"] .maintenance-wrapper {
     z-index: 999999999 !important;
 }
 
-.maintenance-wrapper h1 {
-    font-family: 'Manrope', sans-serif !important;
-    font-size: 2rem !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.3em !important;
-    margin: 0 0 16px 0 !important;
-    color: #ff3333 !important; 
-    text-transform: uppercase !important;
-}
-
 .maintenance-wrapper .status-tag {
     font-size: 1rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.25em !important;
     color: #ff0000 !important; 
+    margin-top: 60px !important; /* 💡 Palielināta atkāpe, lai teksts neietu virsū logo un acis būtu mierīgas */
     margin-bottom: 20px !important;
     text-transform: uppercase !important;
 }
