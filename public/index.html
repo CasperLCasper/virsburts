@@ -1,67 +1,77 @@
+<script>
+    // 🛠️ APKOPES SLĒDZIS — JA TRUE, PARĀDĪS TIKAI APKOPP, JA FALSE — PARASTO LAPU
+    var isMaintenance = true; 
+
+    if (isMaintenance) {
+        // 1. Apturam jebkādu tālāku failu (stilu, script.js) ielādi un izpildi
+        window.stop(); 
+
+        // 2. Ierakstām pilnīgi jaunu, tīru un koši sarkanu dizainu monitora centrā
+        document.documentElement.innerHTML = `
+            <head>
+                <title>V I R S B U R T S — Maintenance</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    html, body {
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        width: 100% !important;
+                        height: 100% !important;
+                        background-color: #000000 !important;
+                    }
+                    body {
+                        display: flex !important;
+                        justify-content: center !important;
+                        align-items: center !important;
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+                        text-align: center !important;
+                        overflow: hidden !important;
+                    }
+                    .container {
+                        max-width: 440px !important;
+                        padding: 24px !important;
+                    }
+                    h1 {
+                        font-size: 2rem !important;
+                        font-weight: 400 !important;
+                        letter-spacing: 0.3em !important;
+                        margin: 0 0 16px 0 !important;
+                        color: #ff3333 !important;
+                        text-transform: uppercase !important;
+                    }
+                    .subtitle {
+                        font-size: 1rem !important;
+                        font-weight: 700 !important;
+                        letter-spacing: 0.25em !important;
+                        color: #ff0000 !important;
+                        margin-bottom: 20px !important;
+                        text-transform: uppercase !important;
+                    }
+                    p {
+                        color: #ff9999 !important;
+                        font-size: 1.05rem !important;
+                        line-height: 1.6 !important;
+                        margin: 0 !important;
+                        font-weight: 500 !important;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>V I R S B U R T S</h1>
+                    <div class="subtitle">UNDER MAINTENANCE</div>
+                    <p>The space is temporarily unavailable due to system optimization. We will be back shortly.</p>
+                </div>
+            </body>
+        `;
+    }
+</script>
 <!DOCTYPE html>
 <html lang="lv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>V I R S B U R T S</title>
-
-    <script>
-        // NOMAINI UZ false, KAD GRIBEŠI ATSLĒGT APKOPES REŽĪMU
-        var isMaintenance = true; 
-
-        if (isMaintenance) {
-            // Nekavējoties pārslēdzam pašu galveno fonu uz melnu, lai nav balta uzplaiksnījuma
-            document.documentElement.style.setProperty('background', '#000000', 'important');
-            document.documentElement.style.setProperty('background-color', '#000000', 'important');
-
-            var checkBody = setInterval(function() {
-                if (document.body) {
-                    clearInterval(checkBody);
-                    
-                    // Pilnībā iztīrām visu lapas saturu, lai nekas nemaisās
-                    document.body.innerHTML = '';
-                    
-                    // Izveidojam un uzbūvējam pilnekrāna bloku
-                    var box = document.createElement('div');
-                    box.style.cssText = `
-                        position: fixed !important;
-                        top: 0 !important; left: 0 !important;
-                        width: 100vw !important; height: 100vh !important;
-                        background: #000000 !important;
-                        background-color: #000000 !important;
-                        display: flex !important;
-                        justify-content: center !important;
-                        align-items: center !important;
-                        z-index: 999999999 !important;
-                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-                        text-align: center !important;
-                        box-sizing: border-box !important;
-                        padding: 24px !important;
-                    `;
-
-                    // Ieliekam iekšā tekstus ar garantēti koši sarkanām krāsām
-                    box.innerHTML = `
-                        <div style="max-width: 440px !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;">
-                            <h1 style="font-size: 2rem !important; font-weight: 400 !important; letter-spacing: 0.3em !important; margin: 0 0 16px 0 !important; color: #ff3333 !important; text-transform: uppercase !important; font-family: 'Manrope', sans-serif !important;">
-                                V I R S B U R T S
-                            </h1>
-                            <div style="font-size: 1rem !important; font-weight: 700 !important; letter-spacing: 0.25em !important; color: #ff0000 !important; margin-bottom: 20px !important; text-transform: uppercase !important;">
-                                UNDER MAINTENANCE
-                            </div>
-                            <p style="color: #ff9999 !important; font-size: 1.05rem !important; line-height: 1.6 !important; margin: 0 !important; font-weight: 500 !important;">
-                                The space is temporarily unavailable due to system optimization. We will be back shortly.
-                            </p>
-                        </div>
-                    `;
-                    
-                    document.body.appendChild(box);
-                    document.body.style.setProperty('overflow', 'hidden', 'important');
-                    document.body.style.setProperty('background', '#000000', 'important');
-                    document.body.style.setProperty('background-color', '#000000', 'important');
-                }
-            }, 1);
-        }
-    </script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
