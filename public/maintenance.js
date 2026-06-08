@@ -3,7 +3,7 @@
 // ============================================ //
 window.MAINTENANCE_CONFIG = {
   // 🛠️ NOMAINI UZ true, LAI IESLĒGTU APKOPES REŽĪMU // NOMAINI UZ false, LAI IZSLĒGTU APKOPES REŽĪMU
-  isMaintenance: false, 
+  isMaintenance: true, 
   
   title: '🛠️ TEHNISKĀ APKOPE / MAINTENANCE 🛠️',
   subtitle: 'Lapa uz brīdi nav pieejama. Atvainojamies par sagādātajām neērtībām.'
