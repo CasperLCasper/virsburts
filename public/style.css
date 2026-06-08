@@ -149,3 +149,64 @@ main { min-height:100vh; display:flex; align-items:center; justify-content:cente
 .projects-modal::-webkit-scrollbar-track { background:var(--color-bg-lines); border-radius:4px; }
 .projects-modal::-webkit-scrollbar-thumb { background:var(--color-button-bg); border-radius:4px; }
 .projects-modal::-webkit-scrollbar-thumb:hover { background:var(--color-button-hover); }
+
+/* ============================================ */
+/* SYSTEM MAINTENANCE MODE */
+/* ============================================ */
+.maintenance-wrapper {
+    display: none;
+}
+
+html[data-maintenance="true"] {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    overflow: hidden !important;
+}
+
+html[data-maintenance="true"] body > :not(.maintenance-wrapper) {
+    display: none !important;
+}
+
+html[data-maintenance="true"] .maintenance-wrapper {
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important; left: 0 !important;
+    width: 100vw !important; height: 100vh !important;
+    background: #000000 !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
+    box-sizing: border-box !important;
+    padding: 24px !important;
+    z-index: 999999999 !important;
+}
+
+.maintenance-wrapper h1 {
+    font-family: 'Manrope', sans-serif !important;
+    font-size: 2rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.3em !important;
+    margin: 0 0 16px 0 !important;
+    color: #ff3333 !important; 
+    text-transform: uppercase !important;
+}
+
+.maintenance-wrapper .status-tag {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.25em !important;
+    color: #ff0000 !important; 
+    margin-bottom: 20px !important;
+    text-transform: uppercase !important;
+}
+
+.maintenance-wrapper p {
+    color: #ff9999 !important; 
+    font-size: 1.05rem !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    font-weight: 500 !important;
+    max-width: 440px !important;
+}
