@@ -1,82 +1,21 @@
-<script>
-    // 🛠️ APKOPES SLĒDZIS — JA TRUE, PARĀDĪS TIKAI APKOPP, JA FALSE — PARASTO LAPU
-    var isMaintenance = true; 
-
-    if (isMaintenance) {
-        // 1. Apturam jebkādu tālāku failu (stilu, script.js) ielādi un izpildi
-        window.stop(); 
-
-        // 2. Ierakstām pilnīgi jaunu, tīru un koši sarkanu dizainu monitora centrā
-        document.documentElement.innerHTML = `
-            <head>
-                <title>V I R S B U R T S — Maintenance</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>
-                    html, body {
-                        margin: 0 !important;
-                        padding: 0 !important;
-                        width: 100% !important;
-                        height: 100% !important;
-                        background-color: #000000 !important;
-                    }
-                    body {
-                        display: flex !important;
-                        justify-content: center !important;
-                        align-items: center !important;
-                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-                        text-align: center !important;
-                        overflow: hidden !important;
-                    }
-                    .container {
-                        max-width: 440px !important;
-                        padding: 24px !important;
-                    }
-                    h1 {
-                        font-size: 2rem !important;
-                        font-weight: 400 !important;
-                        letter-spacing: 0.3em !important;
-                        margin: 0 0 16px 0 !important;
-                        color: #ff3333 !important;
-                        text-transform: uppercase !important;
-                    }
-                    .subtitle {
-                        font-size: 1rem !important;
-                        font-weight: 700 !important;
-                        letter-spacing: 0.25em !important;
-                        color: #ff0000 !important;
-                        margin-bottom: 20px !important;
-                        text-transform: uppercase !important;
-                    }
-                    p {
-                        color: #ff9999 !important;
-                        font-size: 1.05rem !important;
-                        line-height: 1.6 !important;
-                        margin: 0 !important;
-                        font-weight: 500 !important;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="container">
-                    <h1>V I R S B U R T S</h1>
-                    <div class="subtitle">UNDER MAINTENANCE</div>
-                    <p>The space is temporarily unavailable due to system optimization. We will be back shortly.</p>
-                </div>
-            </body>
-        `;
-    }
-</script>
 <!DOCTYPE html>
-<html lang="lv">
+<html lang="lv" data-maintenance="true">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>V I R S B U R T S</title>
+    
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+
+<div class="maintenance-wrapper">
+    <h1>V I R S B U R T S</h1>
+    <div class="status-tag">Under Maintenance</div>
+    <p>The space is temporarily unavailable due to system optimization. We will be back shortly.</p>
+</div>
 
 <div class="loading" id="loading" aria-hidden="true"><div class="loading-line"></div></div>
 
