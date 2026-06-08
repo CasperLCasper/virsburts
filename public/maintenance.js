@@ -2,7 +2,7 @@
 // SYSTEM MAINTENANCE CONFIGURATION
 // ============================================ //
 window.MAINTENANCE_CONFIG = {
-  isMaintenance: false, 
+  isMaintenance: true, 
   
   title: 'V I R S B U R T S',
   subtitle: 'UNDER MAINTENANCE',
