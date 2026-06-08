@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="lv" data-maintenance="false">
+<html lang="lv" data-maintenance="true">
+<!-- 🛠️ NOMAINI UZ true, LAI IESLĒGTU APKOPES REŽĪMU // NOMAINI UZ false, LAI IZSLĒGTU APKOPES REŽĪMU -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +12,14 @@
 </head>
 <body>
 
+<!-- 🛠️ APKOPES BLOKS (Strādā tikai tad, kad augšā html tagā ir ieslēgts "true") -->
 <div class="maintenance-wrapper">
-    <h1>V I R S B U R T S</h1>
+    <img src="virsburts-balts.png" alt="V I R S B U R T S" style="height: 65px; margin-bottom: 24px; object-fit: contain;">
     <div class="status-tag">Under Maintenance</div>
     <p>The space is temporarily unavailable due to system optimization. We will be back shortly.</p>
 </div>
 
+<!-- PARASTAIS LAPAS SATURS -->
 <div class="loading" id="loading" aria-hidden="true"><div class="loading-line"></div></div>
 
 <div class="bg-lines">
@@ -47,6 +50,7 @@
     <button class="info-toggle" id="infoToggle" aria-label="Par telpu"><i class="fas fa-info"></i></button>
 </main>
 
+<!-- Horizons Modal -->
 <div class="projects-overlay" id="projectsOverlay"></div>
 <div class="projects-modal" id="projectsModal">
     <div class="modal-header">
@@ -75,6 +79,7 @@
     </div>
 </div>
 
+<!-- Info Modal -->
 <div class="projects-overlay" id="infoOverlay"></div>
 <div class="projects-modal" id="infoModal">
     <div class="modal-header">
