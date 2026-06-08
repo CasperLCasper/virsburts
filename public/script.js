@@ -1,143 +1,69 @@
-// ✅ APCOPES REŽĪMA INTEGRĀCIJA
-if (window.MAINTENANCE_CONFIG && window.MAINTENANCE_CONFIG.isMaintenance) {
-    console.warn("🛠️ System is undergoing maintenance.");
-    
-    // Funkcija, kas smuki uzbūvē ekrānu, kad pārlūks tam ir gatavs
-    const applyMaintenance = () => {
-        const loading = document.getElementById('loading');
-        if (loading) loading.remove();
+window.addEventListener('load', () => {
+    const loading = document.getElementById('loading');
+    loading.style.opacity = '0';
+    setTimeout(() => loading.remove(), 400);
+});
 
-        const maintenanceOverlay = document.createElement('div');
-        maintenanceOverlay.style.position = 'fixed';
-        maintenanceOverlay.style.top = '0';
-        maintenanceOverlay.style.left = '0';
-        maintenanceOverlay.style.width = '100vw';
-        maintenanceOverlay.style.height = '100vh';
-        maintenanceOverlay.style.backgroundColor = 'var(--bg-color, #000000)';
-        maintenanceOverlay.style.color = 'var(--text-color, #ffffff)';
-        maintenanceOverlay.style.display = 'flex';
-        maintenanceOverlay.style.flexDirection = 'column';
-        maintenanceOverlay.style.justifyContent = 'center';
-        maintenanceOverlay.style.alignItems = 'center';
-        maintenanceOverlay.style.zIndex = '999999';
-        maintenanceOverlay.style.fontFamily = 'sans-serif';
-        maintenanceOverlay.style.textAlign = 'center';
-        maintenanceOverlay.style.padding = '20px';
+document.getElementById('logo').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
-        maintenanceOverlay.innerHTML = `
-            <h1 style="color: #ff3333; margin-bottom: 15px; font-size: 2.5rem; letter-spacing: 1px;">
-                ${window.MAINTENANCE_CONFIG.title}
-            </h1>
-            <p style="font-size: 1.2rem; opacity: 0.8; max-width: 600px; line-height: 1.6;">
-                ${window.MAINTENANCE_CONFIG.subtitle}
-            </p>
-        `;
+const showProjectsBtn = document.getElementById('showProjectsBtn');
+const projectsOverlay = document.getElementById('projectsOverlay');
+const projectsModal = document.getElementById('projectsModal');
+const closeModal = document.getElementById('closeModal');
+const projectCards = projectsModal.querySelectorAll('.project-card');
 
-        document.body.appendChild(maintenanceOverlay);
-        document.body.style.overflow = 'hidden';
-    };
+showProjectsBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    projectsOverlay.classList.add('show');
+    projectsModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    projectCards.forEach((card, i) => { setTimeout(() => card.classList.add('show'), 100 + i*150); });
+});
 
-    // Ja DOM jau ir gatavs, palaižam uzreiz, ja nē - pagaidām
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', applyMaintenance);
-    } else {
-        applyMaintenance();
-    }
+function hideProjectsModal() {
+    projectsOverlay.classList.remove('show');
+    projectsModal.classList.remove('show');
+    projectCards.forEach(card => card.classList.remove('show'));
+    document.body.style.overflow = '';
 }
 
-// 🛑 JA APKOPE IR AKTĪVA, ŠĪ RINDIŅA APTUR VISU TĀLĀKO KODU BEZ KĻŪDĀM KONSOLĒ
-if (window.MAINTENANCE_CONFIG && window.MAINTENANCE_CONFIG.isMaintenance) {
-    // Izmantojam tukšu return. Tā kā esam moduļa/skripta kontekstā, 
-    // šis eleganti apturēs pārlūku no tālākā koda lasīšanas.
-    // Ja pārlūks lamājas par "return outside function", neuztraucies - tūlīt to apiiesim.
+closeModal.addEventListener('click', hideProjectsModal);
+projectsOverlay.addEventListener('click', hideProjectsModal);
+document.addEventListener('keydown', (e) => { if(e.key==='Escape' && projectsModal.classList.contains('show')) hideProjectsModal(); });
+
+const infoToggle = document.getElementById('infoToggle');
+const infoOverlay = document.getElementById('infoOverlay');
+const infoModal = document.getElementById('infoModal');
+const closeInfoModal = document.getElementById('closeInfoModal');
+
+infoToggle.addEventListener('click', () => {
+    infoOverlay.classList.add('show');
+    infoModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+});
+
+function hideInfoModal() {
+    infoOverlay.classList.remove('show');
+    infoModal.classList.remove('show');
+    document.body.style.overflow = '';
 }
 
-// Lai nodrošinātu 100% saderību, ietinam tavu veco kodu vienkāršā "else" blokā:
-if (!window.MAINTENANCE_CONFIG || !window.MAINTENANCE_CONFIG.isMaintenance) {
+closeInfoModal.addEventListener('click', hideInfoModal);
+infoOverlay.addEventListener('click', hideInfoModal);
+document.addEventListener('keydown', (e) => { if(e.key==='Escape' && infoModal.classList.contains('show')) hideInfoModal(); });
 
-    window.addEventListener('load', () => {
-        const loading = document.getElementById('loading');
-        if (loading) {
-            loading.style.opacity = '0';
-            setTimeout(() => loading.remove(), 400);
-        }
-    });
+const toggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const savedTheme = localStorage.getItem('theme') || 'light';
+root.setAttribute('data-theme', savedTheme);
+toggle.innerHTML = savedTheme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
 
-    document.getElementById('logo').addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    const showProjectsBtn = document.getElementById('showProjectsBtn');
-    const projectsOverlay = document.getElementById('projectsOverlay');
-    const projectsModal = document.getElementById('projectsModal');
-    const closeModal = document.getElementById('closeModal');
-    const projectCards = projectsModal ? projectsModal.querySelectorAll('.project-card') : [];
-
-    if (showProjectsBtn) {
-        showProjectsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (projectsOverlay && projectsModal) {
-                projectsOverlay.classList.add('show');
-                projectsModal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-                projectCards.forEach((card, i) => { setTimeout(() => card.classList.add('show'), 100 + i*150); });
-            }
-        });
-    }
-
-    function hideProjectsModal() {
-        if (projectsOverlay && projectsModal) {
-            projectsOverlay.classList.remove('show');
-            projectsModal.classList.remove('show');
-            projectCards.forEach(card => card.classList.remove('show'));
-            document.body.style.overflow = '';
-        }
-    }
-
-    if (closeModal) closeModal.addEventListener('click', hideProjectsModal);
-    if (projectsOverlay) projectsOverlay.addEventListener('click', hideProjectsModal);
-    document.addEventListener('keydown', (e) => { if(e.key==='Escape' && projectsModal && projectsModal.classList.contains('show')) hideProjectsModal(); });
-
-    const infoToggle = document.getElementById('infoToggle');
-    const infoOverlay = document.getElementById('infoOverlay');
-    const infoModal = document.getElementById('infoModal');
-    const closeInfoModal = document.getElementById('closeInfoModal');
-
-    if (infoToggle) {
-        infoToggle.addEventListener('click', () => {
-            if (infoOverlay && infoModal) {
-                infoOverlay.classList.add('show');
-                infoModal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
-        });
-    }
-
-    function hideInfoModal() {
-        if (infoOverlay && infoModal) {
-            infoOverlay.classList.remove('show');
-            infoModal.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-    }
-
-    if (closeInfoModal) closeInfoModal.addEventListener('click', hideInfoModal);
-    if (infoOverlay) infoOverlay.addEventListener('click', hideInfoModal);
-    document.addEventListener('keydown', (e) => { if(e.key==='Escape' && infoModal && infoModal.classList.contains('show')) hideInfoModal(); });
-
-    const toggle = document.getElementById('themeToggle');
-    const root = document.documentElement;
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    root.setAttribute('data-theme', savedTheme);
-    if (toggle) toggle.innerHTML = savedTheme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
-
-    if (toggle) {
-        toggle.addEventListener('click', () => {
-            const isDark = root.getAttribute('data-theme')==='dark';
-            const newTheme = isDark ? 'light':'dark';
-            root.setAttribute('data-theme', newTheme);
-            toggle.innerHTML = isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
-            localStorage.setItem('theme', newTheme);
-        });
-    }
-}
+toggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme')==='dark';
+    const newTheme = isDark ? 'light':'dark';
+    root.setAttribute('data-theme', newTheme);
+    toggle.innerHTML = isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
+    localStorage.setItem('theme', newTheme);
+});
