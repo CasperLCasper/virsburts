@@ -2,7 +2,6 @@
 // SYSTEM MAINTENANCE CONFIGURATION
 // ============================================ //
 window.MAINTENANCE_CONFIG = {
-  // 🛠️ SET TO true TO TURN ON MAINTENANCE MODE
   isMaintenance: true, 
   
   title: 'V I R S B U R T S',
@@ -10,59 +9,48 @@ window.MAINTENANCE_CONFIG = {
   description: 'The space is temporarily unavailable due to system optimization. We will be back shortly.'
 };
 
-// If maintenance is active, halt loading and render the clean interface
 if (window.MAINTENANCE_CONFIG.isMaintenance) {
-    window.stop(); 
-    
-    var mTitle = window.MAINTENANCE_CONFIG.title;
-    var mSubtitle = window.MAINTENANCE_CONFIG.subtitle;
-    var mDesc = window.MAINTENANCE_CONFIG.description;
+    window.stop(); // Apturam tālāko ielādi
 
-    document.documentElement.innerHTML = `
-        <head>
-            <title>` + mTitle + ` — Maintenance</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <style>
-                /* Svarīgi: Piespiežam gan HTML, gan BODY ieņemt visu ekrānu */
-                html, body {
-                    margin: 0;
-                    padding: 0;
-                    width: 100%;
-                    height: 100%;
-                    min-height: 100vh;
-                    background-color: #0a0a0c; 
-                }
-                * { box-sizing: border-box; }
-                
-                /* Šis bloks tagad perfekti centrēs visu monitora vidū */
-                body {
-                    display: flex; 
-                    justify-content: center; 
-                    align-items: center;
-                    color: #ffffff; 
-                    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
-                    text-align: center; 
-                    overflow: hidden;
-                }
-                .container { 
-                    max-width: 480px; 
-                    padding: 24px;
-                    display: flex; 
-                    flex-direction: column; 
-                    align-items: center; 
-                    justify-content: center; 
-                }
-                h1 { font-size: 1.8rem; font-weight: 300; letter-spacing: 0.3em; margin: 0 0 8px 0; color: #ffffff; text-transform: uppercase; }
-                .badge { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); padding: 4px 12px; border-radius: 4px; color: #a0a0aa; margin-bottom: 24px; text-transform: uppercase; }
-                p { color: #71717a; font-size: 0.95rem; line-height: 1.6; margin: 0; font-weight: 400; }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <h1>` + mTitle + `</h1>
-                <div class="badge">` + mSubtitle + `</div>
-                <p>` + mDesc + `</p>
+    // Izveidojam pilnīgi jaunu, tīru pilnekrāna elementu
+    var box = document.createElement('div');
+    
+    // Piespiežam to ieņemt VISU monitoru un centrēt saturu
+    box.style.position = 'fixed';
+    box.style.top = '0';
+    box.style.left = '0';
+    box.style.width = '100vw';
+    box.style.height = '100vh';
+    box.style.backgroundColor = '#0a0a0c';
+    box.style.display = 'flex';
+    box.style.justifyContent = 'center';
+    box.style.alignItems = 'center';
+    box.style.zIndex = '9999999';
+    box.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    box.style.textAlign = 'center';
+    box.style.boxSizing = 'border-box';
+    box.style.padding = '24px';
+
+    // Ieliekam iekšā smuko dizainu
+    box.innerHTML = `
+        <div style="max-width: 480px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <h1 style="font-size: 1.8rem; font-weight: 300; letter-spacing: 0.3em; margin: 0 0 8px 0; color: #ffffff; text-transform: uppercase;">
+                ` + window.MAINTENANCE_CONFIG.title + `
+            </h1>
+            <div style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); padding: 4px 12px; border-radius: 4px; color: #a0a0aa; margin-bottom: 24px; text-transform: uppercase;">
+                ` + window.MAINTENANCE_CONFIG.subtitle + `
             </div>
-        </body>
+            <p style="color: #71717a; font-size: 0.95rem; line-height: 1.6; margin: 0; font-weight: 400;">
+                ` + window.MAINTENANCE_CONFIG.description + `
+            </p>
+        </div>
     `;
+
+    // Ievietojam šo bloku pašā augšā, tiklīdz dokuments sāk eksistēt
+    if (document.body) {
+        document.body.innerHTML = '';
+        document.body.appendChild(box);
+    } else {
+        document.documentElement.appendChild(box);
+    }
 }
