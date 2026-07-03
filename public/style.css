@@ -1,5 +1,5 @@
 :root {
-    --logo-height: 100px;
+    --logo-height: 65px;
     --logo-opacity: 1;
     --logo-src: url('virsburts-melns.png');
     --color-project-name: #0a0a0a;
@@ -75,11 +75,13 @@ header {
 }
 
 .header-logo { 
-    height:var(--logo-height); 
-    opacity:var(--logo-opacity); 
-    cursor:pointer; 
-    transition:var(--transition); 
-    content:var(--logo-src); 
+    height: var(--logo-height); 
+    width: auto;          /* 🛠️ LABOTS: Novērš fiksēta platuma spiešanu un deformāciju */
+    object-fit: contain;  /* 🛠️ LABOTS: Saglabā precīzas logo proporcijas jebkurā izmērā */
+    opacity: var(--logo-opacity); 
+    cursor: pointer; 
+    transition: var(--transition); 
+    content: var(--logo-src); 
 }
 
 main { 
@@ -359,7 +361,7 @@ main {
 /* Responsīvais dizains (Mobilie) */
 @media(max-width:768px){
     header{ padding:15px 0; } 
-    .header-logo{ height:49px; } 
+    .header-logo{ height:49px; } /* Platums pats automātiski pārrēķinās uz "auto" un nekas nesaspiežas */
     .hero-text{ font-size:16px; } 
     .project-name{ font-size:32px; } 
     .projects-modal { padding:25px; width:92%; max-height: 85vh; }
@@ -380,7 +382,7 @@ main {
 /* ==========================================================================
    SYSTEM MAINTENANCE MODE
    ========================================================================== */
-/* 🛠️ ŠĪ IR TĀ RINDIŅA, KURU BIJU IZLAIDIS: Paslēpj bloku pēc noklusējuma */
+/* 🛠️ LABOTS: Paslēpj bloku pēc noklusējuma, kad data-maintenance="false" */
 .maintenance-wrapper {
     display: none;
 }
