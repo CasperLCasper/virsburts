@@ -100,7 +100,7 @@ main {
 }
 
 .project-name { 
-    font-size:46px; /* 💡 Palielināts no 23px uz kārtīgu desktop Hero izmēru */
+    font-size:46px; 
     color:var(--color-project-name); 
     margin: 0 0 12px 0; 
     font-weight:700; 
@@ -361,13 +361,12 @@ main {
     header{ padding:15px 0; } 
     .header-logo{ height:49px; } 
     .hero-text{ font-size:16px; } 
-    .project-name{ font-size:32px; } /* 💡 Tagad loģiski samazinās no 46px uz 32px */
+    .project-name{ font-size:32px; } 
     .projects-modal { padding:25px; width:92%; max-height: 85vh; }
     .modal-header h2 { font-size:24px; }
     .projects-grid { grid-template-columns:1fr; gap:20px; }
     .project-card { padding:20px; }
     
-    /* Uzlabots pogu novietojums uz mobilajiem ekrāniem, lai neizietu ārpus rāmjiem */
     .theme-toggle, .info-toggle { bottom:24px; width:46px; height:46px; opacity: 0.95; }
     .theme-toggle { left:24px; }
     .info-toggle { right:24px; }
@@ -381,6 +380,11 @@ main {
 /* ==========================================================================
    SYSTEM MAINTENANCE MODE
    ========================================================================== */
+/* 🛠️ ŠĪ IR TĀ RINDIŅA, KURU BIJU IZLAIDIS: Paslēpj bloku pēc noklusējuma */
+.maintenance-wrapper {
+    display: none;
+}
+
 html[data-maintenance="true"] {
     background: #000000 !important;
     overflow: hidden !important;
