@@ -4,7 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VIRSBURTS — A digital space where elements, actions, processes, and interactions reveal themselves.">
     <title>V I R S B U R T S</title>
+    
+    <!-- ⚡ Inline skripts: Novērš baltā ekrāna uzliesmojumu (FOUC) tumšajā režīmā, pirms ielādējas CSS -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
     
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
@@ -34,7 +43,7 @@
 </div>
 
 <header>
-    <img src="virsburts-melns.png" alt="V I R S B U R T S logo" class="header-logo" id="logo">
+    <img src="virsburts-melns.png" alt="V I R S B U R T S logo" class="header-logo" id="logo" width="220" height="65">
 </header>
 
 <main>
@@ -43,35 +52,35 @@
         <p class="project-subtitle">Observe how elements, actions, processes, and interactions reveal themselves</p>
         <p class="hero-text">A space where elements, actions, and processes come alive — where their rhythm, consequences, and interactions take shape</p>
         <div class="scroll-indicator" aria-hidden="true"><div class="scroll-line"></div></div>
-        <a href="#" class="cta-button" id="showProjectsBtn" aria-label="Explore the Horizons">Explore the Horizons <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+        <a href="#" class="cta-button open-modal-btn" data-modal="projectsModal" aria-label="Explore the Horizons">Explore the Horizons <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
     </section>
 
     <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu"><i class="fas fa-moon"></i></button>
-    <button class="info-toggle" id="infoToggle" aria-label="Par telpu"><i class="fas fa-info"></i></button>
+    <button class="info-toggle open-modal-btn" data-modal="infoModal" id="infoToggle" aria-label="Par telpu"><i class="fas fa-info"></i></button>
 </main>
 
 <!-- Horizons Modal -->
-<div class="projects-overlay" id="projectsOverlay"></div>
+<div class="projects-overlay"></div>
 <div class="projects-modal" id="projectsModal">
     <div class="modal-header">
         <h2>The Horizons</h2>
-        <button class="close-modal" id="closeModal" aria-label="Aizvērt projektu logu"><i class="fas fa-times"></i></button>
+        <button class="close-modal" aria-label="Aizvērt projektu logu"><i class="fas fa-times"></i></button>
     </div>
     <div class="projects-grid">
         <div class="project-card">
-            <img src="dynamic-wallet.png" alt="NFT Sepolia Wall logo" loading="lazy">
+            <img src="dynamic-wallet.png" alt="NFT Sepolia Wall logo" loading="lazy" width="120" height="120">
             <h3>Dynamic Wallet Visualizer</h3>
             <p class="project-description">Dinamisks NFT mākslas projekts uz Sepolia testnet ar unikālu ģenerēšanu.</p>
             <a href="https://five-server-arweave-with-hash-dynamic.onrender.com/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Go to project</a>
         </div>
         <div class="project-card">
-            <img src="logo2.png" alt="Design System logo #2" loading="lazy">
+            <img src="logo2.png" alt="Design System logo #2" loading="lazy" width="120" height="120">
             <h3>Coming soon #2</h3>
             <p class="project-description">Description</p>
             <a href="https://design-system-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Go to project</a>
         </div>
         <div class="project-card">
-            <img src="logo3.png" alt="Design System logo #3" loading="lazy">
+            <img src="logo3.png" alt="Design System logo #3" loading="lazy" width="120" height="120">
             <h3>Coming soon #3</h3>
             <p class="project-description">Description</p>
             <a href="https://ai-ecommerce-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Go to project</a>
@@ -80,14 +89,14 @@
 </div>
 
 <!-- Info Modal -->
-<div class="projects-overlay" id="infoOverlay"></div>
+<div class="projects-overlay"></div>
 <div class="projects-modal" id="infoModal">
     <div class="modal-header">
         <h2>About a space</h2>
-        <button class="close-modal" id="closeInfoModal" aria-label="Aizvērt info logu"><i class="fas fa-times"></i></button>
+        <button class="close-modal" aria-label="Aizvērt info logu"><i class="fas fa-times"></i></button>
     </div>
     <div class="info-content">
-        <p style="padding:0px; color: var(--color-modal-text); font-size:16px;">This is a space.</p>
+        <p style="padding:0px; color: var(--color-modal-text); font-size:16px; font-weight: 600;">This is a space.</p>
         <p>A space where actions, interactions, and digital processes take form. Where movement becomes visible. Where change leaves a trace.</p>
         <p>The space exists to observe — not to optimize or control. To explore patterns, rhythms, and relationships as they emerge.</p>
         <p>Horizons appear over time. Each one opens a new way to look, interact, or perceive. They are not steps in a plan — they are moments of focus.</p>
@@ -98,6 +107,6 @@
     </div>
 </div>
 
-<script src="script.js" integrity="sha256-v9LaMBY8vNYxG5vgSwbUglfjHQmZbMs0UAPQQf0xO7E=" crossorigin="anonymous"></script>
+<script src="script.js"></script>
 </body>
 </html>
