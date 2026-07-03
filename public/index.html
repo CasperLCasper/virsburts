@@ -1,95 +1,112 @@
 <!DOCTYPE html>
-<html lang="lv" data-theme="light" data-maintenance="false">
+<html lang="lv" data-maintenance="false">
+<!-- 🛠️ NOMAINI UZ true, LAI IESLĒGTU APKOPES REŽĪMU // NOMAINI UZ false, LAI IZSLĒGTU APKOPES REŽĪMU -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projekta Mājaslapa</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="VIRSBURTS — A digital space where elements, actions, processes, and interactions reveal themselves.">
+    <title>V I R S B U R T S</title>
+    
+    <!-- ⚡ Inline skripts: Novērš baltā ekrāna uzliesmojumu (FOUC) tumšajā režīmā, pirms ielādējas CSS -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
-    <!-- Ielādes ekrāns (Loader) -->
-    <div class="loading" id="loader">
-        <div class="loading-line"></div>
+<!-- 🛠️ APKOPES BLOKS (Strādā tikai tad, kad augšā html tagā ir ieslēgts "true") -->
+<div class="maintenance-wrapper">
+    <img src="virsburts-balts.png" alt="V I R S B U R T S" style="height: 65px; margin-bottom: 24px; object-fit: contain;">
+    <div class="status-tag">Under Maintenance</div>
+    <p>The space is temporarily unavailable due to system optimization. We will be back shortly.</p>
+</div>
+
+<!-- PARASTAIS LAPAS SATURS -->
+<div class="loading" id="loading" aria-hidden="true"><div class="loading-line"></div></div>
+
+<div class="bg-lines">
+    <div class="line line-vertical line-1"></div>
+    <div class="line line-vertical line-2"></div>
+    <div class="line line-vertical line-3"></div>
+    <div class="line line-vertical line-4"></div>
+    <div class="line line-horizontal line-5"></div>
+    <div class="line line-horizontal line-6"></div>
+    <div class="line line-horizontal line-7"></div>
+    <div class="line line-horizontal line-8"></div>
+</div>
+
+<header>
+    <img src="virsburts-melns.png" alt="V I R S B U R T S logo" class="header-logo" id="logo" width="220" height="65">
+</header>
+
+<main>
+    <section class="hero" aria-labelledby="title">
+        <h1 id="title" class="project-name">From Action to Form</h1>
+        <p class="project-subtitle">Observe how elements, actions, processes, and interactions reveal themselves</p>
+        <p class="hero-text">A space where elements, actions, and processes come alive — where their rhythm, consequences, and interactions take shape</p>
+        <div class="scroll-indicator" aria-hidden="true"><div class="scroll-line"></div></div>
+        <a href="#" class="cta-button open-modal-btn" data-modal="projectsModal" aria-label="Explore the Horizons">Explore the Horizons <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+    </section>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Pārslēgt gaišo / tumšo režīmu"><i class="fas fa-moon"></i></button>
+    <button class="info-toggle open-modal-btn" data-modal="infoModal" id="infoToggle" aria-label="Par telpu"><i class="fas fa-info"></i></button>
+</main>
+
+<!-- Horizons Modal -->
+<div class="projects-overlay"></div>
+<div class="projects-modal" id="projectsModal">
+    <div class="modal-header">
+        <h2>The Horizons</h2>
+        <button class="close-modal" aria-label="Aizvērt projektu logu"><i class="fas fa-times"></i></button>
     </div>
-
-    <!-- Dekoratīvās fona līnijas -->
-    <div class="bg-lines">
-        <div class="line line-vertical line-1"></div>
-        <div class="line line-vertical line-2"></div>
-        <div class="line line-vertical line-3"></div>
-        <div class="line line-vertical line-4"></div>
-        <div class="line line-horizontal line-5"></div>
-        <div class="line line-horizontal line-6"></div>
-        <div class="line line-horizontal line-7"></div>
-        <div class="line line-horizontal line-8"></div>
-    </div>
-
-    <!-- Galvene (Header) -->
-    <header>
-        <a href="index.html">
-            <!-- 🛠️ PROFESIONĀLAIS VARIANTS: Abas bildes ir HTML failā un tiek pārslēgtas caur CSS display -->
-            <img class="header-logo logo-light" src="virsburts-melns.png" alt="Zīmola Logo" width="220" height="65">
-            <img class="header-logo logo-dark" src="virsburts-balts.png" alt="Zīmola Logo" width="220" height="65">
-        </a>
-    </header>
-
-    <!-- Galvenā satura daļa -->
-    <main>
-        <div class="hero">
-            <h1 class="project-name">Digitālie risinājumi jūsu biznesam</h1>
-            <div class="project-subtitle">Inovācijas & Kvalitāte</div>
-            <p class="hero-text">Mēs palīdzam uzņēmumiem augt, veidojot mūsdienīgas tīmekļa vietnes, sistēmas un zīmola identitāti ar augstāko precizitāti un <span class="highlight">individualizētu pieeju</span>.</p>
-            
-            <div class="scroll-indicator">
-                <div class="scroll-line"></div>
-            </div>
-            
-            <button class="cta-button" id="openModalBtn">
-                Skatīt projektus
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </button>
+    <div class="projects-grid">
+        <div class="project-card">
+            <img src="dynamic-wallet.png" alt="NFT Sepolia Wall logo" loading="lazy" width="120" height="120">
+            <h3>Dynamic Wallet Visualizer</h3>
+            <p class="project-description">Dinamisks NFT mākslas projekts uz Sepolia testnet ar unikālu ģenerēšanu.</p>
+            <a href="https://five-server-arweave-with-hash-dynamic.onrender.com/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Go to project</a>
         </div>
-    </main>
-
-    <!-- Vadības pogas (Tēma un Info) -->
-    <button class="theme-toggle" id="themeToggleBtn" aria-label="Mainīt tēmu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-    </button>
-    <button class="info-toggle" id="infoToggleBtn" aria-label="Informācija">i</button>
-
-    <!-- Modālais logs un pārklājums (Modal & Overlay) -->
-    <div class="projects-overlay" id="modalOverlay"></div>
-    <div class="projects-modal" id="projectsModal">
-        <div class="modal-header">
-            <h2>Mūsu jaunākie projekti</h2>
-            <button class="close-modal" id="closeModalBtn">&times;</button>
+        <div class="project-card">
+            <img src="logo2.png" alt="Design System logo #2" loading="lazy" width="120" height="120">
+            <h3>Coming soon #2</h3>
+            <p class="project-description">Description</p>
+            <a href="https://design-system-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Go to project</a>
         </div>
-        <div class="projects-grid">
-            <div class="project-card">
-                <img src="project1.jpg" alt="Projekts 1" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%23e5e5e5\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' fill=\'%23999\'>Foto</text></svg>'">
-                <h3>E-komercijas platforma</h3>
-                <p class="project-description">Pilna cikla interneta veikala izstrāde ar integrētu noliktavas un grāmatvedības sistēmu.</p>
-                <a href="#" class="project-link">Apskatīt vietni</a>
-            </div>
-            <div class="project-card">
-                <img src="project2.jpg" alt="Projekts 2" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%23e5e5e5\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' fill=\'%23999\'>Foto</text></svg>'">
-                <h3>Korporatīvā mājaslapa</h3>
-                <p class="project-description">Mūsdienīga un ātra vietne starptautiskam finanšu tehnoloģiju uzņēmumam.</p>
-                <a href="#" class="project-link">Apskatīt vietni</a>
-            </div>
+        <div class="project-card">
+            <img src="logo3.png" alt="Design System logo #3" loading="lazy" width="120" height="120">
+            <h3>Coming soon #3</h3>
+            <p class="project-description">Description</p>
+            <a href="https://ai-ecommerce-demo.lv" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fas fa-external-link-alt"></i> Go to project</a>
         </div>
     </div>
+</div>
 
-    <!-- Tehniskās apkopes slānis (System Maintenance Layer) -->
-    <div class="maintenance-wrapper">
-        <div class="status-tag">Under Maintenance</div>
-        <p>The space is temporarily unavailable due to system optimization. We will be back shortly.</p>
+<!-- Info Modal -->
+<div class="projects-overlay"></div>
+<div class="projects-modal" id="infoModal">
+    <div class="modal-header">
+        <h2>About a space</h2>
+        <button class="close-modal" aria-label="Aizvērt info logu"><i class="fas fa-times"></i></button>
     </div>
+    <div class="info-content">
+        <p style="padding:0px; color: var(--color-modal-text); font-size:16px; font-weight: 600;">This is a space.</p>
+        <p>A space where actions, interactions, and digital processes take form. Where movement becomes visible. Where change leaves a trace.</p>
+        <p>The space exists to observe — not to optimize or control. To explore patterns, rhythms, and relationships as they emerge.</p>
+        <p>Horizons appear over time. Each one opens a new way to look, interact, or perceive. They are not steps in a plan — they are moments of focus.</p>
+        <p>NFTs belong to this space as artifacts.</p>
+        <p>Genesis NFTs mark the beginning. Access NFTs open doors to specific horizons.</p>
+        <p>Nothing here asks for belief in the future. What exists, exists now — visible and usable.</p>
+        <p>The space grows through presence, exploration, and time.</p>
+    </div>
+</div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
