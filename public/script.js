@@ -1,69 +1,86 @@
+// Lapas ielādes animācijas noņemšana
 window.addEventListener('load', () => {
     const loading = document.getElementById('loading');
-    loading.style.opacity = '0';
-    setTimeout(() => loading.remove(), 400);
+    if (loading) {
+        loading.style.opacity = '0';
+        setTimeout(() => loading.remove(), 400);
+    }
 });
 
+// Plūstoša ritināšana uz augšu, uzklikšķinot uz logo
 document.getElementById('logo').addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-const showProjectsBtn = document.getElementById('showProjectsBtn');
-const projectsOverlay = document.getElementById('projectsOverlay');
-const projectsModal = document.getElementById('projectsModal');
-const closeModal = document.getElementById('closeModal');
-const projectCards = projectsModal.querySelectorAll('.project-card');
+/* ==========================================================================
+   MODĀLO LOGU LOĢIKA (DRY - Optimizēta versija abiem logiem)
+   ========================================================================== */
+const openModalButtons = document.querySelectorAll('.open-modal-btn');
+const closeButtons = document.querySelectorAll('.close-modal');
+const overlays = document.querySelectorAll('.projects-overlay');
 
-showProjectsBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    projectsOverlay.classList.add('show');
-    projectsModal.classList.add('show');
+// Funkcija, kas atver konkrētu modālo logu
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    // Atrodam overlay, kas atrodas blakus šim modālim HTML struktūrā
+    const overlay = modal.previousElementSibling;
+    if (overlay && overlay.classList.contains('projects-overlay')) {
+        overlay.classList.add('show');
+    }
+
+    modal.classList.add('show');
     document.body.style.overflow = 'hidden';
-    projectCards.forEach((card, i) => { setTimeout(() => card.classList.add('show'), 100 + i*150); });
-});
 
-function hideProjectsModal() {
-    projectsOverlay.classList.remove('show');
-    projectsModal.classList.remove('show');
-    projectCards.forEach(card => card.classList.remove('show'));
+    // Kartīšu kaskādes animācija (strādā abos modāļos, ja tur ir kartītes)
+    const projectCards = modal.querySelectorAll('.project-card');
+    projectCards.forEach((card, i) => { 
+        setTimeout(() => card.classList.add('show'), 100 + i * 150); 
+    });
+}
+
+// Funkcija, kas aizver visus aktīvos modālos logus
+function hideAllModals() {
+    document.querySelectorAll('.projects-modal.show, .projects-overlay.show').forEach(el => el.classList.remove('show'));
+    document.querySelectorAll('.project-card.show').forEach(card => card.classList.remove('show'));
     document.body.style.overflow = '';
 }
 
-closeModal.addEventListener('click', hideProjectsModal);
-projectsOverlay.addEventListener('click', hideProjectsModal);
-document.addEventListener('keydown', (e) => { if(e.key==='Escape' && projectsModal.classList.contains('show')) hideProjectsModal(); });
-
-const infoToggle = document.getElementById('infoToggle');
-const infoOverlay = document.getElementById('infoOverlay');
-const infoModal = document.getElementById('infoModal');
-const closeInfoModal = document.getElementById('closeInfoModal');
-
-infoToggle.addEventListener('click', () => {
-    infoOverlay.classList.add('show');
-    infoModal.classList.add('show');
-    document.body.style.overflow = 'hidden';
+// Event Listeners modālo logu atvēršanai
+openModalButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetModalId = btn.getAttribute('data-modal');
+        openModal(targetModalId);
+    });
 });
 
-function hideInfoModal() {
-    infoOverlay.classList.remove('show');
-    infoModal.classList.remove('show');
-    document.body.style.overflow = '';
-}
+// Event Listeners aizvēršanai (X pogas un klikšķis uz aptumšotā fona)
+closeButtons.forEach(btn => btn.addEventListener('click', hideAllModals));
+overlays.forEach(overlay => overlay.addEventListener('click', hideAllModals));
 
-closeInfoModal.addEventListener('click', hideInfoModal);
-infoOverlay.addEventListener('click', hideInfoModal);
-document.addEventListener('keydown', (e) => { if(e.key==='Escape' && infoModal.classList.contains('show')) hideInfoModal(); });
+// Aizvēršana ar 'Escape' taustiņu
+document.addEventListener('keydown', (e) => { 
+    if (e.key === 'Escape') hideAllModals(); 
+});
 
-const toggle = document.getElementById('themeToggle');
-const root = document.documentElement;
-const savedTheme = localStorage.getItem('theme') || 'light';
-root.setAttribute('data-theme', savedTheme);
-toggle.innerHTML = savedTheme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+/* ==========================================================================
+   DIZANA TĒMAS PĀRSLĒGŠANA (Light / Dark)
+   ========================================================================== */
+const themeToggleBtn = document.getElementById('themeToggle');
+const rootElement = document.documentElement;
 
-toggle.addEventListener('click', () => {
-    const isDark = root.getAttribute('data-theme')==='dark';
-    const newTheme = isDark ? 'light':'dark';
-    root.setAttribute('data-theme', newTheme);
-    toggle.innerHTML = isDark?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
-    localStorage.setItem('theme', newTheme);
+// Uzstādām pareizo ikonu pogai jau ielādes brīdī, balstoties uz inline skripta datiem
+const activeTheme = rootElement.getAttribute('data-theme') || 'light';
+themeToggleBtn.innerHTML = activeTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+// Klikšķa notikums tēmas maiņai
+themeToggleBtn.addEventListener('click', () => {
+    const isCurrentlyDark = rootElement.getAttribute('data-theme') === 'dark';
+    const nextTheme = isCurrentlyDark ? 'light' : 'dark';
+    
+    rootElement.setAttribute('data-theme', nextTheme);
+    themeToggleBtn.innerHTML = isCurrentlyDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    localStorage.setItem('theme', nextTheme);
 });
